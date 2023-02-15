@@ -1,3 +1,13 @@
+# Create env with necessary variables
+In order to run Auth0 correctly, you need to create a .env file in the root directory with the following variables:
+
+REACT_APP_AUTH0_DOMAIN=""
+REACT_APP_AUTH0_CLIENT_ID=""
+
+.gitignore includes .env so we don't mistakenly push these to our repository!
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
