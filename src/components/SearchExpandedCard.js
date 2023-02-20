@@ -36,12 +36,6 @@ export default function SearchExpandedCard({ album }) {
           </IconButton>
         </Box>
       </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image={album.image}
-        alt="Live from space album cover"
-      />
     </Card>
   );
 }
