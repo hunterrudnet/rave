@@ -4,6 +4,7 @@ import "./profile.css";
 import UserInfo from "./UserInfo/UserInfo";
 import {Grid} from "@mui/material";
 import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
+import Reviews from "./Reviews/Reviews";
 
 const Profile = () => {
   const {user, isAuthenticated, isLoading} = useAuth0();
@@ -15,11 +16,15 @@ const Profile = () => {
   return (
       isAuthenticated && (
           <Grid container spacing={2} sx={{m: 0}}>
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <UserInfo user={user}/>
             </Grid>
+            <Grid item xs={1}/>
             <Grid item xs={4}>
               <FavoriteAlbums user={user}/>
+            </Grid>
+            <Grid item xs={4}>
+              <Reviews user={user}/>
             </Grid>
           </Grid>
       )

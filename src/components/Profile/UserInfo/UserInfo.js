@@ -2,7 +2,7 @@ import React from "react";
 import {Avatar} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import users from "./users.json"
+import users from "../users.json"
 
 const UserInfo = ({user}) => {
   const userData = users[user.email];

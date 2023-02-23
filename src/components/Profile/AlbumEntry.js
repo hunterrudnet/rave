@@ -1,9 +1,9 @@
 import React from "react";
-import {Divider, Grid} from "@mui/material";
-import "./favoritealbumentry.css";
+import {Grid} from "@mui/material";
+import "./profile.css";
 import Typography from "@mui/material/Typography";
 
-const FavoriteAlbumEntry = ({album}) => {
+const   AlbumEntry = ({album}) => {
 
   return (
       <Grid container spacing={2} sx={{m: 0}}>
@@ -18,4 +18,4 @@ const FavoriteAlbumEntry = ({album}) => {
   );
 };
 
-export default FavoriteAlbumEntry;
+export default AlbumEntry;
