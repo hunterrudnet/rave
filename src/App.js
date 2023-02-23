@@ -1,30 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
-import Profile from './components/Profile';
+import Profile from './components/Profile/Profile';
+import {BrowserRouter} from "react-router-dom";
+import {Routes, Route} from "react-router";
+import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <LoginButton />
-        <LogoutButton />
-        <Profile />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <div>
+          <TopBar/>
+          <Routes>
+            <Route index element={null}/>
+            <Route path="/profile" element={<Profile/>}/>
+          </Routes>
+        </div>
+      </BrowserRouter>
   );
 }
 
