@@ -4,6 +4,8 @@ import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
 import Profile from './components/Profile';
 import Slides from "./carousel/cards.js";
+import SearchExtended from './carousel/searchExtended.js';
+
 import * as React from 'react';
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
         <LoginButton />
         <LogoutButton />
         <Profile />
+        <SearchExtended />
         <Slides />
       </header>
     </div>
