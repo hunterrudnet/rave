@@ -6,6 +6,7 @@ import Profile from './components/Profile';
 import Slides from "./carousel/cards.js";
 import Carousel from 'react-spring-3d-carousel';
 import * as React from 'react';
+import Card from './carousel/card.js'
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <LogoutButton />
         <Profile />
         <Slides />
+        {/* <Card /> */}
+
       </header>
     </div>
   );

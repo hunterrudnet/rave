@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Carousel from "react-spring-3d-carousel";
 import { config } from "react-spring";
+import Card from "./card.js";
 
 const getTouches = (evt) => {
     return (
@@ -20,35 +21,35 @@ export default class Example extends Component {
     slides = [
         {
             key: '1',
-            content: <img src="https://picsum.photos/800/800/?random" alt="1" />
+            content: <Card />
         },
         {
             key: '2',
-            content: <img src="https://picsum.photos/800/800/?random" alt="2" />
+            content: <Card />
         },
         {
             key: '3',
-            content: <img src="https://picsum.photos/600/800/?random" alt="3" />
+            content: <Card />
         },
         {
             key: '4',
-            content: <img src="https://picsum.photos/800/500/?random" alt="4" />
+            content: <Card />
         },
         {
             key: '5',
-            content: <img src="https://picsum.photos/800/800/?random" alt="5" />
+            content: <Card />
         },
         {
             key: '6',
-            content: <img src="https://picsum.photos/500/800/?random" alt="6" />
+            content: <Card />
         },
         {
             key: '7',
-            content: <img src="https://picsum.photos/800/600/?random" alt="7" />
+            content: <Card />
         },
         {
             key: '8',
-            content: <img src="https://picsum.photos/800/800/?random" alt="8" />
+            content: <Card />
         }
     ].map((slide, index) => {
         return { ...slide, onClick: () => this.setState({ goToSlide: index }) };
