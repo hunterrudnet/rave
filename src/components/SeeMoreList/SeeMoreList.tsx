@@ -3,7 +3,7 @@ import List from '@mui/material/List';
 import SeeMoreItem from "./SeeMoreItem"
 import {Button, Typography} from "@mui/material";
 import {useState} from "react";
-import {KeyboardArrowDown} from "@mui/icons-material";
+import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 
 const item2 = {
     stats: "2.1k",
@@ -15,7 +15,8 @@ const item2 = {
 
 // Displays a generic list of items, starting with a limit of 3.  If there are more than 3 items, an option
 // to see more will appear at the bottom of the list and allow the user to click it to expand the list with 3 further
-// items.  If all items are already displayed, the see more option will not be visible.
+// items.  If all items are already displayed, the see more option will not be visible and will instead be
+// replaced with a see less option to reset the list to 3 items.
 //
 // SeeMoreList takes 2 props:
 //    -- A title for the header of the list
@@ -43,6 +44,10 @@ export default function SeeMoreList({title, items}) {
         setLimit(limit + 3);
     };
 
+    const resetLimit = () => {
+        setLimit(3);
+    };
+
     const renderRowsWithItem = (
         items
     ) => {
@@ -68,6 +73,13 @@ export default function SeeMoreList({title, items}) {
                 sx={{display: limit >= items.length ? "none" : ""}}
             >
                 see more
+            </Button>
+            <Button
+                endIcon={<KeyboardArrowUp />}
+                onClick={resetLimit}
+                sx={{display: limit > items.length ? "" : "none"}}
+            >
+                see less
             </Button>
         </div>
     );
