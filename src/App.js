@@ -1,19 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
-import Profile from './components/Profile';
-import SeeMoreList from "./components/SeeMoreList/SeeMoreList.tsx";
-import {SEE_MORE_MOCK_DATA} from "./components/TestData/seeMoreMockData.tsx";
-
-const props = {
-  title: "Popular Albums",
-  items: SEE_MORE_MOCK_DATA
-}
+import Profile from './components/Profile/Profile';
+import {BrowserRouter} from "react-router-dom";
+import {Routes, Route} from "react-router";
+import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   return (
-      <SeeMoreList {...props}/>
+      <BrowserRouter>
+        <div>
+          <TopBar/>
+          <Routes>
+            <Route index element={null}/>
+            <Route path="/profile" element={<Profile/>}/>
+          </Routes>
+        </div>
+      </BrowserRouter>
   );
 }
 
