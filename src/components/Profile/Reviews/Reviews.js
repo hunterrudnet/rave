@@ -2,12 +2,12 @@ import React from "react";
 import {
   Divider, List, ListItem, ListSubheader, Grid
 } from "@mui/material";
-import userAlbums from "../useralbums.json";
+import userAlbums from "../../TestData/useralbums.json";
 import Typography from "@mui/material/Typography";
 import "../profile.css";
 import ReviewEntry from "./ReviewEntry";
 import AlbumEntry from "../AlbumEntry";
-import albums from "../../albums.json";
+import albums from "../../TestData/profilealbums.json";
 
 const Reviews = ({user}) => {
   const reviewsList = userAlbums[user.email].reviews;
