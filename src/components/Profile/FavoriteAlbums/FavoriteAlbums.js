@@ -2,8 +2,8 @@ import React from "react";
 import {
   Divider, List, ListItem, ListSubheader, Grid
 } from "@mui/material";
-import userAlbums from "../useralbums.json";
-import albums from "../../albums.json";
+import userAlbums from "../../TestData/useralbums.json";
+import albums from "../../TestData/profilealbums.json";
 import AlbumEntry from "../AlbumEntry";
 import Typography from "@mui/material/Typography";
 import "../profile.css";

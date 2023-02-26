@@ -1,5 +1,5 @@
 import React from "react";
-import {Rating, Divider} from "@mui/material";
+import {Rating} from "@mui/material";
 import "../profile.css";
 import Typography from "@mui/material/Typography";
 import AlbumEntry from "../AlbumEntry";
