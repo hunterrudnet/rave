@@ -1,0 +1,11 @@
+.profile-albums-list {
+    max-width: 360px;
+    overflow: auto;
+    max-height: 500px;
+}
+
+.album-picture {
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+}

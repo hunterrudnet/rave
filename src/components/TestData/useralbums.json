@@ -1,0 +1,68 @@
+{
+  "jlachenauer2@gmail.com": {
+    "favorites": [1, 2, 5, 4, 6],
+    "reviews": [
+      {
+        "_id": 1,
+        "album_id": 1,
+        "rating": 4,
+        "review": "Good album!"
+      },
+      {
+        "_id": 2,
+        "album_id": 5,
+        "rating": 5,
+        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quam nibh, tincidunt vel metus in, iaculis bibendum velit. Aliquam erat volutpat. Etiam quis rutrum orci. Cras sed odio lacus. Etiam nec mattis arcu. Praesent eu consequat mi, sit amet hendrerit ex. Suspendisse varius congue pretium. Maecenas nec efficitur dui. Integer rutrum lectus vel nibh iaculis, vel finibus sapien pellentesque. Cras fringilla, justo nec euismod efficitur, mauris metus suscipit odio, blandit ultricies nibh elit a sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque augue leo, sagittis at nunc et, ultrices ultricies augue."
+      },
+      {
+        "_id": 3,
+        "album_id": 3,
+        "rating": 2.5,
+        "review": "ok i guess"
+      },
+      {
+        "_id": 4,
+        "album_id": 2,
+        "review": "real bangers on this one"
+      },
+      {
+        "_id": 5,
+        "album_id": 4,
+        "rating": 5
+      }
+    ]
+  },
+  "hunter.rudnet@gmail.com": {
+    "favorites": [1, 2, 5, 4, 6],
+    "reviews": [
+      {
+        "_id": 1,
+        "album_id": 1,
+        "rating": 4,
+        "review": "Good album!"
+      },
+      {
+        "_id": 2,
+        "album_id": 5,
+        "rating": 5,
+        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quam nibh, tincidunt vel metus in, iaculis bibendum velit. Aliquam erat volutpat. Etiam quis rutrum orci. Cras sed odio lacus. Etiam nec mattis arcu. Praesent eu consequat mi, sit amet hendrerit ex. Suspendisse varius congue pretium. Maecenas nec efficitur dui. Integer rutrum lectus vel nibh iaculis, vel finibus sapien pellentesque. Cras fringilla, justo nec euismod efficitur, mauris metus suscipit odio, blandit ultricies nibh elit a sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque augue leo, sagittis at nunc et, ultrices ultricies augue."
+      },
+      {
+        "_id": 3,
+        "album_id": 3,
+        "rating": 2.5,
+        "review": "ok i guess"
+      },
+      {
+        "_id": 4,
+        "album_id": 2,
+        "review": "real bangers on this one"
+      },
+      {
+        "_id": 5,
+        "album_id": 4,
+        "rating": 5
+      }
+    ]
+  }
+}
