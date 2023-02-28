@@ -3,12 +3,6 @@ import Carousel from "react-spring-3d-carousel";
 import { config } from "react-spring";
 import Card from "./card.js";
 
-const getTouches = (evt) => {
-    return (
-        evt.touches || evt.originalEvent.touches // browser API
-    );
-};
-
 export default class Example extends Component {
     state = {
         goToSlide: 0,
@@ -61,61 +55,15 @@ export default class Example extends Component {
         });
     };
 
-    handleTouchStart = (evt) => {
-        if (!this.state.enableSwipe) {
-            return;
-        }
-
-        const firstTouch = getTouches(evt)[0];
-        this.setState({
-            ...this.state,
-            xDown: firstTouch.clientX,
-            yDown: firstTouch.clientY
-        });
-    };
-
-    handleTouchMove = (evt) => {
-        if (!this.state.enableSwipe || (!this.state.xDown && !this.state.yDown)) {
-            return;
-        }
-
-        let xUp = evt.touches[0].clientX;
-        let yUp = evt.touches[0].clientY;
-
-        let xDiff = this.state.xDown - xUp;
-        let yDiff = this.state.yDown - yUp;
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            if (xDiff > 0) {
-                /* left swipe */
-                this.setState({
-                    goToSlide: this.state.goToSlide + 1,
-                    xDown: null,
-                    yDown: null
-                });
-            } else {
-                /* right swipe */
-                this.setState({
-                    goToSlide: this.state.goToSlide - 1,
-                    xDown: null,
-                    yDown: null
-                });
-            }
-        }
-    };
 
     render() {
         return (
             <div
                 style={{ width: "80%", height: "500px", margin: "0 auto" }}
-                onTouchStart={this.handleTouchStart}
-                onTouchMove={this.handleTouchMove}
             >
                 <Carousel
                     slides={this.slides}
-                    goToSlide={this.state.goToSlide}
-                    offsetRadius={this.state.offsetRadius}
                     showNavigation={this.state.showNavigation}
-                    animationConfig={this.state.config}
                 />
             </div>
         );
