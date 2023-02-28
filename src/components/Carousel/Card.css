@@ -1,7 +1,8 @@
 .card-body {
     position: absolute;
-    top: 42%;
-    width: 18rem;
+    top: 39%;
+    width: 17.9rem;
+    height: 11rem;
     background-color: beige;
 }
 
@@ -17,3 +18,9 @@
 .filter {
     max-width: 30%;
 }
+
+/* .css-1qzevvg {
+    background-color: red;
+    top: 60%;
+    position: absolute;
+} */

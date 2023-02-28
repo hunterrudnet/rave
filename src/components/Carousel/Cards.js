@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import Carousel from "react-spring-3d-carousel";
-import { config } from "react-spring";
-import Card from "./card.js";
+import Card from "./Card.js";
+import './Card.css';
 
 export default class Example extends Component {
     state = {
         goToSlide: 0,
-        offsetRadius: 2,
         showNavigation: true,
-        enableSwipe: true,
-        config: config.gentle
     };
 
     slides = [

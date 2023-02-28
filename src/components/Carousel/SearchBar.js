@@ -1,6 +1,6 @@
 
 import React from "react";
-import './card.css';
+import './Card.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 

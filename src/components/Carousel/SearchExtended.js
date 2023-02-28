@@ -1,18 +1,18 @@
 
 import React from "react";
-import './card.css';
+import './Card.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import SearchBar from "./searchBar.js"
-import Filter from "./filter.js"
+import SearchBar from "./SearchBar.js"
+import Filter from "./Filter.js"
 
 const SearchExtended = () => {
     return (
         <div class="row">
-            <div class="col-4">
+            <div class="col">
                 <SearchBar />
             </div>
-            <div class="col-8 text-white">
+            <div class="col text-white">
                 <Filter />
                 <Filter />
             </div>
