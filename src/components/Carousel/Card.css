@@ -16,7 +16,7 @@
 }
 
 .filter {
-    max-width: 30%;
+    max-width: 40%;
 }
 
 /* .css-1qzevvg {
@@ -24,3 +24,11 @@
     top: 60%;
     position: absolute;
 } */
+
+.css-1qzevvg {
+    width: 100%;
+}
+
+.row {
+    width: 80%;
+}
