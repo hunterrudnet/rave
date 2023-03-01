@@ -5,6 +5,7 @@ import TopBar from "./components/TopBar/TopBar";
 import SeeMoreList from "./components/SeeMoreList/SeeMoreList.tsx";
 import { SEE_MORE_MOCK_DATA } from "./components/TestData/seeMoreMockData.tsx";
 import Slides from "./components/Carousel/Cards.js"
+import Search from "./components/Carousel/SearchExtended.js"
 const props = {
   title: "Popular Albums",
   items: SEE_MORE_MOCK_DATA
@@ -21,6 +22,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
+      <Search />
       <Slides />
     </BrowserRouter>
   );
