@@ -20,10 +20,10 @@ function App() {
           <Route index element={null} />
           <Route path="/see-more" element={<SeeMoreList {...props} />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/slides' element={<Slides />} />
         </Routes>
       </div>
-      <Search />
-      <Slides />
     </BrowserRouter>
   );
 }
