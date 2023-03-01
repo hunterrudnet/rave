@@ -1,0 +1,25 @@
+.card-body {
+    position: absolute;
+    top: 39%;
+    width: 17.9rem;
+    height: 11rem;
+    background-color: beige;
+}
+
+.card {
+    width: 18rem;
+    color: black;
+}
+
+.icon {
+    width: 3rem;
+}
+
+.filter {
+    max-width: 40%;
+}
+
+.row {
+    margin: auto;
+    width: 80%;
+}
