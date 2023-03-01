@@ -7,8 +7,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const SearchBar = () => {
     return (
-        <div class="m-3 search">
-            <input type="search" class="form-control form rounded-pill" id="input1"
+        <div className="m-3 search">
+            <input type="search" className="form-control form rounded-pill" id="input1"
                 placeholder="Search for a song, mood, or artist" />
         </div>
     );
