@@ -8,11 +8,11 @@ import Filter from "./Filter.js"
 
 const SearchExtended = () => {
     return (
-        <div class="row">
-            <div class="col">
+        <div className="row">
+            <div className="col">
                 <SearchBar />
             </div>
-            <div class="col text-white">
+            <div className="col text-white">
                 <Filter />
                 <Filter />
             </div>
