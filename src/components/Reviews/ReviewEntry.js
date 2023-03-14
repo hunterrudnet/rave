@@ -1,14 +1,19 @@
 import React from "react";
 import {Rating} from "@mui/material";
-import "../profile.css";
+import "../Reused/reused.css";
 import Typography from "@mui/material/Typography";
-import AlbumEntry from "../AlbumEntry";
+import ImageText from "../Reused/ImageText";
 
 const ReviewEntry = ({review}) => {
 
   let rating = null;
   if (review.rating) {
-    rating = <Rating name="read-only" precision={0.5} value={review.rating}/>;
+    rating = <Rating name="read-only" precision={0.5} value={review.rating} readOnly/>;
+  }
+
+  let reviewTitle = null;
+  if (review.title) {
+    reviewTitle = <Typography variant="caption">{review.title}</Typography>;
   }
 
   let reviewText = null;
@@ -18,8 +23,9 @@ const ReviewEntry = ({review}) => {
 
   return (
       <>
-        <AlbumEntry album={review._id}/>
+        <ImageText album={review._id}/>
         {rating}
+        {reviewTitle}
         {reviewText}
       </>
   );

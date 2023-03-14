@@ -1,10 +1,10 @@
 import {useAuth0} from "@auth0/auth0-react";
 import React from "react";
-import "./profile.css";
+import "../Reused/reused.css";
 import UserInfo from "./UserInfo/UserInfo";
 import {Grid} from "@mui/material";
 import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
-import Reviews from "./Reviews/Reviews";
+import Reviews from "../Reviews/Reviews";
 
 const Profile = () => {
   const {user, isAuthenticated, isLoading} = useAuth0();

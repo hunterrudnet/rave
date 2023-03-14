@@ -2,14 +2,14 @@ import React from "react";
 import {
   Divider, List, ListItem, ListSubheader, Grid
 } from "@mui/material";
-import userAlbums from "../../TestData/useralbums.json";
+import userAlbums from "../TestData/useralbums.json";
 import Typography from "@mui/material/Typography";
-import "../profile.css";
+import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
-import AlbumEntry from "../AlbumEntry";
-import albums from "../../TestData/profilealbums.json";
+import ImageText from "../Reused/ImageText";
+import albums from "../TestData/profilealbums.json";
 
-const Reviews = ({user}) => {
+const Reviews = ({bigText, smallText, image}) => {
   const reviewsList = userAlbums[user.email].reviews;
 
   return (<List className="profile-albums-list" subheader={<li/>}>
@@ -21,7 +21,7 @@ const Reviews = ({user}) => {
       return (<div key={review._id}>
         <ListItem>
           <Grid container spacing={2} sx={{m: 0}}>
-            <AlbumEntry album={albums[review.album_id]}/>
+            <ImageText bigText={bigText} smallText={smallText} image={image}/>
             <ReviewEntry review={review}/>
           </Grid>
         </ListItem>
