@@ -9,6 +9,7 @@ import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
 
 
 const Reviews = ({ id, idType }) => {
@@ -28,6 +29,14 @@ const Reviews = ({ id, idType }) => {
       image={album.image} />;
   };
 
+  const getReviewRating = (review) => {
+    let reviewRating = null;
+    if (review.rating) {
+      reviewRating = <Rating name="read-only" precision={0.5} value={review.rating} readOnly />
+    }
+    return reviewRating;
+  };
+
   return (<List className="profile-albums-list" subheader={<li />}>
     <ListSubheader>
       <Typography variant="h6">Reviews</Typography>
@@ -39,13 +48,15 @@ const Reviews = ({ id, idType }) => {
           <Grid container spacing={2} sx={{ m: 0 }}>
             <Grid container spacing={2} sx={{ m: 0 }}>
               <Grid item xs={9}>
-                {getReviewHeader(review)}
+                <Box>
+                  {getReviewHeader(review)}
+                  <ReviewEntry review={review} />
+                </Box>
               </Grid>
               <Grid item xs={3}>
-                <Rating name="read-only" precision={0.5} value={review.rating} readOnly />
+                {getReviewRating(review)}
               </Grid>
             </Grid>
-            <ReviewEntry review={review} />
           </Grid>
         </ListItem>
         <Divider />

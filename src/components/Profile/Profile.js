@@ -26,9 +26,6 @@ const Profile = () => {
           <br></br>
           <Reviews id={user_id} idType="user" />
         </Grid>
-        {/* <Grid item xs={4}>
-          <Reviews id={user_id} idType="user" />
-        </Grid> */}
       </Grid>
     )
   );
