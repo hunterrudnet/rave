@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
+import Rating from "@mui/material/Rating";
+
 
 const Reviews = ({ id, idType }) => {
 
@@ -35,7 +37,14 @@ const Reviews = ({ id, idType }) => {
       return (<div key={review._id}>
         <ListItem>
           <Grid container spacing={2} sx={{ m: 0 }}>
-            {getReviewHeader(review)}
+            <Grid container spacing={2} sx={{ m: 0 }}>
+              <Grid item xs={9}>
+                {getReviewHeader(review)}
+              </Grid>
+              <Grid item xs={3}>
+                <Rating name="read-only" precision={0.5} value={review.rating} readOnly />
+              </Grid>
+            </Grid>
             <ReviewEntry review={review} />
           </Grid>
         </ListItem>

@@ -6,13 +6,6 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 const ReviewEntry = ({ review }) => {
-
-  let rating = null;
-  if (review.rating) {
-    rating = <Rating name="read-only" precision={0.5} value={review.rating}
-      readOnly />;
-  }
-
   let reviewTitle = null;
   if (review.title) {
     reviewTitle = <Typography variant="subtitle">{review.title}</Typography>;
@@ -24,10 +17,9 @@ const ReviewEntry = ({ review }) => {
   }
 
   return (
-    <Grid container spacing={2} sx={{ m: 0 }}>
+    <Grid container spacing={2} sx={{ ml: 18.5 }}>
       <Grid item xs={20}>
         <div>
-          <div>{rating}</div>
           <div>{reviewTitle}</div>
           <div>{reviewText}</div>
         </div>
