@@ -5,12 +5,12 @@ import "../Reused/reused.css";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const ReviewEntry = ({review}) => {
+const ReviewEntry = ({ review }) => {
 
   let rating = null;
   if (review.rating) {
     rating = <Rating name="read-only" precision={0.5} value={review.rating}
-                     readOnly/>;
+      readOnly />;
   }
 
   let reviewTitle = null;
@@ -24,15 +24,15 @@ const ReviewEntry = ({review}) => {
   }
 
   return (
-      <Grid container spacing={2} sx={{m: 0}}>
-        <Grid item xs={12}>
-          <Box>
-            <div>{reviewTitle}</div>
-            <div>{rating}</div>
-            <div>{reviewText}</div>
-          </Box>
-        </Grid>
+    <Grid container spacing={2} sx={{ m: 0 }}>
+      <Grid item xs={20}>
+        <div>
+          <div>{rating}</div>
+          <div>{reviewTitle}</div>
+          <div>{reviewText}</div>
+        </div>
       </Grid>
+    </Grid>
   );
 };
 
