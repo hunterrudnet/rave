@@ -24,7 +24,7 @@ const Profile = () => {
               <FavoriteAlbums user={user}/>
             </Grid>
             <Grid item xs={4}>
-              <Reviews user={user}/>
+              <Reviews bigtext={}/>
             </Grid>
           </Grid>
       )

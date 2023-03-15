@@ -2,11 +2,10 @@
   {
     "_id": 1,
     "album_id": 1,
+    "user_id": 1,
     "rating": 4,
-    "review": "Good album!",
     "title": "i liked it",
-    "image": "https://upload.wikimedia.org/wikipedia/en/7/74/Pink_Floyd-Animals-Frontal.jpg",
-    "user": "name@site.com"
+    "text": "Good album!"
   },
   {
     "_id": 2,
