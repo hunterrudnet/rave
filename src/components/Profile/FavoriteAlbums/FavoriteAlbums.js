@@ -4,30 +4,31 @@ import {
 } from "@mui/material";
 import userAlbums from "../../TestData/useralbums.json";
 import albums from "../../TestData/profilealbums.json";
-import AlbumEntry from "../AlbumEntry";
+import ImageText from "../../Reused/ImageText";
 import Typography from "@mui/material/Typography";
-import "../profile.css";
+import "../../Reused/reused.css";
 
 const FavoriteAlbums = ({user}) => {
-  const favoritesList = userAlbums[user.email].favorites;
+      const favoritesList = userAlbums[user.email].favorites;
 
-  return (<List className="profile-albums-list" subheader={<li/>}>
-    <ListSubheader>
-      <Typography variant="h6">Favorite Albums</Typography>
-    </ListSubheader>
+      return (<List className="profile-albums-list" subheader={<li/>}>
+        <ListSubheader>
+          <Typography variant="h6">Favorite Albums</Typography>
+        </ListSubheader>
 
-    {favoritesList.map(favorite => {
-      return (<div key={favorite}>
-        <ListItem>
-          <Grid container spacing={2} sx={{m: 0}}>
-            <AlbumEntry album={albums[favorite]}/>
-          </Grid>
-        </ListItem>
-        <Divider/>
-      </div>);
-    })}
-  </List>);
-}
-  ;
+        {favoritesList.map(favorite => {
+          let album = albums[favorite];
+          return (<div key={favorite}>
+            <ListItem>
+              <Grid container spacing={2} sx={{m: 0}}>
+                <ImageText bigText={album.title} smallText={album.artist} image={album.image}/>
+              </Grid>
+            </ListItem>
+            <Divider/>
+          </div>);
+        })}
+      </List>);
+    }
+;
 
-  export default FavoriteAlbums;
+export default FavoriteAlbums;
