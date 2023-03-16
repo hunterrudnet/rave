@@ -28,7 +28,7 @@ const EditProfile = ({user}) => {
 
   return (
       <>
-        <Button onClick={handleOpen}>Open modal</Button>
+        <Button onClick={handleOpen}>Edit Profile</Button>
         <Modal
             open={open}
             onClose={handleClose}
