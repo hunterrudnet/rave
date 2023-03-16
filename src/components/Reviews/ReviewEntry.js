@@ -17,8 +17,10 @@ const ReviewEntry = ({ review }) => {
   }
 
   return (
-    <Grid container spacing={2} sx={{ ml: 18.5 }}>
-      <Grid item xs={20}>
+    <Grid container spacing={2} sx={{ m: 0 }}>
+      <Grid item xs={3}>
+      </Grid>
+      <Grid item xs={9}>
         <div>
           <div>{reviewTitle}</div>
           <div>{reviewText}</div>
