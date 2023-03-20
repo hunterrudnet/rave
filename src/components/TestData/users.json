@@ -2,25 +2,28 @@
   "jlachenauer2@gmail.com": {
     "user_id": 1,
     "email": "jlachenauer2@gmail.com",
+    "name": "Julia Lachenauer",
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra tellus nec magna luctus, nec luctus justo scelerisque. Pellentesque mi ligula, vulputate nec purus eget, iaculis fringilla dolor. Quisque imperdiet felis massa, eget posuere sem maximus eget. Suspendisse fermentum magna augue, id tincidunt libero posuere vitae. Morbi et tellus turpis.",
-    "followers": 12032,
-    "following": 30,
+    "followers": ["hunter.rudnet@gmail.com"],
+    "following": ["hadeelf2001@gmail.com"],
     "admin": true
   },
   "hunter.rudnet@gmail.com": {
     "user_id": 2,
     "email": "hunter.rudnet@gmail.com",
+    "name": "Hunter Rudnet",
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra tellus nec magna luctus, nec luctus justo scelerisque. Pellentesque mi ligula, vulputate nec purus eget, iaculis fringilla dolor. Quisque imperdiet felis massa, eget posuere sem maximus eget. Suspendisse fermentum magna augue, id tincidunt libero posuere vitae. Morbi et tellus turpis.",
-    "followers": 12032,
-    "following": 30,
+    "followers": [],
+    "following": ["jlachenauer2@gmail.com", "hadeelf2001@gmail.com"],
     "admin": true
   },
   "hadeelf2001@gmail.com": {
     "user_id": 3,
     "email": "hadeelf2001@gmail.com",
+    "name": "Hadeel Farhan",
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra tellus nec magna luctus, nec luctus justo scelerisque. Pellentesque mi ligula, vulputate nec purus eget, iaculis fringilla dolor. Quisque imperdiet felis massa, eget posuere sem maximus eget. Suspendisse fermentum magna augue, id tincidunt libero posuere vitae. Morbi et tellus turpis.",
-    "followers": 12032,
-    "following": 30,
+    "followers": ["jlachenauer2@gmail.com", "hunter.rudnet@gmail.com"],
+    "following": [],
     "admin": true
   }
 }

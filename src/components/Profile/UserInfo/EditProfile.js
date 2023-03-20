@@ -8,6 +8,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import React from "react";
 import users from "../../TestData/users.json";
+import "../../Reused/reused.css"
 
 const EditProfile = ({user}) => {
   const userData = users[user.email];
@@ -21,11 +22,6 @@ const EditProfile = ({user}) => {
     toggleAdmin(event.target.checked);
   };
 
-  const style = {
-    width: 400,
-    bgcolor: 'white'
-  };
-
   return (
       <>
         <Button onClick={handleOpen}>Edit Profile</Button>
@@ -35,7 +31,7 @@ const EditProfile = ({user}) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box className="center-modal">
             <FormControl>
               <legend>Edit Profile</legend>
               <Input value={user.email} disabled/>

@@ -36,7 +36,7 @@ const Reviews = ({id, idType}) => {
     return reviewRating;
   };
 
-  return (<List className="profile-albums-list" subheader={<li />}>
+  return (<List className="scrollable-list" subheader={<li />}>
     <ListSubheader>
       <Typography variant="h6">Reviews</Typography>
     </ListSubheader>
