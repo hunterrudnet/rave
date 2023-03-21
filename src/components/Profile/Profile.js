@@ -6,7 +6,6 @@ import {Grid} from "@mui/material";
 import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
 import Reviews from "../Reviews/Reviews";
 import users from "../TestData/users.json";
-import EditProfile from "./UserInfo/EditProfile";
 
 const Profile = () => {
   const {user, isAuthenticated, isLoading} = useAuth0();
@@ -17,20 +16,16 @@ const Profile = () => {
   const user_id = users[user.email].user_id;
   return (
       isAuthenticated && (
-          <>
-            <EditProfile user={user}/>
-            <Grid container spacing={2} sx={{m: 0}}>
-              <Grid item xs={3}>
-                <FavoriteAlbums user={user}/>
-              </Grid>
-              <Grid item xs={0.5}/>
-              <Grid item xs={7}>
-                <UserInfo user={user}/>
-                <br></br>
-                <Reviews id={user_id} idType="user"/>
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
+              <FavoriteAlbums user={user}/>
             </Grid>
-          </>
+            <Grid item xs={0.5}/>
+            <Grid item xs={7}>
+              <UserInfo user={user}/>
+              <Reviews id={user_id} idType="user"/>
+            </Grid>
+          </Grid>
       )
   );
 };

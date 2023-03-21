@@ -11,7 +11,7 @@ import "../../Reused/reused.css";
 const FavoriteAlbums = ({user}) => {
       const favoritesList = userAlbums[user.email].favorites;
 
-      return (<List className="profile-albums-list" subheader={<li/>}>
+      return (<List className="scrollable-list" subheader={<li/>}>
         <ListSubheader>
           <Typography variant="h6">Favorite Albums</Typography>
         </ListSubheader>
@@ -21,7 +21,8 @@ const FavoriteAlbums = ({user}) => {
           return (<div key={favorite}>
             <ListItem>
               <Grid container spacing={2} sx={{m: 0}}>
-                <ImageText bigText={album.title} smallText={album.artist} image={album.image}/>
+                <ImageText bigText={album.title} smallText={album.artist}
+                           image={album.image}/>
               </Grid>
             </ListItem>
             <Divider/>
