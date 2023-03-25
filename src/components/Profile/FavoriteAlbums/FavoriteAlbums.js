@@ -1,7 +1,9 @@
 import React from "react";
-import {
-  Divider, List, ListItem, ListSubheader, Grid
-} from "@mui/material";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListSubheader from "@mui/material/ListSubheader";
+import Grid from "@mui/material/Grid";
 import userAlbums from "../../TestData/useralbums.json";
 import albums from "../../TestData/profilealbums.json";
 import ImageText from "../../Reused/ImageText";
