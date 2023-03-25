@@ -14,5 +14,5 @@ export const getUser = async (username) => {
 
 export const updateUser = async (user) => {
   const response = await axios.put(`${TUITS_API}/${tuit._id}`, user);
-  return ;
+  return reponse.data;
 };

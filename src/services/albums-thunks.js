@@ -7,3 +7,7 @@ export const getAlbumByIdThunk = createAsyncThunk('albums/getAlbumByIdThunk',
 export const getAlbumsBySearchThunk = createAsyncThunk(
     'albums/getAlbumBySearchThunk',
     async (query) => await service.getAlbumsBySearch(query));
+
+export const getAlbumBySpotifyIdThunk = createAsyncThunk(
+    'albums/getAlbumBySpotifyIdThunk',
+    async (spotifyId) => await service.getAlbumBySpotifyId(spotifyId));

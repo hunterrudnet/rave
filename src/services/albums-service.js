@@ -7,8 +7,13 @@ const ALBUMS_API = 'http://localhost:4000/albums';
 //   return response.data;
 // };
 
+export const getAlbumBySpotifyId = async (spotifyId) => {
+  const response = await axios.get(`${ALBUMS_API}/${spotifyId}`);
+  return response.data;
+};
+
 export const getAlbumById = async (albumId) => {
-  const response = await axios.get(`${ALBUMS_API}/${albumId}`);
+  const response = await axios.get(`${ALBUMS_API}/lookup/${albumId}`);
   return response.data;
 };
 
