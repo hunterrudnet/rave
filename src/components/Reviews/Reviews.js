@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   getReviewsForUserThunk, getReviewsForAlbumThunk
 } from "../../services/reviews-thunks";
-import {getAlbumByIdThunk} from "../../services/albums-thunks"
+import {getAlbumByIdThunk} from "../../services/albums-thunks";
 
 const Reviews = ({id, idType}) => {
 
@@ -30,10 +30,9 @@ const Reviews = ({id, idType}) => {
 
   const getReviewHeader = (review) => {
     let album_id = review.AlbumId;
-    const {albums} =
-    dispatch()
+    dispatch(getAlbumByIdThunk());
+    const {albums} = useSelector(state => state.albumsData);
     let album = albums[album_id];
-
 
     return <ImageText bigText={album.title} smallText={album.artist}
                       image={album.image}/>;
@@ -53,7 +52,7 @@ const Reviews = ({id, idType}) => {
     <ListSubheader>
       <Typography variant="h6">Reviews</Typography>
     </ListSubheader>
-    {loading && <Typography>Loading</Typography>}
+    {/*{loading && <Typography>Loading</Typography>}*/}
 
     {reviews.map(review => {
       return (<div key={review.review_id}>
