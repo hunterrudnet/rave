@@ -6,19 +6,19 @@ import {
 } from "../services/reviews-thunks";
 
 const initialState = {
-  reviewsData: {}
+  reviews: {}
 };
 
 const reviewsSlice = createSlice({
-  name: 'review',
+  name: 'reviews',
   initialState,
   extraReducers: {
     [createReviewThunk.fulfilled]: (state,
-        {payload}) => state.reviewsData = {...payload, ...state.reviewsData},
+        {payload}) => state.reviews = {...payload, ...state.reviews},
     [getReviewsForUserThunk.fulfilled]: (state,
-        {payload}) => state.reviewsData = {...payload, ...state.reviewsData},
+        {payload}) => state.reviews = {...payload, ...state.reviews},
     [getReviewsForAlbumThunk.fulfilled]: (state,
-        {payload}) => state.reviewsData = {...payload, ...state.reviewsData}
+        {payload}) => state.reviews = {...payload, ...state.reviews}
   },
   reducers: {}
 });

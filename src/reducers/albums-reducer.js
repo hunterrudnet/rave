@@ -4,18 +4,18 @@ import {
 } from "../services/albums-thunks";
 
 const initialState = {
-  albumsData: {}
+  albums: {}
 };
 
 const albumsSlice = createSlice({
   name: 'review', initialState, extraReducers: {
     [getAlbumByIdThunk.fulfilled]: (state,
-        {payload}) => state.albumsData = {...payload, ...state.albumsData},
+        {payload}) => state.albums = {...payload, ...state.albums},
     [getAlbumBySpotifyIdThunk.fulfilled]: (state,
-        {payload}) => state.albumsData = {...payload, ...state.albumsData},
+        {payload}) => state.albums = {...payload, ...state.albums},
     [getAlbumsBySearchThunk.fulfilled]: (state, {payload}) => {
       payload.forEach(
-          album => state.albumsData = {...album, ...state.albumsData});
+          album => state.albums = {...album, ...state.albums});
     }
   }, reducers: {}
 });

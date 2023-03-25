@@ -13,10 +13,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   getReviewsForUserThunk, getReviewsForAlbumThunk
 } from "../../services/reviews-thunks";
+import {getAlbumByIdThunk} from "../../services/albums-thunks"
 
 const Reviews = ({id, idType}) => {
 
-  const {reviews, loading} = useSelector(state => state.reviewsData);
+  const {reviews} = useSelector(state => state.reviewsData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,8 +29,11 @@ const Reviews = ({id, idType}) => {
   }, []);
 
   const getReviewHeader = (review) => {
-    let album_id = review.album_id;
+    let album_id = review.AlbumId;
+    const {albums} =
+    dispatch()
     let album = albums[album_id];
+
 
     return <ImageText bigText={album.title} smallText={album.artist}
                       image={album.image}/>;

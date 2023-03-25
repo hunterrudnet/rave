@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {createOrUpdateUserThunk} from "../services/user-thunks";
 
 const initialState = {
-  userData: {}
+  user: {}
 };
 
 const userSlice = createSlice({
@@ -10,7 +10,7 @@ const userSlice = createSlice({
   initialState,
   extraReducers: {
     [createOrUpdateUserThunk.fulfilled]:
-        (state, {payload}) => state.userData = {...payload}
+        (state, {payload}) => state.user = {...payload}
   },
   reducers: {}
 });
