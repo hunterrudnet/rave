@@ -6,19 +6,18 @@ import Grid from "@mui/material/Grid";
 import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
 import Reviews from "../Reviews/Reviews";
 import {Navigate} from "react-router-dom";
-import users from "../TestData/users.json";
 import {useDispatch} from "react-redux";
 
 const Profile = () => {
   const {user, isAuthenticated, isLoading} = useAuth0();
   const dispatch = useDispatch();
 
-  const tuitClickHandler = () => {
-    const newTuit = {
-      tuit: whatsHappening
-    };
-    dispatch(createTuitThunk(newTuit));
-  };
+  // const tuitClickHandler = () => {
+  //   const newTuit = {
+  //     tuit: whatsHappening
+  //   };
+  //   dispatch(createTuitThunk(newTuit));
+  // };
 
   if (isLoading) {
     return <div>Loading ...</div>;

@@ -7,9 +7,9 @@ import {SEE_MORE_MOCK_DATA} from "./components/TestData/seeMoreMockData.tsx";
 import Slides from "./components/Carousel/Cards.js";
 import Search from "./components/Carousel/SearchExtended.js";
 import {configureStore} from '@reduxjs/toolkit';
-import userReducer from "reducers/user-reducer";
-import reviewsReducer from "reducers/reviews-reducer";
-import albumsReducer from "reducers/albums-reducer";
+import userReducer from "./reducers/user-reducer";
+import reviewsReducer from "./reducers/reviews-reducer";
+import albumsReducer from "./reducers/albums-reducer";
 import {Provider} from "react-redux";
 
 const props = {

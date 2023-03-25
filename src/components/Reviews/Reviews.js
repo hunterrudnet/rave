@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {
   Divider, List, ListItem, ListSubheader, Grid
 } from "@mui/material";
-import albums from "../TestData/profilealbums.json";
 import Typography from "@mui/material/Typography";
 import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
@@ -29,13 +28,9 @@ const Reviews = ({id, idType}) => {
   }, []);
 
   const getReviewHeader = (review) => {
-    let album_id = review.AlbumId;
-    dispatch(getAlbumByIdThunk());
-    const {albums} = useSelector(state => state.albumsData);
-    let album = albums[album_id];
-
-    return <ImageText bigText={album.title} smallText={album.artist}
-                      image={album.image}/>;
+    let album = dispatch(getAlbumByIdThunk(review.AlbumId));
+    return <ImageText bigText={album.name} smallText={album.artist}
+                      image={album.images[0]}/>;
   };
 
   const getReviewRating = (review) => {
