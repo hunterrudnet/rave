@@ -8,6 +8,7 @@ import Slides from "./components/Carousel/Cards.js";
 import Search from "./components/Carousel/SearchExtended.js";
 import {configureStore} from '@reduxjs/toolkit';
 import userReducer from "reducers/user-reducer";
+import reviewsReducer from "reducers/reviews-reducer";
 import {Provider} from "react-redux";
 
 const props = {
@@ -15,7 +16,8 @@ const props = {
   items: SEE_MORE_MOCK_DATA
 };
 
-const store = configureStore({reducer: {userData: userReducer}});
+const store = configureStore(
+    {reducer: {userData: userReducer, reviewsData: reviewsReducer}});
 
 function App() {
   return (
