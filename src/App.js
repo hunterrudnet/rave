@@ -9,6 +9,7 @@ import Search from "./components/Carousel/SearchExtended.js";
 import {configureStore} from '@reduxjs/toolkit';
 import userReducer from "reducers/user-reducer";
 import reviewsReducer from "reducers/reviews-reducer";
+import albumsReducer from "reducers/albums-reducer";
 import {Provider} from "react-redux";
 
 const props = {
@@ -17,7 +18,13 @@ const props = {
 };
 
 const store = configureStore(
-    {reducer: {userData: userReducer, reviewsData: reviewsReducer}});
+    {
+      reducer: {
+        userData: userReducer,
+        reviewsData: reviewsReducer,
+        albumsData: albumsReducer
+      }
+    });
 
 function App() {
   return (

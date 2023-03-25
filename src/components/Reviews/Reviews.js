@@ -1,8 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   Divider, List, ListItem, ListSubheader, Grid
 } from "@mui/material";
-import reviews from "../TestData/reviews.json";
 import albums from "../TestData/profilealbums.json";
 import Typography from "@mui/material/Typography";
 import "../Reused/reused.css";
@@ -10,15 +9,23 @@ import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
+import {useDispatch, useSelector} from "react-redux";
+import {
+  getReviewsForUserThunk, getReviewsForAlbumThunk
+} from "../../services/reviews-thunks";
 
 const Reviews = ({id, idType}) => {
 
-  let displayReviews;
-  if (idType === "user") {
-    displayReviews = reviews.filter(review => review.user_id == id);
-  } else {
-    displayReviews = reviews.filter(review => review.album_id == id);
-  }
+  const {reviews, loading} = useSelector(state => state.reviewsData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (idType === "user") {
+      dispatch(getReviewsForUserThunk(id));
+    } else {
+      dispatch(getReviewsForAlbumThunk(id));
+    }
+  }, []);
 
   const getReviewHeader = (review) => {
     let album_id = review.album_id;
@@ -31,17 +38,20 @@ const Reviews = ({id, idType}) => {
   const getReviewRating = (review) => {
     let reviewRating = null;
     if (review.rating) {
-      reviewRating = <Rating name="read-only" precision={0.5} value={review.rating} readOnly />
+      reviewRating =
+          <Rating name="read-only" precision={0.5} value={review.rating}
+                  readOnly/>;
     }
     return reviewRating;
   };
 
-  return (<List className="scrollable-list" subheader={<li />}>
+  return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
       <Typography variant="h6">Reviews</Typography>
     </ListSubheader>
+    {loading && <Typography>Loading</Typography>}
 
-    {displayReviews.map(review => {
+    {reviews.map(review => {
       return (<div key={review.review_id}>
         <ListItem>
           <Grid container spacing={2} sx={{m: 0}}>
@@ -49,7 +59,7 @@ const Reviews = ({id, idType}) => {
               <Grid item xs={9}>
                 <Box>
                   {getReviewHeader(review)}
-                  <ReviewEntry review={review} />
+                  <ReviewEntry review={review}/>
                 </Box>
               </Grid>
               <Grid item xs={3}>
