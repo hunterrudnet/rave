@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REVIEWS_API = 'http://localhost:4000/reviews';
+const REVIEWS_API = 'http://localhost:8080/reviews';
 
 export const createReview = async (review) => {
   const response = await axios.post(REVIEWS_API, review);

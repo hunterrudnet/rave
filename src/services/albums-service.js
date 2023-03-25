@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ALBUMS_API = 'http://localhost:4000/albums';
+const ALBUMS_API = 'http://localhost:8080/albums';
 
 // export const createAlbum = async (album) => {
 //   const response = await axios.post(ALBUMS_API, album);
