@@ -11,7 +11,7 @@ import userReducer from "./reducers/user-data-reducer";
 import reviewsReducer from "./reducers/reviews-reducer";
 import albumsReducer from "./reducers/albums-reducer";
 import {Provider} from "react-redux";
-// import Details from './components/Details/Details.js';
+import Details from './components/Details/Details.js';
 
 const props = {
   title: "Popular Albums", items: SEE_MORE_MOCK_DATA
