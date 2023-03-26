@@ -5,7 +5,7 @@ import {useState} from "react";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 import DetailsCard from './DetailsCard';
 
-export default function DetailsCardList({items}) {
+export default function DetailsCardList({reviews}) {
 
     const [limit, setLimit] = useState(2);
 
@@ -18,11 +18,11 @@ export default function DetailsCardList({items}) {
     };
 
     const renderRowsWithItem = (
-        items
+        reviews
     ) => {
-        return items.slice(0, limit).map((item, i) => {
+        return reviews.slice(0, limit).map((review, i) => {
             return (
-                <DetailsCard album={item} sx={{mb: "25"}}/>
+                <DetailsCard album={review} sx={{mb: "25"}}/>
             );
         });
     };
@@ -30,20 +30,20 @@ export default function DetailsCardList({items}) {
     return (
         <div>
             <List sx={{width: '100%', bgcolor: 'background.paper'}}>
-                {renderRowsWithItem(items)}
+                {renderRowsWithItem(reviews)}
             </List>
 
             <Button
                 endIcon={<KeyboardArrowDown />}
                 onClick={showMoreDocuments}
-                sx={{display: limit >= items.length ? "none" : ""}}
+                sx={{display: limit >= reviews.length ? "none" : ""}}
             >
                 see more
             </Button>
             <Button
                 endIcon={<KeyboardArrowUp />}
                 onClick={resetLimit}
-                sx={{display: limit > items.length ? "" : "none"}}
+                sx={{display: limit > reviews.length ? "" : "none"}}
             >
                 see less
             </Button>
