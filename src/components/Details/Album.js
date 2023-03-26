@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 
 const Root = styled('div')(({ theme }) => ({
   display: 'flex',
+  position: 'absolute',
   flexDirection: 'column',
   alignItems: 'center',
 }));

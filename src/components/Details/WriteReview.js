@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import { Rating } from '@mui/material';
 
 const Root = styled(Box)(({ theme }) => ({
   backgroundColor: '#ececec',
@@ -34,9 +35,15 @@ const ButtonsContainer = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
 }));
 
+const StyledRating = styled(Rating)(({ theme }) => ({
+  position: "center%",
+}));
+
 function WriteReview({albumName}) {
   const [reviewText, setReviewText] = useState('');
+  const [stars, setStars] = useState(0);
 
+  console.log(stars);
   const handleReviewTextChange = (event) => {
     setReviewText(event.target.value);
   };
@@ -44,6 +51,10 @@ function WriteReview({albumName}) {
   const handleClearReview = () => {
     setReviewText('');
   };
+
+  const handleStarsChange = (event) => {
+    setStars(event.target.value);
+  }
 
   const handleSubmitReview = () => {
     console.log('Submitting review:', reviewText);
@@ -68,13 +79,14 @@ function WriteReview({albumName}) {
       />
       <DividerStyled />
       <ButtonsContainer>
-      <Button variant="contained" color="primary" onClick={handleSubmitReview}>
-          Submit
+        <Button variant="contained" color="primary" onClick={handleSubmitReview}>
+            Submit
         </Button>
+        <StyledRating value={stars} precision={0.5} max={5} onChange={handleStarsChange}/>
         <Button variant="outlined" onClick={handleClearReview}>
-          Clear
+            Clear
         </Button>
-      </ButtonsContainer>
+        </ButtonsContainer>
     </Root>
   );
 }

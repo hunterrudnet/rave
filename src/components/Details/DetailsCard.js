@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
+import { Rating } from '@mui/material';
 
 const Root = styled(Box)(({ theme }) => ({
   backgroundColor: '#ececec',
@@ -26,11 +27,6 @@ const Username = styled(Typography)(({ theme }) => ({
   marginRight: theme.spacing(2),
 }));
 
-const Rank = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontWeight: 'bold',
-}));
-
 const DividerStyled = styled(Divider)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
@@ -39,6 +35,11 @@ const Text = styled(Typography)(({ theme }) => ({
   backgroundColor: 'white',
   padding: theme.spacing(2),
   borderRadius: 5,
+}));
+
+const StyledRating = styled(Rating)(({ theme }) => ({
+  position: 'absolute',
+  right: "1%",
 }));
 
 function DetailsCard({album}) {
@@ -50,9 +51,7 @@ function DetailsCard({album}) {
         <Username variant="body1">
           {album.username}
         </Username>
-        <Rank variant="body1">
-          {album.rating}
-        </Rank>
+      <StyledRating name="rating" value={album.rating} max={5} readOnly precision={0.5}/>
       </Header>
       <DividerStyled />
       <Text variant="body1">
