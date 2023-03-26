@@ -84,4 +84,3 @@ export default function SeeMoreList({title, items}) {
         </div>
     );
 }
-
