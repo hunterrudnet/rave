@@ -1,9 +1,9 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import SeeMoreItem from "./SeeMoreItem"
 import {Button, Typography} from "@mui/material";
 import {useState} from "react";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
+import Track from './Track';
 
 const item2 = {
     stats: "2.1k",
@@ -36,7 +36,7 @@ const item2 = {
 //     imgUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Drake_-_Take_Care_cover.jpg/220px-Drake_-_Take_Care_cover.jpg",
 // }
 //
-export default function SeeMoreList({title, items}) {
+export default function TrackList({tracks}) {
 
     const [limit, setLimit] = useState(3);
 
@@ -49,11 +49,11 @@ export default function SeeMoreList({title, items}) {
     };
 
     const renderRowsWithItem = (
-        items
+        tracks
     ) => {
-        return items.slice(0, limit).map((item, i) => {
+        return tracks.slice(0, limit).map((track, i) => {
             return (
-                <SeeMoreItem { ...item} sx={{marginTop: "5px"}}/>
+                <Track name={"something"} track={track}/>
             );
         });
     };
@@ -61,23 +61,20 @@ export default function SeeMoreList({title, items}) {
     return (
         <div>
             <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-                <Typography variant="h5" component="h5">
-                    {title}
-                </Typography>
-                {renderRowsWithItem(items)}
+                {renderRowsWithItem(tracks)}
             </List>
 
             <Button
                 endIcon={<KeyboardArrowDown />}
                 onClick={showMoreDocuments}
-                sx={{display: limit >= items.length ? "none" : ""}}
+                sx={{display: limit >= tracks.length ? "none" : ""}}
             >
                 see more
             </Button>
             <Button
                 endIcon={<KeyboardArrowUp />}
                 onClick={resetLimit}
-                sx={{display: limit > items.length ? "" : "none"}}
+                sx={{display: limit > tracks.length ? "" : "none"}}
             >
                 see less
             </Button>

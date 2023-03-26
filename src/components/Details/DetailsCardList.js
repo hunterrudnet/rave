@@ -1,9 +1,9 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import SeeMoreItem from "./SeeMoreItem"
 import {Button, Typography} from "@mui/material";
 import {useState} from "react";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
+import DetailsCard from './DetailsCard';
 
 const item2 = {
     stats: "2.1k",
@@ -36,16 +36,16 @@ const item2 = {
 //     imgUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Drake_-_Take_Care_cover.jpg/220px-Drake_-_Take_Care_cover.jpg",
 // }
 //
-export default function SeeMoreList({title, items}) {
+export default function DetailsCardList({items}) {
 
-    const [limit, setLimit] = useState(3);
+    const [limit, setLimit] = useState(2);
 
     const showMoreDocuments = () => {
-        setLimit(limit + 3);
+        setLimit(limit + 2);
     };
 
     const resetLimit = () => {
-        setLimit(3);
+        setLimit(2);
     };
 
     const renderRowsWithItem = (
@@ -53,17 +53,14 @@ export default function SeeMoreList({title, items}) {
     ) => {
         return items.slice(0, limit).map((item, i) => {
             return (
-                <SeeMoreItem { ...item} sx={{marginTop: "5px"}}/>
+                <DetailsCard album={item} sx={{mb: "25"}}/>
             );
         });
     };
 
     return (
         <div>
-            <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-                <Typography variant="h5" component="h5">
-                    {title}
-                </Typography>
+            <List sx={{width: '100%', bgcolor: 'background.paper'}}>
                 {renderRowsWithItem(items)}
             </List>
 
@@ -84,4 +81,3 @@ export default function SeeMoreList({title, items}) {
         </div>
     );
 }
-
