@@ -11,38 +11,36 @@ import userReducer from "./reducers/user-data-reducer";
 import reviewsReducer from "./reducers/reviews-reducer";
 import albumsReducer from "./reducers/albums-reducer";
 import {Provider} from "react-redux";
+import Details from './components/Details/Details.js';
 
 const props = {
-  title: "Popular Albums",
-  items: SEE_MORE_MOCK_DATA
+  title: "Popular Albums", items: SEE_MORE_MOCK_DATA
 };
 
-const store = configureStore(
-    {
-      reducer: {
-        userData: userReducer,
-        reviewsData: reviewsReducer,
-        albumsData: albumsReducer
-      }
-    });
+const store = configureStore({
+  reducer: {
+    userData: userReducer,
+    reviewsData: reviewsReducer,
+    albumsData: albumsReducer
+  }
+});
 
 function App() {
-  return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <div>
-            <TopBar/>
-            <Routes>
-              <Route index element={null}/>
-              <Route path="/see-more" element={<SeeMoreList {...props} />}/>
-              <Route path="/profile" element={<Profile/>}/>
-              <Route path="/search" element={<Search/>}/>
-              <Route path="/slides" element={<Slides/>}/>
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </Provider>
-  );
+  return (<Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <TopBar/>
+        <Routes>
+          <Route index element={null}/>
+          <Route path="/see-more" element={<SeeMoreList {...props} />}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/search" element={<Search/>}/>
+          <Route path="/slides" element={<Slides/>}/>
+          <Route path="/details/:albumID" element={<Details/>}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
+  </Provider>);
 }
 
 export default App;
