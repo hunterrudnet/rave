@@ -10,7 +10,7 @@ const PlayButton = styled(IconButton)({
     marginRight: -25,
   });
 
-export default function Track({track, stats, imgUrl, linkUrl, primaryText, secondaryText, visible, name}) {
+export default function Track({track}) {
     const [artists, setArtists] = useState('');
 
     const formatArtistNames = (artists) => {
@@ -44,9 +44,9 @@ export default function Track({track, stats, imgUrl, linkUrl, primaryText, secon
     }, [track]);
 
     return (
-        <ListItem  href={linkUrl} sx={{ backgroundColor: "#ececec", borderRadius: "5px", marginTop: "5px" }}
+        <ListItem  sx={{ backgroundColor: "#ececec", borderRadius: "5px", marginTop: "5px" }}
                   secondaryAction={
-                      <ListItemText primaryTypographyProps={{ style: {fontWeight: "bold"} }} edge="end" primary={ stats } />
+                      <ListItemText primaryTypographyProps={{ style: {fontWeight: "bold"} }} edge="end"/>
                   }
         >
             <ListItemText
