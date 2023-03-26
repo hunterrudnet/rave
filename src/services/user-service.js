@@ -4,10 +4,10 @@ const USERS_API = 'http://localhost:8080/users';
 
 export const createOrUpdateUser = async (user) => {
   const response = await axios.post(`${USERS_API}/`, user);
-  return response.data;
+  return response;
 };
 
 export const getUser = async (username) => {
-  const response = await axios.get(`${USERS_API}/lookup`);
-  return response.data;
+  const response = await axios.get(`${USERS_API}/lookup/${username}`);
+  return response;
 };

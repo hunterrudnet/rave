@@ -13,12 +13,15 @@ const reviewsSlice = createSlice({
   name: 'reviews',
   initialState,
   extraReducers: {
-    [createReviewThunk.fulfilled]: (state,
-        {payload}) => state.reviews = {...payload, ...state.reviews},
-    [getReviewsForUserThunk.fulfilled]: (state,
-        {payload}) => state.reviews = {...payload, ...state.reviews},
-    [getReviewsForAlbumThunk.fulfilled]: (state,
-        {payload}) => state.reviews = {...payload, ...state.reviews}
+    [createReviewThunk.fulfilled]: (state, {payload}) => {
+      state.reviews = {...payload, ...state.reviews};
+    },
+    [getReviewsForUserThunk.fulfilled]: (state, {payload}) => {
+      state.reviews = {...payload, ...state.reviews};
+    },
+    [getReviewsForAlbumThunk.fulfilled]: (state, {payload}) => {
+      state.reviews = {...payload, ...state.reviews};
+    }
   },
   reducers: {}
 });
