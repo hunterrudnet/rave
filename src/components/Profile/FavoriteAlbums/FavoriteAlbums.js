@@ -18,7 +18,6 @@ const FavoriteAlbums = ({userId}) => {
     const favoriteAlbums = await getLikedAlbums(userId);
     const newData = await Promise.all(
         favoriteAlbums.map(async ({spotifyId}) => {
-          console.log(spotifyId);
           let dataForAlbum = await getAlbumBySpotifyId(spotifyId);
           let albumDataToDisplay = {};
           if ("images" in dataForAlbum && dataForAlbum.images.length > 0) {
@@ -36,16 +35,10 @@ const FavoriteAlbums = ({userId}) => {
   };
 
   useEffect(() => {
-    console.log("FETCH");
     setLoading(true);
     updateAlbumData([]);
     fetchLikedAlbumsData();
   }, []);
-
-  useEffect(() => {
-    console.log("Rerender");
-    console.log(albumData);
-  }, [albumData]);
 
   function getFavorites() {
     return albumData.map(data => {

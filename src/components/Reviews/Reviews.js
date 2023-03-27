@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
@@ -10,12 +10,48 @@ import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
+import {getLikedAlbums} from "../../services/likes-service";
+import {getAlbumById, getAlbumBySpotifyId} from "../../services/albums-service";
+import {
+  getReviewsForAlbum,
+  getReviewsForUser
+} from "../../services/reviews-service";
 
 const Reviews = ({id, idType}) => {
+  const [loading, setLoading] = useState(true);
+  const [reviewsData, updateReviewsData] = useState([]);
+
+  const fetchReviewsData = async () => {
+    const reviews = (idType == "user") ? await getReviewsForUser(id)
+        : await getReviewsForAlbum(id);
+    const newReviews = await Promise.all(
+        reviews.map(async ({spotifyId}) => {
+          let dataForAlbum = await getAlbumById(spotifyId);
+          let albumDataToDisplay = {};
+          if ("images" in dataForAlbum && dataForAlbum.images.length > 0) {
+            albumDataToDisplay.image = dataForAlbum.images[0].url;
+          }
+          return {
+            ...albumDataToDisplay,
+            name: dataForAlbum.name,
+            artist: dataForAlbum.artist.name,
+            spotifyId: dataForAlbum.id
+          };
+        }));
+
+    updateReviewsData(reviews);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    updateAlbumData([]);
+    fetchLikedAlbumsData();
+  }, []);
 
   useEffect(() => {
     if (idType === "user") {
-      dispatch(getReviewsForUserThunk(id));
+
     } else {
       dispatch(getReviewsForAlbumThunk(id));
     }

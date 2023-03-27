@@ -36,8 +36,15 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "ignorePatterns": [
+      "node_modules/"
     ]
   },
+  "eslintIgnore": [
+    "node_modules/",
+    "build/*"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
