@@ -8,7 +8,6 @@ import "./topbar.css";
 import {CssBaseline} from "@mui/material";
 
 const TopBar = () => {
-  console.log("TOP BAR");
   return (
       <CssBaseline>
         <AppBar position="static">

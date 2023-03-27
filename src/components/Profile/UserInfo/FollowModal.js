@@ -5,7 +5,7 @@ import users from "../../TestData/users.json";
 import {Divider, Grid, List, ListItem, ListSubheader} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ImageText from "../../Reused/ImageText";
-import "../../Reused/reused.css"
+import "../../Reused/reused.css";
 
 const FollowModal = ({followers, user}) => {
   const userData = users[user.email];
@@ -42,7 +42,7 @@ const FollowModal = ({followers, user}) => {
 
             {data.map(userEmail => {
               let userInList = users[userEmail];
-              return (<div key={user.user_id}>
+              return (<div key={userInList.user_id}>
                 <ListItem>
                   <Grid container spacing={2} sx={{m: 0}}>
                     <ImageText bigText={userInList.email}

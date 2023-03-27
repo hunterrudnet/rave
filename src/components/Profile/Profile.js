@@ -9,22 +9,21 @@ import {useSelector} from "react-redux";
 
 const Profile = () => {
   let {loggedInUser, loading} = useSelector(state => state.loggedInUserData);
-  const isEmpty = (obj) => Object.keys(obj).length === 0;
 
   if (loading) {
     return <div>Loading ...</div>;
-  } else if (loggedInUser === undefined || isEmpty(loggedInUser)) {
+  } else if (loggedInUser === undefined) {
     return <Navigate replace to={"/"}/>;
   } else {
     return (
         <Grid container spacing={2}>
           <Grid item xs={3}>
-            {/*<FavoriteAlbums userId={loggedInUser.UserId}/>*/}
+            <FavoriteAlbums userId={loggedInUser.id}/>
           </Grid>
           <Grid item xs={0.5}/>
           <Grid item xs={7}>
             <UserInfo user={loggedInUser}/>
-            {/*<Reviews id={loggedInUser.UserId} idType="user"/>*/}
+            <Reviews id={loggedInUser.UserId} idType="user"/>
           </Grid>
         </Grid>
     );

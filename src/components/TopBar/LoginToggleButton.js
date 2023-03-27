@@ -2,7 +2,6 @@ import {useAuth0} from "@auth0/auth0-react";
 import React, {useEffect} from "react";
 import {Button} from "@mui/material";
 import ProfileDropdown from "./ProfileDropdown";
-import {signIn, setLoading} from "../../reducers/user-data-reducer";
 import {createOrUpdateUserThunk} from "../../services/user-thunks";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -15,12 +14,10 @@ const LoginToggleButton = () => {
     user
   } = useAuth0();
 
-  let {loggedInUser, loading} = useSelector(state => state.loggedInUserData);
+  let {loggedInUser} = useSelector(state => state.loggedInUserData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLoading(isLoading));
-    console.log(loading);
     if (isAuthenticated) {
       let userForDb = {
         "username": user.nickname,
@@ -28,7 +25,6 @@ const LoginToggleButton = () => {
         "email": user.email,
         "image": user.picture
       };
-      dispatch(signIn(userForDb));
       dispatch(createOrUpdateUserThunk(userForDb));
     }
   }, [isLoading]);

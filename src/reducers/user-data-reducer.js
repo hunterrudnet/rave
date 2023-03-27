@@ -13,7 +13,11 @@ const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   extraReducers: {
+    [createOrUpdateUserThunk.pending]: (state) => {
+      state.loading = true;
+    },
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
+      state.loading = false;
       state.loggedInUser = {...payload};
     },
     [getUserThunk.pending]: (state) => {
@@ -25,19 +29,12 @@ const userSlice = createSlice({
     }
   },
   reducers: {
-    setLoading(state, {payload}) {
-      state.loading = payload;
-    },
-    signIn(state, {payload}) {
-      state.loading = false;
-      state.loggedInUser = {...payload};
-    },
     signOut(state) {
-      state.loading = true;
+      state.loading = false;
       state.loggedInUser = {};
     }
   }
 });
 
-export const {signIn, signOut, setLoading} = userSlice.actions;
+export const {signIn, signOut} = userSlice.actions;
 export default userSlice.reducer;

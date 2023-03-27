@@ -1,23 +1,17 @@
 import React, {useEffect} from "react";
-import {
-  Divider, List, ListItem, ListSubheader, Grid
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListSubheader from "@mui/material/ListSubheader";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
-import {useDispatch, useSelector} from "react-redux";
-import {
-  getReviewsForUserThunk, getReviewsForAlbumThunk
-} from "../../services/reviews-thunks";
-import {getAlbumByIdThunk} from "../../services/albums-thunks";
 
 const Reviews = ({id, idType}) => {
-
-  const {reviews} = useSelector(state => state.reviewsData);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (idType === "user") {

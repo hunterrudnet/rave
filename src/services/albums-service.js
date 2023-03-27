@@ -8,13 +8,16 @@ const ALBUMS_API = 'http://localhost:8080/albums';
 // };
 
 export const getAlbumBySpotifyId = async (spotifyId) => {
-  return await axios.get(`${ALBUMS_API}/${spotifyId}`);
+  const response = await axios.get(`${ALBUMS_API}/${spotifyId}`);
+  return response.data;
 };
 
 export const getAlbumById = async (albumId) => {
-  return await axios.get(`${ALBUMS_API}/lookup/${albumId}`);
+  const response = await axios.get(`${ALBUMS_API}/lookup/${albumId}`);
+  return response.data;
 };
 
 export const getAlbumsBySearch = async (searchQuery) => {
-  return await axios.get(`${ALBUMS_API}/search/${searchQuery}`);
+  const response = await axios.get(`${ALBUMS_API}/search/${searchQuery}`);
+  return response.data;
 };
