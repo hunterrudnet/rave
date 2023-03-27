@@ -2,12 +2,12 @@ import {createSlice} from "@reduxjs/toolkit";
 import {
   createOrUpdateUserThunk,
   getUserThunk
-} from "../services/user-data-thunks";
+} from "../services/user-thunks";
 
 const initialState = {
   loggedInUser: {},
   loading: true
-}
+};
 
 const userSlice = createSlice({
   name: 'user',
@@ -16,7 +16,11 @@ const userSlice = createSlice({
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
       state.loggedInUser = {...payload};
     },
+    [getUserThunk.pending]: (state) => {
+      state.loading = true;
+    },
     [getUserThunk.fulfilled]: (state, {payload}) => {
+      state.loading = false;
       state.loggedInUser = {state, ...payload};
     }
   },

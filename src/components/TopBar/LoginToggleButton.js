@@ -3,7 +3,7 @@ import React, {useEffect} from "react";
 import {Button} from "@mui/material";
 import ProfileDropdown from "./ProfileDropdown";
 import {signIn, setLoading} from "../../reducers/user-data-reducer";
-import {createOrUpdateUserThunk} from "../../services/user-data-thunks";
+import {createOrUpdateUserThunk} from "../../services/user-thunks";
 import {useDispatch, useSelector} from "react-redux";
 
 const LoginToggleButton = () => {
@@ -15,7 +15,7 @@ const LoginToggleButton = () => {
     user
   } = useAuth0();
 
-  let {loggedInUser, loading} = useSelector(state => state.userData);
+  let {loggedInUser, loading} = useSelector(state => state.loggedInUserData);
   const dispatch = useDispatch();
 
   useEffect(() => {

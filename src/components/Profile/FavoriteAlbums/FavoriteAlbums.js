@@ -10,8 +10,8 @@ import ImageText from "../../Reused/ImageText";
 import Typography from "@mui/material/Typography";
 import "../../Reused/reused.css";
 
-const FavoriteAlbums = ({user}) => {
-      const favoritesList = userAlbums[user.email].favorites;
+const FavoriteAlbums = ({userId}) => {
+
 
       return (<List className="scrollable-list" subheader={<li/>}>
         <ListSubheader>

@@ -1,4 +1,3 @@
-import {useAuth0} from "@auth0/auth0-react";
 import React from "react";
 import "../Reused/reused.css";
 import UserInfo from "./UserInfo/UserInfo";
@@ -6,13 +5,10 @@ import Grid from "@mui/material/Grid";
 import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
 import Reviews from "../Reviews/Reviews";
 import {Navigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {createOrUpdateUserThunk} from "../../services/user-data-thunks";
-import {signIn} from "../../reducers/user-data-reducer";
+import {useSelector} from "react-redux";
 
 const Profile = () => {
-  let {loggedInUser, loading} = useSelector(state => state.userData);
-
+  let {loggedInUser, loading} = useSelector(state => state.loggedInUserData);
   const isEmpty = (obj) => Object.keys(obj).length === 0;
 
   if (loading) {
