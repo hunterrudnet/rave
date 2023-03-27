@@ -8,15 +8,21 @@ export const createReviewThunk = createAsyncThunk('reviews/createReview',
     });
 
 export const getReviewsForUserThunk = createAsyncThunk(
-    'reviews/getReviewsForUserThunk',
+    'reviews/getReviewsForUser',
     async (userId) => {
       const response = await service.getReviewsForUser(userId);
       return response.data;
     });
 
 export const getReviewsForAlbumThunk = createAsyncThunk(
-    'reviews/getReviewsForAlbumThunk',
+    'reviews/getReviewsForAlbum',
     async (albumId) => {
       const response = await service.getReviewsForAlbum(albumId);
+      return response.data;
+    });
+
+export const getAllReviewsThunk = createAsyncThunk('reviews/getAllReviews',
+    async () => {
+      const response = await service.getAllReviews();
       return response.data;
     });

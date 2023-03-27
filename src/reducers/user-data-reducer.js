@@ -5,7 +5,8 @@ import {
 } from "../services/user-data-thunks";
 
 const initialState = {
-  loggedInUser: {}
+  loggedInUser: {},
+  loading: true
 }
 
 const userSlice = createSlice({
@@ -20,14 +21,19 @@ const userSlice = createSlice({
     }
   },
   reducers: {
+    setLoading(state, {payload}) {
+      state.loading = payload;
+    },
     signIn(state, {payload}) {
+      state.loading = false;
       state.loggedInUser = {...payload};
     },
     signOut(state) {
+      state.loading = true;
       state.loggedInUser = {};
     }
   }
 });
 
-export const {signIn, signOut} = userSlice.actions;
+export const {signIn, signOut, setLoading} = userSlice.actions;
 export default userSlice.reducer;

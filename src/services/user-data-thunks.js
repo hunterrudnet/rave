@@ -13,3 +13,4 @@ export const getUserThunk = createAsyncThunk('users/getUser',
       const response = await service.getUser(username);
       return response.data;
     });
+
