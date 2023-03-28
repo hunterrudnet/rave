@@ -1,25 +1,39 @@
-import Input from "@mui/material/Input";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import React from "react";
-import users from "../../TestData/users.json";
-import "../../Reused/reused.css"
+import React, {useState} from "react";
+import "../../Reused/reused.css";
+import Typography from "@mui/material/Typography";
+import {useDispatch} from "react-redux";
+import {
+  createOrUpdateUserThunk, makeUserModeratorThunk,
+  makeUserNotModeratorThunk
+} from "../../../services/user-thunks";
 
 const EditProfile = ({user}) => {
-  const userData = users[user.email];
-
-  const [open, setOpen] = React.useState(false);
-  const [admin, toggleAdmin] = React.useState(userData.admin);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleToggleAdmin = (event) => {
-    toggleAdmin(event.target.checked);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newUserData = new FormData(event.currentTarget);
+    dispatch(createOrUpdateUserThunk({
+      ...user,
+      bio: newUserData.get("bio")
+    }));
+    console.log(newUserData.get("admin"));
+    if (newUserData.get("admin") === "admin") {
+      dispatch(makeUserModeratorThunk({userId: user.id, role: "admin"}));
+    } else {
+      dispatch(makeUserNotModeratorThunk(user.id));
+    }
   };
 
   return (
@@ -31,16 +45,22 @@ const EditProfile = ({user}) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-          <Box className="center-modal">
+          <Box className="center-modal" component="form" onSubmit={handleSubmit}
+               sx={{p: 2}}>
             <FormControl>
-              <legend>Edit Profile</legend>
-              <Input value={user.email} disabled/>
-              <TextareaAutosize placeholder="Write a bio here"
-                                defaultValue={userData.bio}/>
-              <FormControlLabel control={<Checkbox checked={admin}
-                                                   onChange={handleToggleAdmin}/>}
-                                label="Admin"/>
-              <Button>Submit</Button>
+              <Typography variant="h5">Edit Profile</Typography>
+              <TextField margin="normal" disabled label="Name"
+                         defaultValue={user.name} variant="filled"/>
+              <TextField margin="normal" disabled label="Email"
+                         defaultValue={user.email} variant="filled"/>
+              <TextField margin="normal" name="bio"
+                         placeholder="Write a bio here" defaultValue={user.bio}
+                         multiline rows={4} label="Bio"/>
+              <FormControlLabel
+                  control={<Checkbox value="admin" defaultChecked={user.isMod}
+                                     name="admin"/>}
+                  label="Admin"/>
+              <Button type="submit">Submit</Button>
             </FormControl>
           </Box>
         </Modal>

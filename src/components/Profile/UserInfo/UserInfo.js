@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -6,12 +6,35 @@ import Grid from "@mui/material/Grid";
 import VerifiedIcon from '@mui/icons-material/Verified';
 import FollowModal from "./FollowModal";
 import EditProfile from "./EditProfile";
+import {
+  getWhoFollowsUser,
+  getWhoUserFollows
+} from "../../../services/following-service";
 
 const UserInfo = ({user}) => {
   let verified = null;
-  if (user.admin) {
+  if (user.isMod) {
     verified = <VerifiedIcon/>;
   }
+
+  const [followLoading, setFollowLoading] = useState(true);
+  const [followersData, updateFollowers] = useState([]);
+  const [followingData, updateFollowing] = useState([]);
+
+  const fetchFollowData = async () => {
+    const followers = await getWhoFollowsUser(user.id);
+    updateFollowers(followers);
+    const following = await getWhoUserFollows(user.id);
+    updateFollowing(following);
+    setFollowLoading(false);
+  };
+
+  useEffect(() => {
+    setFollowLoading(true);
+    updateFollowers([]);
+    updateFollowing([]);
+    fetchFollowData();
+  }, []);
 
   return (
       <Box>
@@ -29,8 +52,10 @@ const UserInfo = ({user}) => {
             <Typography variant="body2"
                         sx={{"pb": 1}}>@{user.username}</Typography>
             <Box>
-              <FollowModal user={user} followers={true}/>
-              <FollowModal user={user} followers={false}/>
+              <FollowModal followers={true} data={followersData}
+                           loading={followLoading}/>
+              <FollowModal followers={false} data={followingData}
+                           loading={followLoading}/>
             </Box>
             <Typography variant="caption">{user.bio}</Typography>
           </Grid>

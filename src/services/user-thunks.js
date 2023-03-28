@@ -2,15 +2,22 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from "./user-service";
 
 export const createOrUpdateUserThunk = createAsyncThunk(
-    'users/createOrUpdateUser',
+    'user/createOrUpdateUser',
     async (user) => {
-      const response = await service.createOrUpdateUser(user);
-      return response.data;
+      return await service.createOrUpdateUser(user);
     });
 
-export const getUserThunk = createAsyncThunk('users/getUser',
+export const getUserThunk = createAsyncThunk('user/getUser',
     async (username) => {
-      const response = await service.getUser(username);
-      return response.data;
+      return await service.getUser(username);
     });
 
+export const makeUserModeratorThunk = createAsyncThunk('user/makeUserMod',
+    async ({userId, role}) => {
+      return await service.makeUserModerator(userId, role);
+    });
+
+export const makeUserNotModeratorThunk = createAsyncThunk('user/makeUserNotMod',
+    async (userId) => {
+      return await service.makeUserNotModerator(userId);
+    });

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const LIKES_API = "http://localhost:8080/likes";
 
-export const likeAlbum = async (userId, albumId) => {
+export const likeAlbum = async ({userId, albumId}) => {
   const response = await axios.post(LIKES_API, {userId, albumId});
   return response.data;
 };

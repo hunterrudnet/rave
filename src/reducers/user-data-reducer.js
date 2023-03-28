@@ -1,7 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
   createOrUpdateUserThunk,
-  getUserThunk
+  getUserThunk,
+  makeUserModeratorThunk,
+  makeUserNotModeratorThunk
 } from "../services/user-thunks";
 
 const initialState = {
@@ -18,6 +20,7 @@ const userSlice = createSlice({
     },
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
       state.loading = false;
+      console.log("Payload:", payload);
       state.loggedInUser = {...payload};
     },
     [getUserThunk.pending]: (state) => {
@@ -25,7 +28,21 @@ const userSlice = createSlice({
     },
     [getUserThunk.fulfilled]: (state, {payload}) => {
       state.loading = false;
-      state.loggedInUser = {state, ...payload};
+      state.loggedInUser = {...state.loggedInUser, ...payload};
+    },
+    [makeUserModeratorThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [makeUserModeratorThunk.fulfilled]: (state, {payload}) => {
+      state.loading = false;
+      state.loggedInUser = {...state.loggedInUser, ...payload};
+    },
+    [makeUserNotModeratorThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [makeUserNotModeratorThunk.fulfilled]: (state, {payload}) => {
+      state.loading = false;
+      state.loggedInUser = {...state.loggedInUser, ...payload};
     }
   },
   reducers: {
@@ -36,5 +53,5 @@ const userSlice = createSlice({
   }
 });
 
-export const {signIn, signOut} = userSlice.actions;
+export const {signOut} = userSlice.actions;
 export default userSlice.reducer;

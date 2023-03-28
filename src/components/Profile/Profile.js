@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "../Reused/reused.css";
 import UserInfo from "./UserInfo/UserInfo";
 import Grid from "@mui/material/Grid";
@@ -6,9 +6,27 @@ import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
 import Reviews from "../Reviews/Reviews";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {getReviewsForUser} from "../../services/reviews-service";
 
 const Profile = () => {
   let {loggedInUser, loading} = useSelector(state => state.loggedInUserData);
+  const [reviewsLoading, setLoading] = useState(true);
+  const [reviewsData, updateReviewsData] = useState([]);
+
+  const fetchReviewsData = async () => {
+    const reviews = await getReviewsForUser(loggedInUser.id);
+    updateReviewsData(reviews);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (!loading) {
+      setLoading(true);
+      updateReviewsData([]);
+      fetchReviewsData();
+      console.log(loggedInUser);
+    }
+  }, [loading, loggedInUser]);
 
   if (loading) {
     return <div>Loading ...</div>;
@@ -23,7 +41,7 @@ const Profile = () => {
           <Grid item xs={0.5}/>
           <Grid item xs={7}>
             <UserInfo user={loggedInUser}/>
-            <Reviews id={loggedInUser.UserId} idType="user"/>
+            <Reviews reviews={reviewsData} loading={reviewsLoading}/>
           </Grid>
         </Grid>
     );
