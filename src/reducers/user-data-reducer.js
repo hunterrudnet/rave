@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   loggedInUser: {},
-  loading: true
+  loading: false
 };
 
 const userSlice = createSlice({
@@ -20,7 +20,6 @@ const userSlice = createSlice({
     },
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
       state.loading = false;
-      console.log("Payload:", payload);
       state.loggedInUser = {...payload};
     },
     [getUserThunk.pending]: (state) => {

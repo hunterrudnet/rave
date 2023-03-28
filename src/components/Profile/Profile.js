@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "../Reused/reused.css";
-import UserInfo from "./UserInfo/UserInfo";
 import Grid from "@mui/material/Grid";
-import FavoriteAlbums from "./FavoriteAlbums/FavoriteAlbums";
+import UserInfo from "./UserInfo/UserInfo";
+import FavoriteAlbums from "./UserInfo/FavoriteAlbums";
 import Reviews from "../Reviews/Reviews";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
@@ -24,13 +24,12 @@ const Profile = () => {
       setLoading(true);
       updateReviewsData([]);
       fetchReviewsData();
-      console.log(loggedInUser);
     }
   }, [loading, loggedInUser]);
 
   if (loading) {
     return <div>Loading ...</div>;
-  } else if (loggedInUser === undefined) {
+  } else if (!loggedInUser || Object.keys(loggedInUser).length === 0) {
     return <Navigate replace to={"/"}/>;
   } else {
     return (

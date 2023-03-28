@@ -28,7 +28,6 @@ const EditProfile = ({user}) => {
       ...user,
       bio: newUserData.get("bio")
     }));
-    console.log(newUserData.get("admin"));
     if (newUserData.get("admin") === "admin") {
       dispatch(makeUserModeratorThunk({userId: user.id, role: "admin"}));
     } else {
