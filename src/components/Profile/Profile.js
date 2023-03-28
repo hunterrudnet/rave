@@ -9,27 +9,28 @@ import {useSelector} from "react-redux";
 import {getReviewsForUser} from "../../services/reviews-service";
 
 const Profile = () => {
-  let {loggedInUser, loading} = useSelector(state => state.loggedInUserData);
-  const [reviewsLoading, setLoading] = useState(true);
+  let {loggedInUser, loading, loggedIn} = useSelector(
+      state => state.loggedInUserData);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
   const [reviewsData, updateReviewsData] = useState([]);
 
   const fetchReviewsData = async () => {
     const reviews = await getReviewsForUser(loggedInUser.id);
     updateReviewsData(reviews);
-    setLoading(false);
+    setReviewsLoading(false);
   };
 
   useEffect(() => {
     if (!loading) {
-      setLoading(true);
+      setReviewsLoading(true);
       updateReviewsData([]);
       fetchReviewsData();
     }
-  }, [loading, loggedInUser]);
+  }, [loading, loggedInUser, loggedIn]);
 
   if (loading) {
     return <div>Loading ...</div>;
-  } else if (!loggedInUser || Object.keys(loggedInUser).length === 0) {
+  } else if (!loading && !loggedIn) {
     return <Navigate replace to={"/"}/>;
   } else {
     return (
