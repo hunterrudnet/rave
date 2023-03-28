@@ -1,7 +1,11 @@
+import React from "react";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import React from "react";
-import {Divider, Grid, List, ListItem, ListSubheader} from "@mui/material";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
 import ImageText from "../../Reused/ImageText";
 import "../../Reused/reused.css";
@@ -12,15 +16,9 @@ const FollowModal = ({followers, data, loading}) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  let buttonLabel;
-  if (followers) {
-    buttonLabel = `${data.length} follower`;
-    if (data.length !== 1) {
-      buttonLabel += "s";
-    }
-  } else {
-    buttonLabel = `${data.length} following`;
-  }
+  const word = followers ? (data.length === 1 ? "follower" : "followers")
+      : "following";
+  const buttonLabel = `${data.length} ${word}`;
 
   if (loading) {
     return "Loading...";

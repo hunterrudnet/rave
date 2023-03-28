@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "../Reused/reused.css";
 import Grid from "@mui/material/Grid";
 import UserInfo from "./UserInfo/UserInfo";
-import FavoriteAlbums from "./UserInfo/FavoriteAlbums";
+import LikedAlbums from "./UserInfo/LikedAlbums";
 import Reviews from "../Reviews/Reviews";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
@@ -35,7 +35,7 @@ const Profile = () => {
     return (
         <Grid container spacing={2}>
           <Grid item xs={3}>
-            <FavoriteAlbums userId={loggedInUser.id}/>
+            <LikedAlbums userId={loggedInUser.id}/>
           </Grid>
           <Grid item xs={0.5}/>
           <Grid item xs={7}>

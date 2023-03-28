@@ -10,14 +10,14 @@ import {getLikedAlbums} from "../../../services/likes-service";
 import {getAlbumBySpotifyId} from "../../../services/albums-service";
 import ImageText from "../../Reused/ImageText";
 
-const FavoriteAlbums = ({userId}) => {
+const LikedAlbums = ({userId}) => {
   const [loading, setLoading] = useState(true);
   const [albumData, updateAlbumData] = useState([]);
 
   const fetchLikedAlbumsData = async () => {
-    const favoriteAlbums = await getLikedAlbums(userId);
+    const likedAlbums = await getLikedAlbums(userId);
     const newData = await Promise.all(
-        favoriteAlbums.map(async ({spotifyId}) => {
+        likedAlbums.map(async ({spotifyId}) => {
           let dataForAlbum = await getAlbumBySpotifyId(spotifyId);
           let albumDataToDisplay = {};
           if ("images" in dataForAlbum && dataForAlbum.images.length > 0) {
@@ -40,7 +40,7 @@ const FavoriteAlbums = ({userId}) => {
     fetchLikedAlbumsData();
   }, []);
 
-  function getFavorites() {
+  function getlikes() {
     return albumData.map(data => {
       return (<div key={data.spotifyId}>
         <ListItem>
@@ -56,11 +56,11 @@ const FavoriteAlbums = ({userId}) => {
 
   return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
-      <Typography variant="h6">Favorite Albums</Typography>
+      <Typography variant="h6">Liked Albums</Typography>
     </ListSubheader>
     {loading && "Loading..."}
-    {!loading && getFavorites()}
+    {!loading && getlikes()}
   </List>);
 };
 
-export default FavoriteAlbums;
+export default LikedAlbums;
