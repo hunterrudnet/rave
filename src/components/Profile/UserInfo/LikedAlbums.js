@@ -7,7 +7,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "../../Reused/reused.css";
 import {getLikedAlbums} from "../../../services/likes-service";
-import {getAlbumBySpotifyId} from "../../../services/albums-service";
 import ImageText from "../../Reused/ImageText";
 
 const LikedAlbums = ({userId}) => {
@@ -16,21 +15,15 @@ const LikedAlbums = ({userId}) => {
 
   const fetchLikedAlbumsData = async () => {
     const likedAlbums = await getLikedAlbums(userId);
-    const newData = await Promise.all(
-        likedAlbums.map(async ({spotifyId}) => {
-          let dataForAlbum = await getAlbumBySpotifyId(spotifyId);
-          let albumDataToDisplay = {};
-          if ("images" in dataForAlbum && dataForAlbum.images.length > 0) {
-            albumDataToDisplay.image = dataForAlbum.images[0].url;
-          }
-          return {
-            ...albumDataToDisplay,
-            name: dataForAlbum.name,
-            artist: dataForAlbum.artist.name,
-            spotifyId: dataForAlbum.id
-          };
-        }));
-    updateAlbumData(newData);
+    likedAlbums.map(likedAlbum => {
+      return {
+        id: likedAlbum.id,
+        name: likedAlbum.name,
+        artist: likedAlbum.artist,
+        image: likedAlbum.image
+      }
+    })
+    updateAlbumData(likedAlbums);
     setLoading(false);
   };
 
