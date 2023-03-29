@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const REVIEWS_API = 'http://localhost:8080/reviews';
+const REVIEWS_API = process.env.REACT_APP_BASE_API + '/reviews';
 
-export const createReview = async (review) => {
+export const createOrUpdateUser = async (review) => {
   const response = await axios.post(REVIEWS_API, review);
+  return response.data;
 };
 
 export const getReviewsForUser = async (userId) => {
@@ -20,8 +21,3 @@ export const getAllReviews = async () => {
   const response = await axios.get(`${REVIEWS_API}/`);
   return response.data;
 };
-
-// export const updateReview = async (review) => {
-//   const response = await axios.put(`${REVIEWS_API}/${review._id}`, review);
-//   return;
-// };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const FOLLOWING_API = 'http://localhost:8080/user-follows';
+const FOLLOWING_API = process.env.REACT_APP_BASE_API + '/user-follows';
 
 export const getWhoFollowsUser = async (userId) => {
   const response = await axios.get(`${FOLLOWING_API}/follower/${userId}`);
