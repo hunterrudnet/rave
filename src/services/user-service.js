@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USERS_API = 'http://localhost:8080/users';
+const USERS_API = process.env.REACT_APP_BASE_API + '/users';
 
 export const createOrUpdateUser = async (user) => {
   const response = await axios.post(`${USERS_API}/`, user);
