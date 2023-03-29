@@ -9,9 +9,9 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import '@fontsource/roboto/300.css';
 
 export default function SearchExpandedCard({ album }) {
-
+  
   return (
-    <Card sx={{ display: 'flex', m: 1 }}>
+    <Card sx={{ display: 'flex', m: 2, backgroundColor: '#ececec', borderRadius: 10}}>
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h5">
           {album.name}
@@ -31,7 +31,7 @@ export default function SearchExpandedCard({ album }) {
       <Box sx={{ position: 'relative', width: 151, height: '100%', display: 'flex', alignItems: 'center' }}>
         <CardMedia
           component="img"
-          sx={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, objectFit: 'cover'}}
+          sx={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, objectFit: 'cover', borderRadius: 10 }}
           image={album.image}
           alt="Album cover image information"
         />
