@@ -25,15 +25,15 @@ const SearchPage = () => {
       // const response = await axios.get(url);
       let testing = [
         {
-          "name": "Album 1",
-          "artist": "Artist 1",
-          "attributes": ["attribute 1", "attribute 2"],
+          "name": "Nothing was the same",
+          "artist": "Drake",
+          "image": "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/41aLMoRW0HL.jpg",
           "url": "https://open.spotify.com/playlist/37i9dQZF1DWU05aHRDUDnL"
         },
         {
-          "name": "Album 2",
-          "artist": "Artist 2",
-          "attributes": ["attribute 1", "attribute 2"],
+          "name": "Solid Air",
+          "artist": "John Martyn",
+          "image": "https://www.nme.com/wp-content/uploads/2016/09/2015JohnMartyn_SolidAir_201015.jpg",
           "url": "https://open.spotify.com/playlist/37i9dQZF1DWU05aHRDUDnL"
         },
       ]
