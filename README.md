@@ -1,3 +1,5 @@
+The backend lives at the following URL: https://github.com/hunterrudnet/rave-backend/
+
 # Create env with necessary variables
 In order to run Auth0 correctly, you need to create a .env file in the root directory with the following variables:
 
