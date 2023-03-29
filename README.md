@@ -4,9 +4,12 @@ In order to run Auth0 correctly, you need to create a .env file in the root dire
 REACT_APP_AUTH0_DOMAIN=""
 REACT_APP_AUTH0_CLIENT_ID=""
 
-.gitignore includes .env so we don't mistakenly push these to our repository!
+# Backend env variable
+You also need an enviornment variable to connect to the backend. For development, we will have the following on our local machines:
 
+REACT_APP_BASE_API="http://localhost:8080"
 
+This assumes that the backend lives on port 8080.
 
 # Getting Started with Create React App
 

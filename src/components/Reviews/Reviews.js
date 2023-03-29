@@ -1,55 +1,48 @@
-import React from "react";
-import {
-  Divider, List, ListItem, ListSubheader, Grid
-} from "@mui/material";
-import reviews from "../TestData/reviews.json";
-import albums from "../TestData/profilealbums.json";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListSubheader from "@mui/material/ListSubheader";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
 
-const Reviews = ({id, idType}) => {
-
-  let displayReviews;
-  if (idType === "user") {
-    displayReviews = reviews.filter(review => review.user_id == id);
-  } else {
-    displayReviews = reviews.filter(review => review.album_id == id);
-  }
+const Reviews = ({reviews, loading}) => {
 
   const getReviewHeader = (review) => {
-    let album_id = review.album_id;
-    let album = albums[album_id];
-
-    return <ImageText bigText={album.title} smallText={album.artist}
+    const album = review.Album;
+    return <ImageText bigText={album.name} smallText={album.artist}
                       image={album.image}/>;
   };
 
   const getReviewRating = (review) => {
     let reviewRating = null;
-    if (review.rating) {
-      reviewRating = <Rating name="read-only" precision={0.5} value={review.rating} readOnly />
+    if (review.score) {
+      reviewRating =
+          <Rating name="read-only" precision={0.5} value={review.score}
+                  readOnly/>;
     }
     return reviewRating;
   };
 
-  return (<List className="scrollable-list" subheader={<li />}>
+  return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
       <Typography variant="h6">Reviews</Typography>
     </ListSubheader>
+    {loading && <Typography>Loading</Typography>}
 
-    {displayReviews.map(review => {
-      return (<div key={review.review_id}>
+    {reviews.map(review => {
+      return (<div key={review.id}>
         <ListItem>
           <Grid container spacing={2} sx={{m: 0}}>
             <Grid container spacing={2} sx={{m: 0}}>
               <Grid item xs={9}>
                 <Box>
                   {getReviewHeader(review)}
-                  <ReviewEntry review={review} />
+                  <ReviewEntry review={review}/>
                 </Box>
               </Grid>
               <Grid item xs={3}>
