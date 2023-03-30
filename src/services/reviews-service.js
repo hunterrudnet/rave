@@ -2,8 +2,13 @@ import axios from 'axios';
 
 const REVIEWS_API = process.env.REACT_APP_BASE_API + '/reviews';
 
-export const createOrUpdateUser = async (review) => {
+export const createOrUpdateReview = async (review) => {
   const response = await axios.post(REVIEWS_API, review);
+  return response.data;
+};
+
+export const deleteReview = async (reviewId) => {
+  const response = await axios.delete(`${REVIEWS_API}/${reviewId}`);
   return response.data;
 };
 
