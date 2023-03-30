@@ -38,7 +38,7 @@ export default function SearchExpandedCard({ album }) {
       <Box sx={{ position: 'relative', width: 151, height: '100%', display: 'flex', alignItems: 'center' }}>
         <CardMedia
           component="img"
-          sx={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, objectFit: 'cover', borderRadius: 10 }}
+          sx={{ position: 'absolute', top: 0, p: 1, right: 0, bottom: 0, left: 0, objectFit: 'cover', borderRadius: 10 }}
           image={album.image}
           alt="Album cover image information"
         />
