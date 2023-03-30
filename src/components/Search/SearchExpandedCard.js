@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,9 +10,13 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import '@fontsource/roboto/300.css';
 
 export default function SearchExpandedCard({ album }) {
+
+  const handleClick = (event) => {
+    event.stopPropagation();
+  };
   
   return (
-    <Card sx={{ display: 'flex', m: 2, backgroundColor: '#ececec', borderRadius: 10}}>
+    <Card sx={{ display: 'flex', m: 2, backgroundColor: '#ececec', borderRadius: 10}} component={Link} to={`/details/${album.spotifyId}`}>
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h5">
           {album.name}
@@ -20,12 +25,14 @@ export default function SearchExpandedCard({ album }) {
           {album.artist}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton aria-label="play/pause" href={album.url}>
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-            <Typography variant="subtitle1" color="text.secondary" component="div">
-              Play on Spotify
-            </Typography>
-          </IconButton>
+          <Link to={album.url} target="_blank" rel="noopener noreferrer">
+            <IconButton aria-label="play/pause" onClick={handleClick}>
+              <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+              <Typography variant="subtitle1" color="text.secondary" component="div" onClick={handleClick}>
+                Play on Spotify
+              </Typography>
+            </IconButton>
+          </Link>
         </Box>
       </CardContent>
       <Box sx={{ position: 'relative', width: 151, height: '100%', display: 'flex', alignItems: 'center' }}>
