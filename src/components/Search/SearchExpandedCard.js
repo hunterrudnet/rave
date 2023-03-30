@@ -16,7 +16,7 @@ export default function SearchExpandedCard({ album }) {
   };
   
   return (
-    <Card sx={{ display: 'flex', m: 2, backgroundColor: '#ececec', borderRadius: 10}} component={Link} to={`/details/${album.spotifyId}`}>
+    <Card sx={{ display: 'flex', m: 2, backgroundColor: '#ececec', borderRadius: 10, textDecoration: 'none'}} component={Link} to={`/details/${album.spotifyId}`}>
       <CardContent sx={{ flex: '1 0 auto' }}>
         <Typography component="div" variant="h5">
           {album.name}
@@ -28,7 +28,7 @@ export default function SearchExpandedCard({ album }) {
           <Link to={album.url} target="_blank" rel="noopener noreferrer">
             <IconButton aria-label="play/pause" onClick={handleClick}>
               <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-              <Typography variant="subtitle1" color="text.secondary" component="div" onClick={handleClick}>
+              <Typography variant="subtitle1" color="text.secondary" component="div">
                 Play on Spotify
               </Typography>
             </IconButton>
