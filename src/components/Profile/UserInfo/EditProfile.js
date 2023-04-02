@@ -28,8 +28,8 @@ const EditProfile = ({user}) => {
       ...user,
       bio: newUserData.get("bio")
     }));
-    if (newUserData.get("admin") === "admin") {
-      dispatch(makeUserModeratorThunk({userId: user.id, role: "admin"}));
+    if (newUserData.get("mod") === "mod") {
+      dispatch(makeUserModeratorThunk({userId: user.id, role: "mod"}));
     } else {
       dispatch(makeUserNotModeratorThunk(user.id));
     }
@@ -56,9 +56,9 @@ const EditProfile = ({user}) => {
                          placeholder="Write a bio here" defaultValue={user.bio}
                          multiline rows={4} label="Bio"/>
               <FormControlLabel
-                  control={<Checkbox value="admin" defaultChecked={user.isMod}
-                                     name="admin"/>}
-                  label="Admin"/>
+                  control={<Checkbox value="mod" defaultChecked={user.isMod}
+                                     name="mod"/>}
+                  label="Moderator"/>
               <Button type="submit">Submit</Button>
             </FormControl>
           </Box>
