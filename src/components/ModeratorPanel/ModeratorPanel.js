@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getAllReviews, deleteReview } from "../../services/reviews-service";
 import { Navigate } from "react-router-dom";
 import Reviews from "../Reviews/Reviews";
+import Typography from "@mui/material/Typography";
 
 const ModeratorPanel = () => {
 
@@ -41,22 +42,29 @@ const ModeratorPanel = () => {
     return <Navigate replace to={"/"} />;
   } else {
     return (
-      <List>
-        {reviewsData.map((review) => (
-          <ListItem key={review.id}>
-            <ListItemText primary={review.text} />
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(review.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
+      <>
+        {reviewsLoading && <Typography>Loading</Typography>}
+        <List>
+          {reviewsData.map((review) => (
+            <ListItem key={review.id}>
+              <ListItemText primary={review.text} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(review.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+        </List>
+      </>
+
       // <Reviews reviews={reviewsData} loading={reviewsLoading} />
 
     );
   }
 };
 
+
 export default ModeratorPanel;
+
+
