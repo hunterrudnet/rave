@@ -2,12 +2,12 @@ import React from "react";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from "@mui/material/CssBaseline";
 import LoginToggleButton from "./LoginToggleButton";
 import {Link} from "react-router-dom";
 import "./topbar.css";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
 
 const TopBar = () => {
   return (

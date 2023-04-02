@@ -1,6 +1,6 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import {Button} from "@mui/material";
+import Button from "@mui/material/Button";
 import {useState} from "react";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 import DetailsCard from './DetailsCard';
