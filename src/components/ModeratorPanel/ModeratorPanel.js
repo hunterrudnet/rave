@@ -8,11 +8,6 @@ import { Navigate } from "react-router-dom";
 import Reviews from "../Reviews/Reviews";
 
 const ModeratorPanel = () => {
-  // const [reviews, setReviews] = useState([
-  //   { id: 1, text: 'This is a great product' },
-  //   { id: 2, text: 'I didn\'t like this product' },
-  //   { id: 3, text: 'Amazing customer service' },
-  // ]);
 
   let { loggedInUser, loading, loggedIn } = useSelector(
     state => state.loggedInUserData);
@@ -34,21 +29,10 @@ const ModeratorPanel = () => {
     }
   }, [loading, loggedInUser, loggedIn]);
 
-  // new method for deleting
-  // const handleDelete = (id) => {
-  //   const filteredReviews = reviewsData.filter((review) => review.id !== id);
-  //   // const filteredReviews = reviews.filter((review) => review.id !== id);
-  //   updateReviewsData(filteredReviews);
-  //   // setReviews(filteredReviews);
-  // };
   const handleDelete = async (id) => {
     const reviews = await deleteReview(id);
     updateReviewsData(reviews);
     setReviewsLoading(false);
-    // const filteredReviews = reviewsData.filter((review) => review.id !== id);
-    // // const filteredReviews = reviews.filter((review) => review.id !== id);
-    // updateReviewsData(filteredReviews);
-    // setReviews(filteredReviews);
   };
 
   if (loading) {
