@@ -10,14 +10,7 @@ import ReviewEntry from "./ReviewEntry";
 import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
 
-const Reviews = ({reviews, loading}) => {
-
-  const getReviewHeader = (review) => {
-    const album = review.Album;
-    return <ImageText bigText={album.name} smallText={album.artist}
-                      image={album.image}/>;
-  };
-
+const Reviews = ({reviews, loading, getReviewHeader}) => {
   const getReviewRating = (review) => {
     let reviewRating = null;
     if (review.score) {
