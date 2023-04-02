@@ -39,6 +39,8 @@ const FollowModal = ({followers, data, loading}) => {
               </ListSubheader>
 
               {data.map(user => {
+                const userImage = (user.image) ? user.image
+                    : "/images/rave-logo.jpg";
                 const url = `/profile/${user.username}`;
                 return (<div key={user.id}>
                   <ListItem component={Link} to={url}
@@ -46,7 +48,7 @@ const FollowModal = ({followers, data, loading}) => {
                     <Grid container spacing={2} sx={{m: 0}}>
                       <ImageText bigText={user.username}
                                  smallText={user.name}
-                                 image={user.image}/>
+                                 image={userImage}/>
                     </Grid>
                   </ListItem>
                   <Divider/>
@@ -57,6 +59,6 @@ const FollowModal = ({followers, data, loading}) => {
         </>
     );
   }
-  };
+};
 
-  export default FollowModal;
+export default FollowModal;

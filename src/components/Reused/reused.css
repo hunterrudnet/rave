@@ -4,12 +4,6 @@
     max-height: calc(100vh - 200px);
 }
 
-.image-text-picture {
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-}
-
 .center-modal {
     width: 400px;
     top: 50%;

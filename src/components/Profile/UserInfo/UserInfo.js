@@ -36,11 +36,13 @@ const UserInfo = ({user, isLoggedInUser}) => {
     fetchFollowData();
   }, []);
 
+  const userImage = (user.image) ? user.image : "/images/rave-logo.jpg";
+
   return (
       <Box>
         <Grid container spacing={2} sx={{m: 0}}>
           <Grid item xs={3}>
-            <Avatar alt={user.name} src={user.image}
+            <Avatar alt={user.name} src={userImage}
                     sx={{width: 160, height: 160, mb: 1}}/>
           </Grid>
           <Grid item xs={9}>
