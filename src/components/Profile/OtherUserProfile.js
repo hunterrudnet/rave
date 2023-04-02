@@ -20,6 +20,7 @@ const OtherUserProfile = () => {
   };
 
   useEffect(() => {
+    setIsLoggedInUser(false);
     setUserLoading(true);
     setUserData({});
     fetchUserData();
