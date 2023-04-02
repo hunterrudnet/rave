@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
-import { Rating } from '@mui/material';
+import Rating from '@mui/material/Rating';
 
 const Root = styled(Box)(({ theme }) => ({
   backgroundColor: '#ececec',

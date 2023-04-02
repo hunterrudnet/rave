@@ -1,8 +1,8 @@
-import * as React from 'react';
 import List from '@mui/material/List';
 import Button from "@mui/material/Button";
 import {useState} from "react";
-import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import Track from './Track';
 
 export default function TrackList({tracks}) {
