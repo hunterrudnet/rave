@@ -7,6 +7,7 @@ import Reviews from "../Reviews/Reviews";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getReviewsForUser} from "../../services/reviews-service";
+import ImageText from "../Reused/ImageText";
 
 const Profile = () => {
   let {loggedInUser, loading, loggedIn} = useSelector(
@@ -18,6 +19,12 @@ const Profile = () => {
     const reviews = await getReviewsForUser(loggedInUser.id);
     updateReviewsData(reviews);
     setReviewsLoading(false);
+  };
+
+  const getReviewHeader = (review) => {
+    const album = review.Album;
+    return <ImageText bigText={album.name} smallText={album.artist}
+                      image={album.image}/>;
   };
 
   useEffect(() => {
@@ -41,7 +48,8 @@ const Profile = () => {
           <Grid item xs={0.5}/>
           <Grid item xs={7}>
             <UserInfo user={loggedInUser}/>
-            <Reviews reviews={reviewsData} loading={reviewsLoading}/>
+            <Reviews reviews={reviewsData} loading={reviewsLoading}
+                     getReviewHeader={getReviewHeader}/>
           </Grid>
         </Grid>
     );
