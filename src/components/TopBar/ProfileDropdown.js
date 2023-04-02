@@ -22,10 +22,10 @@ const ProfileDropdown = ({name, image, logout, moderator}) => {
   };
 
   const moderatorPanel = () => {
-    console.log("MODERATOR");
     return (
-        <MenuItem onClick={handleClose}>
-          <Link component={RouterLink} to="/moderator">Moderator Panel</Link>
+        <MenuItem onClick={handleClose}
+                  component={RouterLink} to="/moderator">
+          Moderator Panel
         </MenuItem>);
   };
 
@@ -40,9 +40,11 @@ const ProfileDropdown = ({name, image, logout, moderator}) => {
             open={open}
             onClose={handleClose}
             onClick={handleClose}
-            id="profile-menu">
-          <MenuItem onClick={handleClose}>
-            <Link component={RouterLink} to="/profile">Profile</Link>
+            id="profile-menu"
+        >
+          <MenuItem onClick={handleClose}
+                    component={RouterLink} to="/profile">
+            Profile
           </MenuItem>
           {moderator && moderatorPanel()}
           <MenuItem onClick={handleLogout}>
