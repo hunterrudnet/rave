@@ -13,7 +13,6 @@ const LoggedInUserProfile = () => {
     return <Profile loading={loggedInUserLoading} user={loggedInUser}
                     isLoggedInUser={true}/>;
   }
-
 };
 
 export default LoggedInUserProfile;

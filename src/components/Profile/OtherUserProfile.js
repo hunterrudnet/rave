@@ -10,28 +10,31 @@ const OtherUserProfile = () => {
       state => state.loggedInUserData);
   const {username} = useParams();
   const [userLoading, setUserLoading] = useState(false);
-  const [userData, updateUserData] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
 
   const fetchUserData = async () => {
     const user = await getUser(username);
-    updateUserData(user);
+    setUserData(user);
     setUserLoading(false);
   };
 
   useEffect(() => {
     setUserLoading(true);
-    updateUserData([]);
+    setUserData({});
     fetchUserData();
   }, [username]);
 
   useEffect(() => {
     if (loggedIn && !loggedInUserLoading && !userLoading) {
       if (loggedInUser.username && userData.username) {
-        setIsLoggedInUser(loggedInUser.username === userData.username);
+        if (loggedInUser.username === userData.username) {
+          setIsLoggedInUser(loggedInUser.username === userData.username);
+          setUserData(loggedInUser);
+        }
       }
     }
-  }, [loggedInUserLoading, userLoading]);
+  }, [loggedInUserLoading, userLoading, loggedInUser]);
 
   if (!userLoading && (!userData || Object.keys(userData).length === 0)) {
     return `Could not find user: ${username}`;

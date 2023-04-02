@@ -27,6 +27,7 @@ const userSlice = createSlice({
       state.loggingIn = true;
     },
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
+      state.loggedInUserLoading = true;
       state.loggedIn = true;
       state.loggedInUser = {...payload};
       updateProfilePicture(state.loggedInUser);
@@ -36,6 +37,7 @@ const userSlice = createSlice({
       state.loggedInUserLoading = true;
     },
     [getUserThunk.fulfilled]: (state, {payload}) => {
+      state.loggedInUserLoading = true;
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
@@ -45,6 +47,7 @@ const userSlice = createSlice({
       state.loggedInUserLoading = true;
     },
     [makeUserModeratorThunk.fulfilled]: (state, {payload}) => {
+      state.loggedInUserLoading = true;
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
@@ -54,6 +57,7 @@ const userSlice = createSlice({
       state.loggedInUserLoading = true;
     },
     [makeUserNotModeratorThunk.fulfilled]: (state, {payload}) => {
+      state.loggedInUserLoading = true;
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
