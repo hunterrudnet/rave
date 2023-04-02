@@ -28,7 +28,7 @@ const TopBar = () => {
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <Link className="top-bar-link" to="/">
-                <Box
+                {/* <Box
                   component="img"
                   // sx={{
                   //   height: 3,
@@ -38,7 +38,7 @@ const TopBar = () => {
                   // }}
                   alt="logo"
                   src={require("./../../images/rave-logo.jpg")}
-                />
+                /> */}
                 {/* <img src="./rave-logo.png" alt="Girl in a jacket"></img> */}
                 <Avatar alt="rave" src="./../..rave-logo.jpg"
                   sx={{ width: 40, height: 40 }} />
