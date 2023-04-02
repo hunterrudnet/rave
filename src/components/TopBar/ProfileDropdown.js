@@ -3,12 +3,11 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {signOut} from "../../reducers/user-data-reducer";
 
-const ProfileDropdown = ({name, image, logout}) => {
+const ProfileDropdown = ({name, image, logout, moderator}) => {
   const [anchorEl, setAnchorEl] = useState();
   const dispatch = useDispatch();
 
@@ -19,6 +18,14 @@ const ProfileDropdown = ({name, image, logout}) => {
     handleClose();
     logout({logoutParams: {returnTo: window.location.origin}});
     dispatch(signOut());
+  };
+
+  const moderatorPanel = () => {
+    return (
+        <MenuItem onClick={handleClose}
+                  component={RouterLink} to="/moderator">
+          Moderator Panel
+        </MenuItem>);
   };
 
   return (
@@ -32,10 +39,13 @@ const ProfileDropdown = ({name, image, logout}) => {
             open={open}
             onClose={handleClose}
             onClick={handleClose}
-            id="profile-menu">
-          <MenuItem onClick={handleClose}>
-            <Link component={RouterLink} to="/profile">Profile</Link>
+            id="profile-menu"
+        >
+          <MenuItem onClick={handleClose}
+                    component={RouterLink} to="/profile">
+            Profile
           </MenuItem>
+          {moderator && moderatorPanel()}
           <MenuItem onClick={handleLogout}>
             Log Out
           </MenuItem>

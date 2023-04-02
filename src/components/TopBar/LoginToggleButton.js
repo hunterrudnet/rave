@@ -1,6 +1,6 @@
 import {useAuth0} from "@auth0/auth0-react";
 import React, {useEffect} from "react";
-import {Button} from "@mui/material";
+import Button from "@mui/material/Button";
 import ProfileDropdown from "./ProfileDropdown";
 import {createOrUpdateUserThunk} from "../../services/user-thunks";
 import {useDispatch, useSelector} from "react-redux";
@@ -37,7 +37,8 @@ const LoginToggleButton = () => {
     return <></>;
   } else if (isAuthenticated) {
     return <ProfileDropdown logout={logout} image={loggedInUser.image}
-                            name={loggedInUser.name}/>;
+                            name={loggedInUser.name}
+                            moderator={loggedInUser.isMod}/>;
   } else {
     return <Button color="inherit" onClick={() => loginWithRedirect()}>Log
       In</Button>;
