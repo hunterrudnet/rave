@@ -11,7 +11,7 @@ import {
   getWhoUserFollows
 } from "../../../services/following-service";
 
-const UserInfo = ({user}) => {
+const UserInfo = ({user, isLoggedInUser}) => {
   let verified = null;
   if (user.isMod) {
     verified = <VerifiedIcon/>;
@@ -45,7 +45,7 @@ const UserInfo = ({user}) => {
           </Grid>
           <Grid item xs={9}>
             <span>
-              <EditProfile user={user}/>
+              {isLoggedInUser && <EditProfile user={user}/>}
               <Typography variant="h6"
                           sx={{"pb": 1}}>{user.name} {verified}</Typography>
             </span>
