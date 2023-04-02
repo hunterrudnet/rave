@@ -23,7 +23,7 @@ const OtherUserProfile = () => {
     setUserLoading(true);
     updateUserData([]);
     fetchUserData();
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (loggedIn && !loggedInUserLoading && !userLoading) {
