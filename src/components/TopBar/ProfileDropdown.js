@@ -3,7 +3,6 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {signOut} from "../../reducers/user-data-reducer";
