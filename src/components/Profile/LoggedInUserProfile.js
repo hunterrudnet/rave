@@ -10,8 +10,7 @@ const LoggedInUserProfile = () => {
   if (!loggedInUserLoading && !loggedIn) {
     return <Navigate replace to={"/"}/>;
   } else {
-    return <Profile loading={loggedInUserLoading} user={loggedInUser}
-                    isLoggedInUser={true}/>;
+    return <Profile loading={loggedInUserLoading} user={loggedInUser}/>;
   }
 };
 

@@ -10,16 +10,17 @@ import {
   getWhoFollowsUser,
   getWhoUserFollows
 } from "../../../services/following-service";
+import {useSelector} from "react-redux";
 
-const UserInfo = ({user, isLoggedInUser}) => {
-  let verified = null;
-  if (user.isMod) {
-    verified = <VerifiedIcon/>;
-  }
+const UserInfo = ({user}) => {
+  let {loggedInUser, loggedInUserLoading, loggedIn} = useSelector(
+      state => state.loggedInUserData);
 
   const [followLoading, setFollowLoading] = useState(true);
   const [followersData, updateFollowers] = useState([]);
   const [followingData, updateFollowing] = useState([]);
+  const [isLoggedInUser, setIsLoggedInUser] = useState(false);
+  const [userData, setUserData] = useState(user);
 
   const fetchFollowData = async () => {
     const followers = await getWhoFollowsUser(user.id);
@@ -34,32 +35,47 @@ const UserInfo = ({user, isLoggedInUser}) => {
     updateFollowers([]);
     updateFollowing([]);
     fetchFollowData();
-  }, []);
+  }, [user]);
 
-  const userImage = (user.image) ? user.image : "/images/rave-logo.jpg";
+  useEffect(() => {
+    if (loggedIn && !loggedInUserLoading) {
+      if (loggedInUser.username && userData.username) {
+        if (loggedInUser.username === userData.username) {
+          setIsLoggedInUser(loggedInUser.username === userData.username);
+          setUserData(loggedInUser);
+        }
+      }
+    }
+  }, [loggedInUserLoading, loggedInUser, loggedIn]);
+
+  const userImage = (userData.image) ? userData.image : "/images/rave-logo.jpg";
+  let verified = null;
+  if (userData.isMod) {
+    verified = <VerifiedIcon/>;
+  }
 
   return (
       <Box>
         <Grid container spacing={2} sx={{m: 0}}>
           <Grid item xs={3}>
-            <Avatar alt={user.name} src={userImage}
+            <Avatar alt={userData.name} src={userImage}
                     sx={{width: 160, height: 160, mb: 1}}/>
           </Grid>
           <Grid item xs={9}>
             <span>
-              {isLoggedInUser && <EditProfile user={user}/>}
+              {isLoggedInUser && <EditProfile user={userData}/>}
               <Typography variant="h6"
-                          sx={{"pb": 1}}>{user.name} {verified}</Typography>
+                          sx={{"pb": 1}}>{userData.name} {verified}</Typography>
             </span>
             <Typography variant="body2"
-                        sx={{"pb": 1}}>@{user.username}</Typography>
+                        sx={{"pb": 1}}>@{userData.username}</Typography>
             <Box>
               <FollowModal followers={true} data={followersData}
                            loading={followLoading}/>
               <FollowModal followers={false} data={followingData}
                            loading={followLoading}/>
             </Box>
-            <Typography variant="caption">{user.bio}</Typography>
+            <Typography variant="caption">{userData.bio}</Typography>
           </Grid>
         </Grid>
       </Box>

@@ -6,12 +6,9 @@ import {getUser} from "../../services/user-service";
 import {useSelector} from "react-redux";
 
 const OtherUserProfile = () => {
-  let {loggedInUser, loggedInUserLoading, loggedIn} = useSelector(
-      state => state.loggedInUserData);
   const {username} = useParams();
   const [userLoading, setUserLoading] = useState(false);
   const [userData, setUserData] = useState([]);
-  const [isLoggedInUser, setIsLoggedInUser] = useState(false);
 
   const fetchUserData = async () => {
     const user = await getUser(username);
@@ -20,28 +17,15 @@ const OtherUserProfile = () => {
   };
 
   useEffect(() => {
-    setIsLoggedInUser(false);
     setUserLoading(true);
     setUserData({});
     fetchUserData();
   }, [username]);
 
-  useEffect(() => {
-    if (loggedIn && !loggedInUserLoading && !userLoading) {
-      if (loggedInUser.username && userData.username) {
-        if (loggedInUser.username === userData.username) {
-          setIsLoggedInUser(loggedInUser.username === userData.username);
-          setUserData(loggedInUser);
-        }
-      }
-    }
-  }, [loggedInUserLoading, userLoading, loggedInUser]);
-
   if (!userLoading && (!userData || Object.keys(userData).length === 0)) {
     return `Could not find user: ${username}`;
   } else {
-    return <Profile user={userData} loading={userLoading}
-                    isLoggedInUser={isLoggedInUser}/>;
+    return <Profile user={userData} loading={userLoading}/>;
   }
 
 };
