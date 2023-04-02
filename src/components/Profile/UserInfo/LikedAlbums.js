@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import "../../Reused/reused.css";
 import {getLikedAlbums} from "../../../services/likes-service";
 import ImageText from "../../Reused/ImageText";
+import {Link} from "react-router-dom";
 
 const LikedAlbums = ({userId}) => {
   const [loading, setLoading] = useState(true);
@@ -36,12 +37,14 @@ const LikedAlbums = ({userId}) => {
   const getLikes = () => {
     return albumData.map(data => {
       return (<div key={data.spotifyId}>
+        <Link to={`/details/${data.spotifyId}`} style={{ textDecoration: 'none', color: "black"}}>
         <ListItem>
           <Grid container spacing={2} sx={{m: 0}}>
             <ImageText bigText={data.name} smallText={data.artist}
                        image={data.image}/>
           </Grid>
         </ListItem>
+        </Link>
         <Divider/>
       </div>);
     });

@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
+import {Link} from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
@@ -38,12 +39,16 @@ const FollowModal = ({followers, data, loading}) => {
               </ListSubheader>
 
               {data.map(user => {
+                const userImage = (user.image) ? user.image
+                    : "/images/rave-logo.jpg";
+                const url = `/profile/${user.username}`;
                 return (<div key={user.id}>
-                  <ListItem>
+                  <ListItem component={Link} to={url}
+                            className="link-no-decoration">
                     <Grid container spacing={2} sx={{m: 0}}>
                       <ImageText bigText={user.username}
                                  smallText={user.name}
-                                 image={user.image}/>
+                                 image={userImage}/>
                     </Grid>
                   </ListItem>
                   <Divider/>

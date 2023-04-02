@@ -11,6 +11,8 @@ import Details from './components/Details/Details.js';
 import ModeratorPanel from "./components/ModeratorPanel/ModeratorPanel";
 import SearchPage from './components/Search/SearchPage';
 import HomePage from "./components/Home/HomePage";
+import OtherUserProfile from "./components/Profile/OtherUserProfile";
+import LoggedInUserProfile from "./components/Profile/LoggedInUserProfile";
 
 const props = {
   title: "Popular Albums", items: SEE_MORE_MOCK_DATA
@@ -26,7 +28,8 @@ function App() {
         <Routes>
           <Route index element={<HomePage/>}/>
           <Route path="/see-more" element={<SeeMoreList {...props} />}/>
-          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile" element={<LoggedInUserProfile/>}/>
+          <Route path="/profile/:username" element={<OtherUserProfile/>}/>
           <Route path="/search" element={<SearchPage/>}/>
           <Route path="/moderator" element={<ModeratorPanel/>}/>
           <Route path="/details/:albumID" element={<Details/>}/>
