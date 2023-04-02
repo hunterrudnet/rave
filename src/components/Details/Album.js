@@ -26,8 +26,7 @@ const AlbumArtist = styled(Typography)(({theme}) => ({
   textAlign: 'center'
 }));
 
-function Album({name, artist, imageSrc}) {
-
+const Album = ({name, artist, imageSrc}) => {
   return (
       <Root>
         <AlbumName variant="h6">{name}</AlbumName>
@@ -35,6 +34,6 @@ function Album({name, artist, imageSrc}) {
         <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
       </Root>
   );
-}
+};
 
 export default Album;

@@ -20,26 +20,25 @@ import ListItemText from "@mui/material/ListItemText";
 //     imgUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Drake_-_Take_Care_cover.jpg/220px-Drake_-_Take_Care_cover.jpg",
 // }
 //
-export default function SeeMoreItem({
+const SeeMoreItem = ({
   stats,
   imgUrl,
   linkUrl,
   primaryText,
   secondaryText,
   visible
-}) {
+}) => {
 
   return (
       <ListItem button component="a" href={linkUrl} sx={{
         backgroundColor: "#ececec",
         borderRadius: "5px",
         marginTop: "5px"
-      }}
-                secondaryAction={
-                  <ListItemText
-                      primaryTypographyProps={{style: {fontWeight: "bold"}}}
-                      edge="end" primary={stats}/>
-                }
+      }} secondaryAction={
+        <ListItemText
+            primaryTypographyProps={{style: {fontWeight: "bold"}}}
+            edge="end" primary={stats}/>
+      }
       >
         <ListItemAvatar>
           <Avatar src={imgUrl}/>
@@ -50,4 +49,6 @@ export default function SeeMoreItem({
         />
       </ListItem>
   );
-}
+};
+
+export default SeeMoreItem;

@@ -11,14 +11,14 @@ const PlayButton = styled(IconButton)({
   marginRight: -25
 });
 
-export default function Track({track}) {
+const Track = ({track}) => {
   const [artists, setArtists] = useState('');
 
-  function formatDuration(duration) {
+  const formatDuration = (duration) => {
     const minutes = Math.floor(duration / 60000);
     const seconds = Math.floor((duration % 60000) / 1000);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  }
+  };
 
   // call the formatArtistNames function and set the result to state
   useState(() => {
@@ -51,4 +51,6 @@ export default function Track({track}) {
         </PlayButton>
       </ListItem>
   );
-}
+};
+
+export default Track;

@@ -5,7 +5,7 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import DetailsCard from './DetailsCard';
 
-export default function DetailsCardList({reviews}) {
+const DetailsCardList = ({reviews}) => {
   const [limit, setLimit] = useState(2);
 
   const showMoreDocuments = () => {
@@ -48,4 +48,6 @@ export default function DetailsCardList({reviews}) {
         </Button>
       </div>
   );
-}
+};
+
+export default DetailsCardList;

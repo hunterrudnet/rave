@@ -5,7 +5,7 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import Track from './Track';
 
-export default function TrackList({tracks}) {
+const TrackList = ({tracks}) => {
 
   const [limit, setLimit] = useState(3);
 
@@ -49,5 +49,6 @@ export default function TrackList({tracks}) {
         </Button>
       </div>
   );
-}
+};
 
+export default TrackList;

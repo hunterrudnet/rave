@@ -39,7 +39,7 @@ const StyledRating = styled(Rating)(({theme}) => ({
   position: "center%"
 }));
 
-function WriteReview({albumName}) {
+const WriteReview = ({albumName}) => {
   const [reviewText, setReviewText] = useState('');
   const [stars, setStars] = useState(0);
 
@@ -91,6 +91,6 @@ function WriteReview({albumName}) {
         </ButtonsContainer>
       </Root>
   );
-}
+};
 
 export default WriteReview;

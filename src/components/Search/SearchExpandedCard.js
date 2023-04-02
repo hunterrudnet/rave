@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import '@fontsource/roboto/300.css';
 
-export default function SearchExpandedCard({album}) {
+const SearchExpandedCard = ({album}) => {
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -67,4 +67,6 @@ export default function SearchExpandedCard({album}) {
         </Box>
       </Card>
   );
-}
+};
+
+export default SearchExpandedCard;

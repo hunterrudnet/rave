@@ -10,7 +10,7 @@ import {useParams} from 'react-router';
 import testReviews from '../TestData/testReviews.json';
 import {formatArtistNames} from "../Reused/boilerplate";
 
-function Details() {
+const Details = () => {
   const [artists, setArtists] = useState('');
   const [foundAlbum, setFoundAlbum] = useState(false);
   const [album, setAlbum] = useState(albumData);
@@ -54,6 +54,6 @@ function Details() {
         </div>
     );
   }
-}
+};
 
 export default Details;
