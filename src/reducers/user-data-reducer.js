@@ -12,6 +12,12 @@ const initialState = {
   loggedIn: false
 };
 
+const updateProfilePicture = (loggedInUser) => {
+  if (!loggedInUser.image) {
+    loggedInUser.image = "/images/rave-logo.jpg";
+  }
+};
+
 const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
@@ -23,6 +29,7 @@ const userSlice = createSlice({
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...payload};
+      updateProfilePicture(state.loggedInUser);
       state.loading = false;
     },
     [getUserThunk.pending]: (state) => {
@@ -31,6 +38,7 @@ const userSlice = createSlice({
     [getUserThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
+      updateProfilePicture(state.loggedInUser);
       state.loading = false;
     },
     [makeUserModeratorThunk.pending]: (state) => {
@@ -39,6 +47,7 @@ const userSlice = createSlice({
     [makeUserModeratorThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
+      updateProfilePicture(state.loggedInUser);
       state.loading = false;
     },
     [makeUserNotModeratorThunk.pending]: (state) => {
@@ -47,6 +56,7 @@ const userSlice = createSlice({
     [makeUserNotModeratorThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
+      updateProfilePicture(state.loggedInUser);
       state.loading = false;
     }
   },
