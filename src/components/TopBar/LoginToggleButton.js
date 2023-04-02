@@ -37,7 +37,8 @@ const LoginToggleButton = () => {
     return <></>;
   } else if (isAuthenticated) {
     return <ProfileDropdown logout={logout} image={loggedInUser.image}
-                            name={loggedInUser.name}/>;
+                            name={loggedInUser.name}
+                            moderator={loggedInUser.isMod}/>;
   } else {
     return <Button color="inherit" onClick={() => loginWithRedirect()}>Log
       In</Button>;

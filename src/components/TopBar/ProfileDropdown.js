@@ -8,7 +8,7 @@ import {Link as RouterLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {signOut} from "../../reducers/user-data-reducer";
 
-const ProfileDropdown = ({name, image, logout}) => {
+const ProfileDropdown = ({name, image, logout, moderator}) => {
   const [anchorEl, setAnchorEl] = useState();
   const dispatch = useDispatch();
 
@@ -19,6 +19,14 @@ const ProfileDropdown = ({name, image, logout}) => {
     handleClose();
     logout({logoutParams: {returnTo: window.location.origin}});
     dispatch(signOut());
+  };
+
+  const moderatorPanel = () => {
+    console.log("MODERATOR");
+    return (
+        <MenuItem onClick={handleClose}>
+          <Link component={RouterLink} to="/moderator">Moderator Panel</Link>
+        </MenuItem>);
   };
 
   return (
@@ -36,6 +44,7 @@ const ProfileDropdown = ({name, image, logout}) => {
           <MenuItem onClick={handleClose}>
             <Link component={RouterLink} to="/profile">Profile</Link>
           </MenuItem>
+          {moderator && moderatorPanel()}
           <MenuItem onClick={handleLogout}>
             Log Out
           </MenuItem>
