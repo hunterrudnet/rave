@@ -5,7 +5,7 @@ import {useState} from "react";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 import Track from './Track';
 
-export default function TrackList({tracks}) {
+export default function TrackList({tracks, artistName}) {
 
     const [limit, setLimit] = useState(3);
 
@@ -22,7 +22,7 @@ export default function TrackList({tracks}) {
     ) => {
         return tracks.slice(0, limit).map((track, i) => {
             return (
-                <Track name={"something"} track={track}/>
+                <Track track={track} artistName={artistName}/>
             );
         });
     };
