@@ -6,6 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import {Link as RouterLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {signOut} from "../../reducers/user-data-reducer";
+import "../Reused/reused.css"
 
 const ProfileDropdown = ({name, image, logout, moderator}) => {
   const [anchorEl, setAnchorEl] = useState();
@@ -40,6 +41,7 @@ const ProfileDropdown = ({name, image, logout, moderator}) => {
             onClose={handleClose}
             onClick={handleClose}
             id="profile-menu"
+            className="link-no-decoration"
         >
           <MenuItem onClick={handleClose}
                     component={RouterLink} to="/profile">

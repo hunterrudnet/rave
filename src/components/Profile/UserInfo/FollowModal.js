@@ -41,8 +41,8 @@ const FollowModal = ({followers, data, loading}) => {
               {data.map(user => {
                 const url = `/profile/${user.username}`;
                 return (<div key={user.id}>
-                  {/*<Link to={`/profile/${user.username}`} style={{ textDecoration: 'none', color: 'black'}}>*/}
-                  <ListItem component={Link} to={url}>
+                  <ListItem component={Link} to={url}
+                            className="link-no-decoration">
                     <Grid container spacing={2} sx={{m: 0}}>
                       <ImageText bigText={user.username}
                                  smallText={user.name}
@@ -57,6 +57,6 @@ const FollowModal = ({followers, data, loading}) => {
         </>
     );
   }
-};
+  };
 
-export default FollowModal;
+  export default FollowModal;
