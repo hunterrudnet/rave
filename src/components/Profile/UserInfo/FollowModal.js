@@ -40,7 +40,7 @@ const FollowModal = ({followers, data, loading}) => {
 
               {data.map(user => {
                 return (<div key={user.id}>
-                  <Link to={`/profile/${user.id}`} style={{ textDecoration: 'none', color: 'black'}}>
+                  <Link to={`/profile/${user.username}`} style={{ textDecoration: 'none', color: 'black'}}>
                   <ListItem>
                     <Grid container spacing={2} sx={{m: 0}}>
                       <ImageText bigText={user.username}
