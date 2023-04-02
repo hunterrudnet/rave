@@ -1,5 +1,5 @@
 import "../Reused/reused.css";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import Profile from "./Profile";
 import {useEffect, useState} from "react";
 import {getUser} from "../../services/user-service";
@@ -33,8 +33,12 @@ const OtherUserProfile = () => {
     }
   }, [loggedInUserLoading, userLoading]);
 
-  return <Profile user={userData} loading={userLoading}
-                  isLoggedInUser={isLoggedInUser}/>;
+  if (!userLoading && (!userData || Object.keys(userData).length === 0)) {
+    return `Could not find user: ${username}`;
+  } else {
+    return <Profile user={userData} loading={userLoading}
+                    isLoggedInUser={isLoggedInUser}/>;
+  }
 
 };
 
