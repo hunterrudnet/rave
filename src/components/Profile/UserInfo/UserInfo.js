@@ -11,7 +11,7 @@ import {
   getWhoUserFollows
 } from "../../../services/following-service";
 
-const UserInfo = ({user}) => {
+const UserInfo = ({user, isLoggedInUser}) => {
   let verified = null;
   if (user.isMod) {
     verified = <VerifiedIcon/>;
@@ -36,16 +36,18 @@ const UserInfo = ({user}) => {
     fetchFollowData();
   }, []);
 
+  const userImage = (user.image) ? user.image : "/images/rave-logo.jpg";
+
   return (
       <Box>
         <Grid container spacing={2} sx={{m: 0}}>
           <Grid item xs={3}>
-            <Avatar alt={user.name} src={user.image}
+            <Avatar alt={user.name} src={userImage}
                     sx={{width: 160, height: 160, mb: 1}}/>
           </Grid>
           <Grid item xs={9}>
             <span>
-              <EditProfile user={user}/>
+              {isLoggedInUser && <EditProfile user={user}/>}
               <Typography variant="h6"
                           sx={{"pb": 1}}>{user.name} {verified}</Typography>
             </span>

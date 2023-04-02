@@ -4,12 +4,6 @@
     max-height: calc(100vh - 200px);
 }
 
-.image-text-picture {
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-}
-
 .center-modal {
     width: 400px;
     top: 50%;
@@ -17,4 +11,9 @@
     position: absolute;
     background-color: white;
     transform: translate(-50%, -50%);
+}
+
+.link-no-decoration {
+    text-decoration: none;
+    color: black;
 }

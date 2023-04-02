@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   loggedInUser: {},
-  loading: true,
+  loggedInUserLoading: true,
   loggedIn: false
 };
 
@@ -23,51 +23,51 @@ const userSlice = createSlice({
   initialState: initialState,
   extraReducers: {
     [createOrUpdateUserThunk.pending]: (state) => {
-      state.loading = true;
+      state.loggedInUserLoading = true;
       state.loggingIn = true;
     },
     [createOrUpdateUserThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...payload};
       updateProfilePicture(state.loggedInUser);
-      state.loading = false;
+      state.loggedInUserLoading = false;
     },
     [getUserThunk.pending]: (state) => {
-      state.loading = true;
+      state.loggedInUserLoading = true;
     },
     [getUserThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
-      state.loading = false;
+      state.loggedInUserLoading = false;
     },
     [makeUserModeratorThunk.pending]: (state) => {
-      state.loading = true;
+      state.loggedInUserLoading = true;
     },
     [makeUserModeratorThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
-      state.loading = false;
+      state.loggedInUserLoading = false;
     },
     [makeUserNotModeratorThunk.pending]: (state) => {
-      state.loading = true;
+      state.loggedInUserLoading = true;
     },
     [makeUserNotModeratorThunk.fulfilled]: (state, {payload}) => {
       state.loggedIn = true;
       state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
-      state.loading = false;
+      state.loggedInUserLoading = false;
     }
   },
   reducers: {
     stopLoading(state) {
-      state.loading = false;
+      state.loggedInUserLoading = false;
     },
     signOut(state) {
       state.loggedIn = false;
       state.loggedInUser = {};
-      state.loading = false;
+      state.loggedInUserLoading = false;
     }
   }
 });

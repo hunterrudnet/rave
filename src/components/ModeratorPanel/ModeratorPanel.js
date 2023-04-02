@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 
 const ModeratorPanel = () => {
 
-  let { loggedInUser, loading, loggedIn } = useSelector(state => state.loggedInUserData);
+  let { loggedInUser, loggedInUserLoading, loggedIn } = useSelector(state => state.loggedInUserData);
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [reviewsData, setReviewsData] = useState([]);
 
@@ -21,12 +21,12 @@ const ModeratorPanel = () => {
   };
 
   useEffect(() => {
-    if (!loading) {
+    if (!loggedInUserLoading) {
       setReviewsLoading(true);
       setReviewsData([]);
       fetchReviewsData();
     }
-  }, [loading, loggedInUser, loggedIn]);
+  }, [loggedInUserLoading, loggedInUser, loggedIn]);
 
   const handleDelete = async (id) => {
     await deleteReview(id);
@@ -34,10 +34,10 @@ const ModeratorPanel = () => {
     setReviewsData(newReviews);
   };
 
-  if (loading) {
+  if (loggedInUserLoading) {
     return <div>Loading ...</div>;
     // If they try to hit /moderator and aren't a mod, just redirect them to the home page
-  } else if ((!loading && !loggedIn) || (loggedInUser && !loggedInUser.isMod)) {
+  } else if ((!loggedInUserLoading && !loggedIn) || (loggedInUser && !loggedInUser.isMod)) {
     return <Navigate replace to={"/"} />;
   } else {
     return (

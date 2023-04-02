@@ -39,16 +39,18 @@ const FollowModal = ({followers, data, loading}) => {
               </ListSubheader>
 
               {data.map(user => {
+                const userImage = (user.image) ? user.image
+                    : "/images/rave-logo.jpg";
+                const url = `/profile/${user.username}`;
                 return (<div key={user.id}>
-                  <Link to={`/profile/${user.username}`} style={{ textDecoration: 'none', color: 'black'}}>
-                  <ListItem>
+                  <ListItem component={Link} to={url}
+                            className="link-no-decoration">
                     <Grid container spacing={2} sx={{m: 0}}>
                       <ImageText bigText={user.username}
                                  smallText={user.name}
-                                 image={user.image}/>
+                                 image={userImage}/>
                     </Grid>
                   </ListItem>
-                  </Link>
                   <Divider/>
                 </div>);
               })}
