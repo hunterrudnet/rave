@@ -1,46 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import './Details.css';
 import DetailsCardList from './DetailsCardList';
 import WriteReview from './WriteReview';
 import Album from './Album';
-import songData from '../TestData/songData.json'
 import TrackList from './TrackList';
 import { useParams } from 'react-router';
+import {useSelector} from "react-redux";
 import testReviews from '../TestData/testReviews.json'
 import { getAlbumBySpotifyId } from '../../services/album-service';
+import { getReviewsForAlbum } from '../../services/reviews-service';
 
 function Details() {
     const { albumID } = useParams();
-    const [artists, setArtists] = useState('');
     const [album, setAlbum] = useState();
     const [shouldFetch, setShouldFetch] = useState(true);
+    const [reviewsData, updateReviewsData] = useState([]);
+    const [reviewsLoading, setReviewsLoading] = useState(true);
+    let {loggedInUser, loading, loggedIn} = useSelector(state => state.loggedInUserData);
 
-    const formatArtistNames = (artists) => {
-      if (artists.length === 0) {
-        return '';
-      } else if (artists.length === 1) {
-        return artists[0].name;
-      } else if (artists.length === 2) {
-        return `${artists[0].name} and ${artists[1].name}`;
-      } else {
-        return artists.reduce((acc, curr, index) => {
-          if (index === artists.length - 1) {
-            return `${acc} and ${curr.name}`;
-          } else {
-            return `${acc}, ${curr.name}`;
-          }
-        }, '');
-      }
-    };
+    const fetchReviewsData = async () => {
+      console.log(album.id);
+      const reviews = await getReviewsForAlbum(album.id);
+      console.log(reviews);
+      updateReviewsData(reviews);
+      setReviewsLoading(false);
+  };
+
 
     async function fetchAlbumBySpotifyId() {
       const foundAlbum = await getAlbumBySpotifyId(albumID);
       if (foundAlbum) {
         setAlbum(foundAlbum);
-        setArtists(formatArtistNames([album.artist]));
         setShouldFetch(false);
       }
     }
+
+    useEffect(() => {
+      if (!loading) {
+          setReviewsLoading(true);
+          fetchReviewsData();
+      }
+  }, [loading, loggedIn]);
 
     useEffect(() => {
 
@@ -52,7 +52,6 @@ function Details() {
     if (!album) {
       return <h2>Album not found</h2>
     }
-
 
     return (
         <div className="grid-container">
@@ -67,8 +66,8 @@ function Details() {
             <TrackList tracks={album.tracks} artistName={album.artist.name} />
           </div>
           <div className="bottom-right">
-            <h3>{`Reviews for ${album.name} by ${artists}`}</h3>
-                <DetailsCardList reviews={testReviews} />
+            <h3>{`Reviews for ${album.name} by ${album.artist.name}`}</h3>
+                <DetailsCardList reviews={reviewsData} />
           </div>
         </div>
       );
