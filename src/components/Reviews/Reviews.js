@@ -5,12 +5,14 @@ import ListItem from "@mui/material/ListItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import {Link} from "react-router-dom";
 import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
 import Rating from "@mui/material/Rating";
 
 const Reviews = ({reviews, loading, headerText, getReviewHeader}) => {
   const getReviewRating = (review) => {
+    console.log(review);
     let reviewRating = null;
     if (review.score) {
       reviewRating =
@@ -29,6 +31,13 @@ const Reviews = ({reviews, loading, headerText, getReviewHeader}) => {
     {reviews.map(review => {
       return (<div key={review.id}>
         <ListItem>
+        <Link to={`/details/${review.Album.spotifyId}`} 
+        style={{
+            textDecoration: 'none',
+            color: 'black',
+            display: 'inline-block',
+            width: '100%',
+          }}>
           <Grid container spacing={2} sx={{m: 0}}>
             <Grid container spacing={2} sx={{m: 0}}>
               <Grid item xs={9}>
@@ -42,6 +51,7 @@ const Reviews = ({reviews, loading, headerText, getReviewHeader}) => {
               </Grid>
             </Grid>
           </Grid>
+          </Link>
         </ListItem>
         <Divider/>
       </div>);
