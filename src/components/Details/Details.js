@@ -36,11 +36,11 @@ function Details() {
     }
 
     useEffect(() => {
-      if (!loading) {
+      if (!loading && album) {
           setReviewsLoading(true);
           fetchReviewsData();
       }
-  }, [loading, loggedIn]);
+  }, [loading, loggedIn, album]);
 
     useEffect(() => {
 
