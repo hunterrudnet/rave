@@ -95,6 +95,7 @@ function WriteReview({albumName, albumIDFromDB}) {
       setReviewText(result.reviewText);
       setStars(result.score);
     }
+    window.location.reload();
   };
 
   return (
