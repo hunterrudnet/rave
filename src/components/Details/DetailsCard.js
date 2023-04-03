@@ -3,6 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Rating } from '@mui/material';
 
@@ -45,18 +46,20 @@ const StyledRating = styled(Rating)(({ theme }) => ({
 function DetailsCard({album}) {
 
   return (
-    <Root sx={{mb: 1}}>
+    <Root sx={{mb: 1, textDecoration: 'none'}}>
+      <Link to={`/profile/${album.User.username}`} style={{ textDecoration: 'none', color: "black"}}>
       <Header>
-        <AvatarStyled src={album.userProfilePicture} alt={album.username} />
+        <AvatarStyled src={album.User.image} alt={album.User.username} />
         <Username variant="body1">
-          {album.username}
+          {album.User.username}
         </Username>
-      <StyledRating name="rating" value={album.rating} max={5} readOnly precision={0.5}/>
+      <StyledRating name="rating" value={album.score} max={5} readOnly precision={0.5}/>
       </Header>
       <DividerStyled />
       <Text variant="body1">
-        {album.review}
+        {album.reviewText}
       </Text>
+      </Link>
     </Root>
   );
 }
