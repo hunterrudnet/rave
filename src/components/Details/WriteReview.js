@@ -56,12 +56,14 @@ function WriteReview({albumName, albumIDFromDB}) {
     const userFromDB = await getUser(loggedInUser.username);
     setUserIDFromDB(userFromDB.id);
     const allUserReviews = await getReviewsForUser(userIDFromDB);
+    if (allUserReviews) {
+      setShouldFindReview(false);
+    }
     const foundUserReview = allUserReviews.find(review => review.AlbumId === albumIDFromDB && review.UserId === userIDFromDB);
     if (foundUserReview) {
       setUserReview(foundUserReview);
       setReviewText(foundUserReview.reviewText);
       setStars(foundUserReview.score);
-      setShouldFindReview(false);
     }
   }
 
