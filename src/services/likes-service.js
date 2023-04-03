@@ -8,7 +8,7 @@ export const likeAlbum = async ({userId, albumId}) => {
 };
 
 export const unlikeAlbum = async ({userId, albumId}) => {
-  const response = await axios.delete(LIKES_API, {userId, albumId});
+  const response = await axios.delete(LIKES_API, { data: { userId, albumId}});
   return response.data;
 };
 
