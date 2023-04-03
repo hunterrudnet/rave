@@ -51,7 +51,7 @@ const SearchPage = () => {
       <Container sx={{m: 1}}>
       <TextField
         label="Search"
-        placeholder="Search for an album"
+        placeholder="Search for an album, artist, or keyword"
         variant="outlined"
         value={searchTerm}
         onChange={handleChange}
