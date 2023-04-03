@@ -7,11 +7,6 @@ export const createOrUpdateUserThunk = createAsyncThunk(
       return await service.createOrUpdateUser(user);
     });
 
-export const getUserThunk = createAsyncThunk('user/getUser',
-    async (username) => {
-      return await service.getUser(username);
-    });
-
 export const makeUserModeratorThunk = createAsyncThunk('user/makeUserMod',
     async ({userId, role}) => {
       return await service.makeUserModerator(userId, role);

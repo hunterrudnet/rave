@@ -1,7 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
   createOrUpdateUserThunk,
-  getUserThunk,
   makeUserModeratorThunk,
   makeUserNotModeratorThunk
 } from "../services/user-thunks";
@@ -30,16 +29,6 @@ const userSlice = createSlice({
       state.loggedInUserLoading = true;
       state.loggedIn = true;
       state.loggedInUser = {...payload};
-      updateProfilePicture(state.loggedInUser);
-      state.loggedInUserLoading = false;
-    },
-    [getUserThunk.pending]: (state) => {
-      state.loggedInUserLoading = true;
-    },
-    [getUserThunk.fulfilled]: (state, {payload}) => {
-      state.loggedInUserLoading = true;
-      state.loggedIn = true;
-      state.loggedInUser = {...state.loggedInUser, ...payload};
       updateProfilePicture(state.loggedInUser);
       state.loggedInUserLoading = false;
     },

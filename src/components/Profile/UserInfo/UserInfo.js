@@ -7,10 +7,12 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import FollowModal from "./FollowModal";
 import EditProfile from "./EditProfile";
 import {
+  followUser,
   getWhoFollowsUser,
-  getWhoUserFollows
+  getWhoUserFollows, unfollowUser
 } from "../../../services/following-service";
 import {useSelector} from "react-redux";
+import {Button} from "@mui/material";
 
 const UserInfo = ({user}) => {
   let {loggedInUser, loggedInUserLoading, loggedIn} = useSelector(
@@ -20,7 +22,9 @@ const UserInfo = ({user}) => {
   const [followersData, updateFollowers] = useState([]);
   const [followingData, updateFollowing] = useState([]);
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
+  const [loggedInFollowsThis, setLoggedInFollowsThis] = useState(false);
   const [userData, setUserData] = useState(user);
+  const [ignored, forceUpdate] = useState(false);
 
   const fetchFollowData = async () => {
     const followers = await getWhoFollowsUser(user.id);
@@ -30,12 +34,28 @@ const UserInfo = ({user}) => {
     setFollowLoading(false);
   };
 
+  const setUserIsFollowing = () => {
+    if (loggedIn && !loggedInUserLoading && loggedInUser.username
+        && followersData.filter(
+            elem => elem.username === loggedInUser.username).length > 0) {
+      setLoggedInFollowsThis(true);
+    } else {
+      setLoggedInFollowsThis(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!followLoading) {
+      setUserIsFollowing();
+    }
+  }, [followLoading, loggedIn]);
+
   useEffect(() => {
     setFollowLoading(true);
     updateFollowers([]);
     updateFollowing([]);
     fetchFollowData();
-  }, [user]);
+  }, [user, loggedInFollowsThis]);
 
   useEffect(() => {
     if (loggedIn && !loggedInUserLoading) {
@@ -52,6 +72,27 @@ const UserInfo = ({user}) => {
   let verified = null;
   if (userData.isMod) {
     verified = <VerifiedIcon/>;
+  }
+
+  const handleFollow = async () => {
+    if (loggedInFollowsThis) {
+      await unfollowUser(loggedInUser.id, userData.id);
+      setLoggedInFollowsThis(false);
+    } else {
+      await followUser(loggedInUser.id, userData.id);
+      setLoggedInFollowsThis(true);
+    }
+    forceUpdate(!ignored);
+  };
+
+  let followButton = null;
+  if (loggedIn && !isLoggedInUser) {
+    if (followLoading) {
+      followButton = "Loading...";
+    } else {
+      const followButtonText = loggedInFollowsThis ? "Unfollow" : "Follow";
+      followButton = <Button onClick={handleFollow}>{followButtonText}</Button>;
+    }
   }
 
   return (
@@ -75,6 +116,7 @@ const UserInfo = ({user}) => {
               <FollowModal followers={false} data={followingData}
                            loading={followLoading}/>
             </Box>
+            {followButton}
             <Typography variant="caption">{userData.bio}</Typography>
           </Grid>
         </Grid>
