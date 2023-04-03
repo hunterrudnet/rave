@@ -44,10 +44,6 @@ const ProfileDropdown = ({name, image, logout, moderator}) => {
             className="link-no-decoration"
         >
           <MenuItem onClick={handleClose}
-                    component={RouterLink} to="/search">
-            Search
-          </MenuItem>
-          <MenuItem onClick={handleClose}
                     component={RouterLink} to="/profile">
             Profile
           </MenuItem>
