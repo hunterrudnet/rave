@@ -26,11 +26,11 @@ export default function SeeMoreItem({stats, imgUrl, linkUrl, primaryText, second
     return (
         <ListItem button component="a" href={linkUrl} sx={{ backgroundColor: "#ececec", borderRadius: "5px", marginTop: "5px" }}
                   secondaryAction={
-                      <ListItemText primaryTypographyProps={{ style: {fontWeight: "bold"} }} edge="end" primary={ stats } />
+                      stats
                   }
         >
             <ListItemAvatar>
-                <Avatar src={imgUrl} />
+                <Avatar src={imgUrl ? imgUrl : "/images/rave-logo.jpg"} />
             </ListItemAvatar>
             <ListItemText
                 primary={primaryText}

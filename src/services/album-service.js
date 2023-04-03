@@ -21,3 +21,8 @@ export const getAlbumSearch = async (query) => {
   const response = await axios.get(`${ALBUM_API}/search/${query}`);
   return response.data;
 };
+
+export const getAllAlbums = async (query) => {
+  const response = await axios.get(`${ALBUM_API}`);
+  return response.data;
+};

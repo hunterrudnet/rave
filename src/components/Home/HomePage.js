@@ -1,18 +1,103 @@
-import {useAuth0} from "@auth0/auth0-react";
-import React from "react";
+// import {useAuth0} from "@auth0/auth0-react";
+import React, {useEffect, useState} from "react";
 import "../Reused/reused.css";
-import {CardMedia, Grid, Typography} from "@mui/material";
+import {Badge, CardMedia, Grid, Typography} from "@mui/material";
 import SeeMoreList from "../SeeMoreList/SeeMoreList.tsx";
-import {SEE_MORE_MOCK_DATA} from "../TestData/seeMoreMockData.tsx";
-import testReviews from "../TestData/testReviews.json";
-import DetailsCardList from "../Details/DetailsCardList";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import {getAllReviews, getReviewsForUserFollowings} from "../../services/reviews-service";
+import {getAllAlbums} from "../../services/album-service";
+import {useSelector} from "react-redux";
+import Reviews from "../Reviews/Reviews";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { red } from '@mui/material/colors';
+import {getAllUsers} from "../../services/user-service";
+import {getWhoFollowsUser} from "../../services/following-service";
+import {getLikedAlbums} from "../../services/likes-service";
+import ImageText from "../Reused/ImageText";
+
+function LikeBadge(count) {
+    return (
+        <Badge badgeContent={count} color="primary">
+            <FavoriteIcon style={{color: red[500]}}/>
+        </Badge>
+    );
+}
+
 
 const HomePage = () => {
-    const {isAuthenticated, isLoading} = useAuth0();
+    // const {isAuthenticated, isLoading} = useAuth0();
+    let {loggedInUser, loading, loggedIn} = useSelector(
+        state => state.loggedInUserData);
+    const [reviewsData, updateReviewsData] = useState([]);
+    const [albumsData, updateAlbumsData] = useState([]);
+    const [usersData, updateUsersData] = useState([]);
+    const [reviewsLoading, setReviewsLoading] = useState(true);
+    const getReviewHeader = (review) => {
+        const album = review.Album;
+        return <ImageText bigText={album.name} smallText={album.artist}
+                          image={album.image}/>;
+    };
 
-    if (isLoading) {
+    const fetchReviewsData = async () => {
+        let reviews;
+        if (loggedIn) {
+            reviews = await getReviewsForUserFollowings(loggedInUser.id);
+        } else {
+            reviews = await getAllReviews();
+        }
+        updateReviewsData(reviews);
+        setReviewsLoading(false);
+    };
+
+    const fetchAlbumsData = async () => {
+        let albums;
+        if (loggedIn) {
+            albums = await getLikedAlbums(loggedInUser.id);
+        } else {
+            albums = await getAllAlbums();
+        }
+
+        updateAlbumsData(albums.map(album => {
+            return {
+                imgUrl: album.image,
+                stats: LikeBadge(album.likesCount),
+                primaryText: album.name,
+                secondaryText: album.artist,
+                linkUrl: "/details/" + album.spotifyId
+            }
+        }));
+    };
+
+    const fetchUsersData = async () => {
+        let users;
+        if (loggedIn) {
+            users = await getWhoFollowsUser(loggedInUser.id);
+        } else {
+            users = await getAllUsers();
+        }
+        updateUsersData(users.map(user => {
+            return {
+                imgUrl: user.image,
+                primaryText: user.username,
+                linkUrl: "/profile/" + user.username
+            }
+        }));
+    };
+
+    useEffect(() => {
+        if (!loading) {
+            setReviewsLoading(true);
+            updateReviewsData([]);
+            updateAlbumsData([]);
+            updateUsersData([]);
+            fetchAlbumsData();
+            fetchReviewsData();
+            fetchUsersData();
+        }
+    }, [loading, loggedIn]);
+
+    if (loading) {
         return <div>Loading ...</div>;
     }
     return (
@@ -46,20 +131,23 @@ const HomePage = () => {
             </div>
             <Grid container spacing={2} sx={{m: 0}} style={{width: "100% "}}>
                 <Grid item xs={12} md={3} sx={{p: 1}}>
-                    <SeeMoreList title={isAuthenticated ? "Favorite Artists" : "Popular Artists"}
-                                 items={SEE_MORE_MOCK_DATA}/>
-                    <SeeMoreList title={isAuthenticated ? "Newest Followers" : "Top Reviewers"}
-                                 items={SEE_MORE_MOCK_DATA}/>
+                    <SeeMoreList title={loggedIn ? "Your Favorite Albums" : "Popular Albums"}
+                                 items={albumsData}
+                                 noContentMessage={"No Albums Yet..."}/>
+                    <SeeMoreList title={loggedIn ? "Newest Followers" : "Newest Members"}
+                                 items={usersData}
+                                 noContentMessage={"No Followers Yet..."}/>
                 </Grid>
                 <Grid item xs={0} md={7}>
-                    <Typography variant="h5" component="h5">
-                        {isAuthenticated ? "Reviews From Your Follows" : "Recent Reviews"}
-                    </Typography>
-                    <DetailsCardList reviews={testReviews} />
+                    <Reviews reviews={reviewsData}
+                             loading={reviewsLoading}
+                             getReviewHeader={getReviewHeader}
+                             headerText={loggedIn ? "Reviews From Your Follows" : "Recent Reviews"}/>
                 </Grid>
             </Grid>
         </div>
     );
 };
+
 
 export default HomePage;

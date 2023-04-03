@@ -5,13 +5,6 @@ import {Button, Typography} from "@mui/material";
 import {useState} from "react";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 
-const item2 = {
-    stats: "2.1k",
-    primaryText: "Dark Side of the Moon",
-    secondaryText: "Psychedelic Rock",
-    linkUrl: "/",
-    imgUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Drake_-_Take_Care_cover.jpg/220px-Drake_-_Take_Care_cover.jpg",
-}
 
 // Displays a generic list of items, starting with a limit of 3.  If there are more than 3 items, an option
 // to see more will appear at the bottom of the list and allow the user to click it to expand the list with 3 further
@@ -36,9 +29,11 @@ const item2 = {
 //     imgUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Drake_-_Take_Care_cover.jpg/220px-Drake_-_Take_Care_cover.jpg",
 // }
 //
-export default function SeeMoreList({title, items}) {
 
-    const [limit, setLimit] = useState(3);
+const INITIAL_LIMIT = 3;
+export default function SeeMoreList({title, items, noContentMessage}) {
+
+    const [limit, setLimit] = useState(INITIAL_LIMIT);
 
     const showMoreDocuments = () => {
         setLimit(limit + 3);
@@ -53,34 +48,46 @@ export default function SeeMoreList({title, items}) {
     ) => {
         return items.slice(0, limit).map((item, i) => {
             return (
-                <SeeMoreItem { ...item} sx={{marginTop: "5px"}}/>
+                <SeeMoreItem key={i} { ...item} sx={{marginTop: "5px"}}/>
             );
         });
     };
 
-    return (
-        <div>
-            <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+    if (items.length == 0) {
+        return (
+            <div>
                 <Typography variant="h5" component="h5">
                     {title}
                 </Typography>
-                {renderRowsWithItem(items)}
-            </List>
+                <Typography variant="h6" component="h6">
+                    {noContentMessage}
+                </Typography>
+            </div>)
+    } else {
+        return (
+            <div>
+                <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+                    <Typography variant="h5" component="h5">
+                        {title}
+                    </Typography>
+                    {renderRowsWithItem(items)}
+                </List>
 
-            <Button
-                endIcon={<KeyboardArrowDown />}
-                onClick={showMoreDocuments}
-                sx={{display: limit >= items.length ? "none" : ""}}
-            >
-                see more
-            </Button>
-            <Button
-                endIcon={<KeyboardArrowUp />}
-                onClick={resetLimit}
-                sx={{display: limit > items.length ? "" : "none"}}
-            >
-                see less
-            </Button>
-        </div>
-    );
+                <Button
+                    endIcon={<KeyboardArrowDown />}
+                    onClick={showMoreDocuments}
+                    sx={{display: limit >= items.length ? "none" : ""}}
+                >
+                    see more
+                </Button>
+                <Button
+                    endIcon={<KeyboardArrowUp />}
+                    onClick={resetLimit}
+                    sx={{display: (limit > items.length && !(items.length < INITIAL_LIMIT)) ? "" : "none"}}
+                >
+                    see less
+                </Button>
+            </div>
+        );
+    }
 }
