@@ -50,28 +50,25 @@ function WriteReview({albumName, albumIDFromDB}) {
   const [userReview, setUserReview] = useState();
   const [reviewText, setReviewText] = useState('');
   const [stars, setStars] = useState(0);
-  const [shouldFindReview, setShouldFindReview] = useState(true);
-
-  async function fetchUserReviewsFromDatabase() {
-    const userFromDB = await getUser(loggedInUser.username);
-    setUserIDFromDB(userFromDB.id);
-    const allUserReviews = await getReviewsForUser(userIDFromDB);
-    if (allUserReviews) {
-      setShouldFindReview(false);
-    }
-    const foundUserReview = allUserReviews.find(review => review.AlbumId === albumIDFromDB && review.UserId === userIDFromDB);
-    if (foundUserReview) {
-      setUserReview(foundUserReview);
-      setReviewText(foundUserReview.reviewText);
-      setStars(foundUserReview.score);
-    }
-  }
 
   useEffect(() => {
-    if (shouldFindReview) {
-      fetchUserReviewsFromDatabase();
+    async function fetchData() {
+      const userFromDB = await getUser(loggedInUser.username);
+      setUserIDFromDB(userFromDB.id);
+      const allUserReviews = await getReviewsForUser(userFromDB.id);
+      const foundUserReview = allUserReviews.find(review => review.AlbumId === albumIDFromDB && review.UserId === userFromDB.id);
+      if (foundUserReview) {
+        setUserReview(foundUserReview);
+        setReviewText(foundUserReview.reviewText);
+        setStars(foundUserReview.score);
+      }
     }
-  },);
+  
+    if (loggedInUser && !userIDFromDB) {
+      fetchData();
+    }
+  }, [loggedInUser, userIDFromDB]);
+  
 
   const handleReviewTextChange = (event) => {
     setReviewText(event.target.value);
@@ -97,7 +94,6 @@ function WriteReview({albumName, albumIDFromDB}) {
       setUserReview(result);
       setReviewText(result.reviewText);
       setStars(result.score);
-      setShouldFindReview(true);
     }
   };
 
