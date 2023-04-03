@@ -12,6 +12,11 @@ export const getUser = async (username) => {
   return response.data;
 };
 
+export const getAllUsers = async () => {
+  const response = await axios.get(`${USERS_API}`);
+  return response.data;
+};
+
 export const makeUserModerator = async (userId, role) => {
   const response = await axios.post(`${USERS_API}/moderator`,
       {userId: userId, role: role});

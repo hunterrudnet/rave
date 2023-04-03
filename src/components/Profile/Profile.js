@@ -43,7 +43,7 @@ const Profile = ({loading, user, isLoggedInUser}) => {
           <Grid item xs={7}>
             <UserInfo user={user} isLoggedInUser={isLoggedInUser}/>
             <Reviews reviews={reviewsData} loading={reviewsLoading}
-                     getReviewHeader={getReviewHeader}/>
+                     getReviewHeader={getReviewHeader} headerText={"Reviews"}/>
           </Grid>
         </Grid>
     );

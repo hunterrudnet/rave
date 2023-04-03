@@ -7,10 +7,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "../Reused/reused.css";
 import ReviewEntry from "./ReviewEntry";
-import ImageText from "../Reused/ImageText";
 import Rating from "@mui/material/Rating";
 
-const Reviews = ({reviews, loading, getReviewHeader}) => {
+const Reviews = ({reviews, loading, headerText, getReviewHeader}) => {
   const getReviewRating = (review) => {
     let reviewRating = null;
     if (review.score) {
@@ -23,7 +22,7 @@ const Reviews = ({reviews, loading, getReviewHeader}) => {
 
   return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
-      <Typography variant="h6">Reviews</Typography>
+      <Typography variant="h6">{headerText}</Typography>
     </ListSubheader>
     {loading && <Typography>Loading</Typography>}
 
