@@ -20,9 +20,8 @@ export const followUser = async (followerUserId, followingUserId) => {
 
 export const unfollowUser = async (followerUserId, unfollowingUserId) => {
   const body = {
-    "follower_id": followerUserId,
-    "following_id": unfollowingUserId
+    "follower_id": followerUserId, "following_id": unfollowingUserId
   };
-  const response = await axios.delete(`${FOLLOWING_API}/`, body);
+  const response = await axios.delete(`${FOLLOWING_API}/`, {data: body});
   return response.data;
 };
