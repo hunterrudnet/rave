@@ -1,9 +1,6 @@
-import Profile from './components/Profile/Profile';
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import TopBar from "./components/TopBar/TopBar";
-import SeeMoreList from "./components/SeeMoreList/SeeMoreList.tsx";
-import {SEE_MORE_MOCK_DATA} from "./components/TestData/seeMoreMockData.tsx";
 import {configureStore} from '@reduxjs/toolkit';
 import userDataReducer from "./reducers/user-data-reducer";
 import {Provider} from "react-redux";
@@ -14,10 +11,6 @@ import HomePage from "./components/Home/HomePage";
 import OtherUserProfile from "./components/Profile/OtherUserProfile";
 import LoggedInUserProfile from "./components/Profile/LoggedInUserProfile";
 
-const props = {
-  title: "Popular Albums", items: SEE_MORE_MOCK_DATA
-};
-
 const store = configureStore({reducer: {loggedInUserData: userDataReducer}});
 
 function App() {
@@ -27,7 +20,6 @@ function App() {
         <TopBar/>
         <Routes>
           <Route index element={<HomePage/>}/>
-          <Route path="/see-more" element={<SeeMoreList {...props} />}/>
           <Route path="/profile" element={<LoggedInUserProfile/>}/>
           <Route path="/profile/:username" element={<OtherUserProfile/>}/>
           <Route path="/search" element={<SearchPage/>}/>

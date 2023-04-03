@@ -6,7 +6,6 @@ import Album from './Album';
 import TrackList from './TrackList';
 import { useParams } from 'react-router';
 import {useSelector} from "react-redux";
-import testReviews from '../TestData/testReviews.json'
 import { getAlbumBySpotifyId } from '../../services/album-service';
 import { getReviewsForAlbum } from '../../services/reviews-service';
 
