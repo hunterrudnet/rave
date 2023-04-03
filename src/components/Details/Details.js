@@ -57,7 +57,7 @@ function Details() {
     return (
         <div className="grid-container">
           <div className="top-left">
-            <Album name={album.name} artist={album.artist.name} imageSrc={album.images[0].url}/>
+            <Album id={album.id} name={album.name} artist={album.artist.name} imageSrc={album.images[0].url}/>
           </div>
           <div className="top-right">
             <WriteReview albumName={album.name} albumIDFromDB={album.id}/>
