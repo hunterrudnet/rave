@@ -33,6 +33,7 @@ const EditProfile = ({user}) => {
     } else {
       dispatch(makeUserNotModeratorThunk(user.id));
     }
+    handleClose();
   };
 
   return (

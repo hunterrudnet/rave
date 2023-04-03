@@ -7,7 +7,7 @@ import ImageText from "../Reused/ImageText";
 import React, {useEffect, useState} from "react";
 import {getReviewsForUser} from "../../services/reviews-service";
 
-const Profile = ({loading, user, isLoggedInUser}) => {
+const Profile = ({loading, user}) => {
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [reviewsData, updateReviewsData] = useState([]);
 
@@ -41,7 +41,7 @@ const Profile = ({loading, user, isLoggedInUser}) => {
           </Grid>
           <Grid item xs={0.5}/>
           <Grid item xs={7}>
-            <UserInfo user={user} isLoggedInUser={isLoggedInUser}/>
+            <UserInfo user={user}/>
             <Reviews reviews={reviewsData} loading={reviewsLoading}
                      getReviewHeader={getReviewHeader} headerText={"Reviews"}/>
           </Grid>
