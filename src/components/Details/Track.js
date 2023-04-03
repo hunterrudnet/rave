@@ -10,14 +10,13 @@ const PlayButton = styled(IconButton)({
     marginRight: -25,
   });
 
-export default function Track({track}) {
+export default function Track({track, artistName}) {
     const [artists, setArtists] = useState('');
-
     const formatArtistNames = (artists) => {
         if (artists.length === 0) {
           return '';
         } else if (artists.length === 1) {
-          return artists[0].name;
+          return artists[0];
         } else if (artists.length === 2) {
           return `${artists[0].name} and ${artists[1].name}`;
         } else {
@@ -40,7 +39,7 @@ export default function Track({track}) {
 
     // call the formatArtistNames function and set the result to state
      useState(() => {
-        setArtists(formatArtistNames(track.artists));
+        setArtists(formatArtistNames([artistName]));
     }, [track]);
 
     return (
@@ -53,10 +52,10 @@ export default function Track({track}) {
                 primary={track.name}
                 secondary={artists}
             />
-            <Typography variant="subtitle2">{formatDuration(track.duration_ms)}</Typography>
+            <Typography variant="subtitle2">{formatDuration(track.duration)}</Typography>
             <PlayButton
                 color="primary"
-                onClick={() => window.open(track.external_urls.spotify)}
+                onClick={() => window.open(track.url)}
             >
                 <PlayArrow />
             </PlayButton>
