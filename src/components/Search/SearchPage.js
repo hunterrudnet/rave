@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   TextField,
@@ -15,6 +14,7 @@ import {
 import { Search } from '@mui/icons-material';
 import SearchExpandedCard from './SearchExpandedCard';
 import { getAlbumSearch } from '../../services/album-service';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -28,19 +28,30 @@ const theme = createTheme({
 });
 
 const SearchPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q');
+    if (q) {
+      setSearchTerm(q);
+      handleSearch(q);
+    }
+  }, [location.search]);
+
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearch = async () => {
+  const handleSearch = async (query) => {
     setLoading(true);
     try {
-      const results = await getAlbumSearch(searchTerm);
+      const results = await getAlbumSearch(query);
 
       const albums = results.slice(0, 10).map((album) => ({
         spotifyId: album.spotifyId,
@@ -53,6 +64,9 @@ const SearchPage = () => {
       setResults(albums);
       setLoading(false);
       setError(null);
+
+      // Push the search term to the URL as a query param
+      navigate(`/search?q=${encodeURIComponent(query)}`);
     } catch (error) {
       console.error('Error fetching search results:', error);
       setLoading(false);
@@ -62,7 +76,7 @@ const SearchPage = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      handleSearch();
+      handleSearch(searchTerm);
     }
   };
 
