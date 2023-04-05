@@ -85,8 +85,11 @@ const Album = ({id, name, artist, imageSrc}) => {
               </IconButton>
           )}
         </AlbumName>
-        <StyledRating readOnly value={averageRating} precision={0.5}
-                      max={5}> </StyledRating>
+        <h3>Average score:
+          <StyledRating readOnly value={averageRating} precision={0.5}
+                        max={5}> </StyledRating>
+        </h3>
+
         <AlbumImage src={imageSrc} alt={name}/>
         <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
       </Root>

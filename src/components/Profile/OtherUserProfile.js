@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import Profile from "./Profile";
 import {useEffect, useState} from "react";
 import {getUser} from "../../services/user-service";
+import {objectEmpty} from "../Reused/ReusedFunctions";
 
 const OtherUserProfile = () => {
   const {username} = useParams();
@@ -21,7 +22,7 @@ const OtherUserProfile = () => {
     fetchUserData();
   }, [username]);
 
-  if (!userLoading && (!userData || Object.keys(userData).length === 0)) {
+  if (objectEmpty(userData)) {
     return `Could not find user: ${username}`;
   } else {
     return <Profile user={userData} loading={userLoading}/>;

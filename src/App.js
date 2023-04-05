@@ -4,7 +4,7 @@ import TopBar from "./components/TopBar/TopBar";
 import {configureStore} from '@reduxjs/toolkit';
 import userDataReducer from "./reducers/user-data-reducer";
 import {Provider} from "react-redux";
-import Details from './components/Details/Details.js';
+import Details from './components/AlbumInfo/Details.js';
 import ModeratorPanel from "./components/ModeratorPanel/ModeratorPanel";
 import SearchPage from './components/Search/SearchPage';
 import HomePage from "./components/Home/HomePage";

@@ -17,9 +17,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {getAllUsers} from "../../services/user-service";
 import {getWhoFollowsUser} from "../../services/following-service";
 import {getLikedAlbums} from "../../services/likes-service";
-import {red} from "@mui/material/colors";
 import ReviewsCardList from "../Reviews/ReviewsCardList";
-import {getReviewHeaderDataShowAlbum} from "../Reused/GetReviewsHeaderData";
+import {getReviewHeaderDataShowAlbum} from "../Reused/ReusedFunctions";
+import {red} from "@mui/material/colors";
 
 const LikeBadge = (count) => {
   return (
@@ -140,7 +140,7 @@ const HomePage = () => {
                 noContentMessage={"No Followers Yet..."}/>
           </Grid>
           <Grid item xs={0} md={7}>
-            <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}
+            <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
                              getReviewHeaderData={getReviewHeaderDataShowAlbum}
                              reviewsListTitle={loggedIn
                                  ? "Reviews From Users You Follow"

@@ -6,10 +6,8 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import {styled} from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
-import {useSelector} from "react-redux";
 import {getReviewsForUser} from '../../services/reviews-service';
-import {createOrUpdateReview} from '../../services/reviews-service';
-import {getUser} from '../../services/user-service';
+import {objectEmpty} from "../Reused/ReusedFunctions";
 
 const Root = styled(Box)(({theme}) => ({
   backgroundColor: '#ececec',
@@ -29,7 +27,6 @@ const DividerStyled = styled(Divider)(({theme}) => ({
 
 const Text = styled(TextField)(({theme}) => ({
   backgroundColor: 'white',
-  padding: theme.spacing(2),
   borderRadius: 5,
   marginBottom: theme.spacing(2)
 }));
@@ -43,67 +40,66 @@ const StyledRating = styled(Rating)(() => ({
   position: "center%"
 }));
 
-const WriteReview = ({albumName, albumIDFromDB}) => {
+const WriteReview = ({
+  albumName,
+  albumIDFromDB,
+  loggedInUserId,
+  submitReview,
+  reviewsLen
+}) => {
+  const [userReview, setUserReview] = useState({reviewText: "", score: 0});
+  const [userHasReview, setUserHasReview] = useState(false);
 
-  const {loggedInUser, loggedIn} = useSelector(state => state.loggedInUserData);
-  const [userIDFromDB, setUserIDFromDB] = useState();
-  const [userReview, setUserReview] = useState();
-  const [reviewText, setReviewText] = useState('');
-  const [stars, setStars] = useState(0);
+  const fetchUserReview = async () => {
+    const allUserReviews = await getReviewsForUser(loggedInUserId);
+    const foundUserReview = allUserReviews.find(
+        review => review.AlbumId === albumIDFromDB && review.UserId
+            === loggedInUserId);
+    if (foundUserReview) {
+      setUserHasReview(true);
+      setUserReview({
+        reviewText: foundUserReview.reviewText,
+        score: foundUserReview.score
+      });
+    } else {
+      setUserHasReview(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const userFromDB = await getUser(loggedInUser.username);
-      setUserIDFromDB(userFromDB.id);
-      const allUserReviews = await getReviewsForUser(userFromDB.id);
-      const foundUserReview = allUserReviews.find(
-          review => review.AlbumId === albumIDFromDB && review.UserId
-              === userFromDB.id);
-      if (foundUserReview) {
-        setUserReview(foundUserReview);
-        setReviewText(foundUserReview.reviewText);
-        setStars(foundUserReview.score);
-      }
-    };
-
-    if (loggedInUser && !userIDFromDB) {
-      fetchData();
+    if (loggedInUserId) {
+      fetchUserReview();
     }
-  }, [loggedInUser, userIDFromDB]);
+  }, [loggedInUserId, reviewsLen]);
+
+  const handleScoreChange = (event) => {
+    let score = event.target.value;
+    score = score ? score : 0;
+    setUserReview({...userReview, score: score});
+  };
 
   const handleReviewTextChange = (event) => {
-    setReviewText(event.target.value);
+    setUserReview({...userReview, reviewText: event.target.value});
   };
 
   const handleClearReview = () => {
-    setReviewText('');
-  };
-
-  const handleStarsChange = (event) => {
-    setStars(event.target.value);
+    setUserReview({reviewText: "", score: 0});
   };
 
   const handleSubmitReview = async () => {
-    const review = {
-      userId: userIDFromDB,
-      albumId: albumIDFromDB,
-      score: stars,
-      reviewText: reviewText
-    };
-    const result = await createOrUpdateReview(review);
+    const result = await submitReview(userReview);
     if (result) {
       setUserReview(result);
-      setReviewText(result.reviewText);
-      setStars(result.score);
+      setUserHasReview(true);
     }
-    window.location.reload();
   };
 
   return (
       <Root>
         <Header>
           <Typography variant="h5">
-            {`${userReview ? "Edit your" : "Write a"} review for ${albumName}`}
+            {`${userHasReview ? "Edit your"
+                : "Write a"} review for ${albumName}`}
           </Typography>
         </Header>
         <DividerStyled/>
@@ -113,17 +109,17 @@ const WriteReview = ({albumName, albumIDFromDB}) => {
             rows={4}
             fullWidth
             placeholder="Write your review here"
-            value={reviewText}
+            value={userReview.reviewText}
             onChange={handleReviewTextChange}
         />
         <DividerStyled/>
         <ButtonsContainer>
           <Button variant="contained" color="primary"
-                  onClick={() => handleSubmitReview()} disabled={!loggedIn}>
-            {userReview ? 'Update' : 'Submit'}
+                  onClick={() => handleSubmitReview()}>
+            {userHasReview ? 'Update' : 'Submit'}
           </Button>
-          <StyledRating value={stars} precision={0.5} max={5}
-                        onChange={handleStarsChange}/>
+          <StyledRating value={userReview.score} precision={0.5}
+                        max={5} name="score" onChange={handleScoreChange}/>
           <Button variant="outlined" onClick={handleClearReview}>
             Clear
           </Button>

@@ -6,12 +6,15 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import ReviewCard from './ReviewCard';
 import Typography from "@mui/material/Typography";
 import ListSubheader from "@mui/material/ListSubheader";
+import {handleDeleteGeneral} from "../Reused/ReusedFunctions";
 
 const ReviewsCardList = ({
   loading,
-  reviews,
+  reviewsData,
   getReviewHeaderData,
-  reviewsListTitle
+  reviewsListTitle,
+  setReviewsData,
+  loggedInUserId
 }) => {
   const [limit, setLimit] = useState(2);
 
@@ -23,13 +26,40 @@ const ReviewsCardList = ({
     setLimit(2);
   };
 
-  const renderRowsWithItem = (reviews) => {
-    return reviews.slice(0, limit).map((review) => {
+  const handleDelete = (id) => {
+    handleDeleteGeneral(id, reviewsData, setReviewsData);
+  };
+
+  const renderRowsWithItem = () => {
+    return reviewsData.slice(0, limit).map((review) => {
       return (<ReviewCard {...getReviewHeaderData(review)}
                           score={review.score}
                           reviewText={review.reviewText}
+                          reviewUserId={review.UserId}
+                          canDelete={review.UserId === loggedInUserId}
+                          handleDelete={() => handleDelete(review.id)}
                           sx={{mb: "25"}}/>);
     });
+  };
+
+  const showMoreButton = () => {
+    return (<Button
+        endIcon={<KeyboardArrowDown/>}
+        onClick={showMoreDocuments}
+        sx={{display: limit >= reviewsData.length ? "none" : ""}}
+    >
+      see more
+    </Button>);
+  };
+
+  const showLessButton = () => {
+    return (<Button
+        endIcon={<KeyboardArrowUp/>}
+        onClick={resetLimit}
+        sx={{display: limit > reviewsData.length ? "" : "none"}}
+    >
+      see less
+    </Button>);
   };
 
   if (loading) {
@@ -41,23 +71,11 @@ const ReviewsCardList = ({
             <ListSubheader>
               <Typography variant="h6">{reviewsListTitle}</Typography>
             </ListSubheader>
-            {renderRowsWithItem(reviews)}
+            {renderRowsWithItem()}
           </List>
+          {reviewsData.length > 2 && showMoreButton()}
+          {reviewsData.length > 2 && showLessButton()}
 
-          <Button
-              endIcon={<KeyboardArrowDown/>}
-              onClick={showMoreDocuments}
-              sx={{display: limit >= reviews.length ? "none" : ""}}
-          >
-            see more
-          </Button>
-          <Button
-              endIcon={<KeyboardArrowUp/>}
-              onClick={resetLimit}
-              sx={{display: limit > reviews.length ? "" : "none"}}
-          >
-            see less
-          </Button>
         </div>
     );
   }
