@@ -34,7 +34,7 @@ const LikedAlbums = ({userId}) => {
     fetchLikedAlbumsData();
   }, []);
 
-  function getlikes() {
+  const getLikes = () => {
     return albumData.map(data => {
       return (<div key={data.spotifyId}>
         <Link to={`/details/${data.spotifyId}`}
@@ -49,14 +49,14 @@ const LikedAlbums = ({userId}) => {
         <Divider/>
       </div>);
     });
-  }
+  };
 
   return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
       <Typography variant="h6">Liked Albums</Typography>
     </ListSubheader>
     {loading && "Loading..."}
-    {!loading && getlikes()}
+    {!loading && getLikes()}
   </List>);
 };
 

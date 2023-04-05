@@ -17,18 +17,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {getAllUsers} from "../../services/user-service";
 import {getWhoFollowsUser} from "../../services/following-service";
 import {getLikedAlbums} from "../../services/likes-service";
-import ImageText from "../Reused/ImageText";
 import {red} from "@mui/material/colors";
 import ReviewsCardList from "../Reviews/ReviewsCardList";
 import {getReviewHeaderDataShowAlbum} from "../Reused/GetReviewsHeaderData";
 
-function LikeBadge(count) {
+const LikeBadge = (count) => {
   return (
       <Badge badgeContent={count} color="primary">
         <FavoriteIcon style={{color: red[500]}}/>
       </Badge>
   );
-}
+};
 
 const HomePage = () => {
   // const {isAuthenticated, isLoading} = useAuth0();

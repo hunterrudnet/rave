@@ -7,12 +7,9 @@ import TrackList from './TrackList';
 import {useParams} from 'react-router';
 import {getAlbumBySpotifyId} from '../../services/album-service';
 import {getReviewsForAlbum} from '../../services/reviews-service';
-import {
-  getReviewHeaderDataShowUser,
-  reviewsForAlbumListTitle
-} from "../Reused/GetReviewsHeaderData";
+import {getReviewHeaderDataShowUser} from "../Reused/GetReviewsHeaderData";
 
-function Details() {
+const Details = () => {
   const {albumID} = useParams();
   const [album, setAlbum] = useState();
   const [albumLoading, setAlbumLoading] = useState(true);
@@ -72,6 +69,6 @@ function Details() {
         </div>
       </div>
   );
-}
+};
 
 export default Details;

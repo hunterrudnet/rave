@@ -13,7 +13,7 @@ import {
 } from '../../services/likes-service';
 import {getAverageReviewScoreByAlbumId} from '../../services/album-service';
 
-const Root = styled('div')(({theme}) => ({
+const Root = styled('div')(() => ({
   display: 'flex',
   position: 'absolute',
   flexDirection: 'column',
@@ -37,11 +37,11 @@ const AlbumArtist = styled(Typography)(({theme}) => ({
   textAlign: 'center'
 }));
 
-const StyledRating = styled(Rating)(({theme}) => ({
-  position: "center%"
+const StyledRating = styled(Rating)(({}) => ({
+  position: "center"
 }));
 
-function Album({id, name, artist, imageSrc}) {
+const Album = ({id, name, artist, imageSrc}) => {
   const {loggedInUser, loggedIn} = useSelector(state => state.loggedInUserData);
   const [liked, setLiked] = useState(false);
   const [averageRating, setAverageRating] = useState(null);
@@ -68,7 +68,6 @@ function Album({id, name, artist, imageSrc}) {
     if (liked) {
       unlikeAlbum({userId: loggedInUser.id, albumId: id});
       setLiked(false);
-      return;
     } else {
       likeAlbum({userId: loggedInUser.id, albumId: id});
       // Fire off a like request here
@@ -78,18 +77,20 @@ function Album({id, name, artist, imageSrc}) {
 
   return (
       <Root>
-        <AlbumName variant="h6">{name}</AlbumName>
-        {loggedIn && (
-            <IconButton aria-label="like" onClick={handleClick}>
-              {liked ? <FavoriteIcon color="error"/> : <FavoriteBorderIcon/>}
-            </IconButton>
-        )}
+        <AlbumName variant="h6">{name}
+          {loggedIn && (
+              <IconButton aria-label="like" onClick={handleClick}>
+                {liked ? <FavoriteIcon color="error"/> :
+                    <FavoriteBorderIcon/>}
+              </IconButton>
+          )}
+        </AlbumName>
         <StyledRating readOnly value={averageRating} precision={0.5}
                       max={5}> </StyledRating>
         <AlbumImage src={imageSrc} alt={name}/>
         <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
       </Root>
   );
-}
+};
 
 export default Album;

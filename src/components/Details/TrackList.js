@@ -17,10 +17,8 @@ const TrackList = ({tracks, artistName}) => {
   };
 
   const renderRowsWithItem = (tracks) => {
-    return tracks.slice(0, limit).map((track, i) => {
-      return (
-          <Track track={track} artistName={artistName}/>
-      );
+    return tracks.slice(0, limit).map((track) => {
+      return (<Track track={track} artistName={artistName}/>);
     });
   };
 
