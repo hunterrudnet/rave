@@ -5,7 +5,7 @@ import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import ReviewCard from './ReviewCard';
 
-const ReviewsCardList = ({loading, reviews}) => {
+const ReviewsCardList = ({loading, reviews, getReviewHeaderData}) => {
   const [limit, setLimit] = useState(2);
 
   const showMoreDocuments = () => {
@@ -18,11 +18,8 @@ const ReviewsCardList = ({loading, reviews}) => {
 
   const renderRowsWithItem = (reviews) => {
     return reviews.slice(0, limit).map((review) => {
-      return (<ReviewCard image={review.User.image} alt={review.User.username}
-                          link={`/profile/${review.User.username}`}
+      return (<ReviewCard {...getReviewHeaderData(review)}
                           score={review.score}
-                          topText={review.User.username}
-                          bottomText={review.User.username}
                           reviewText={review.reviewText}
                           sx={{mb: "25"}}/>);
     });

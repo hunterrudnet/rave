@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import './Details.css';
-import ReviewsCardList from './ReviewsCardList';
-import WriteReview from './WriteReview';
+import ReviewsCardList from '../Reviews/ReviewsCardList';
+import WriteReview from '../Reviews/WriteReview';
 import Album from './Album';
 import TrackList from './TrackList';
 import {useParams} from 'react-router';
-import {useSelector} from "react-redux";
 import {getAlbumBySpotifyId} from '../../services/album-service';
 import {getReviewsForAlbum} from '../../services/reviews-service';
 
@@ -15,6 +14,14 @@ function Details() {
   const [albumLoading, setAlbumLoading] = useState(true);
   const [reviewsData, setReviewsData] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
+
+  const getReviewHeaderData = (review) => ({
+    image: review.User.image,
+    alt: review.User.username,
+    link: `/profile/${review.User.username}`,
+    topText: review.User.username,
+    bottomText: review.User.name
+  });
 
   const fetchReviewsData = async () => {
     const reviews = await getReviewsForAlbum(album.id);
@@ -64,7 +71,8 @@ function Details() {
         </div>
         <div className="bottom-right">
           <h3>{`Reviews for ${album.name} by ${album.artist.name}`}</h3>
-          <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}/>
+          <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}
+                           getReviewHeaderData={getReviewHeaderData}/>
         </div>
       </div>
   );
