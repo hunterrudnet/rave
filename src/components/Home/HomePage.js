@@ -13,13 +13,14 @@ import {
 } from "../../services/reviews-service";
 import {getAllAlbums} from "../../services/album-service";
 import {useSelector} from "react-redux";
-import Reviews from "../Reviews/Reviews";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {getAllUsers} from "../../services/user-service";
 import {getWhoFollowsUser} from "../../services/following-service";
 import {getLikedAlbums} from "../../services/likes-service";
 import ImageText from "../Reused/ImageText";
 import {red} from "@mui/material/colors";
+import ReviewsCardList from "../Reviews/ReviewsCardList";
+import {getReviewHeaderDataShowAlbum} from "../Reused/GetReviewsHeaderData";
 
 function LikeBadge(count) {
   return (
@@ -37,11 +38,6 @@ const HomePage = () => {
   const [albumsData, updateAlbumsData] = useState([]);
   const [usersData, updateUsersData] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
-  const getReviewHeader = (review) => {
-    const album = review.Album;
-    return <ImageText bigText={album.name} smallText={album.artist}
-                      image={album.image}/>;
-  };
 
   const fetchReviewsData = async () => {
     let reviews;
@@ -145,11 +141,12 @@ const HomePage = () => {
                 noContentMessage={"No Followers Yet..."}/>
           </Grid>
           <Grid item xs={0} md={7}>
-            <Reviews reviews={reviewsData}
-                     loading={reviewsLoading}
-                     getReviewHeader={getReviewHeader}
-                     headerText={loggedIn ? "Reviews From Your Follows"
-                         : "Recent Reviews"}/>
+            <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}
+                             getReviewHeaderData={getReviewHeaderDataShowAlbum}
+                             reviewsListTitle={loggedIn
+                                 ? "Reviews From Users You Follow"
+                                 : "Recent Reviews"}/>
+
           </Grid>
         </Grid>
       </div>

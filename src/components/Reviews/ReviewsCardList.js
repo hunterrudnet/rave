@@ -4,8 +4,15 @@ import {useState} from "react";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import ReviewCard from './ReviewCard';
+import Typography from "@mui/material/Typography";
+import ListSubheader from "@mui/material/ListSubheader";
 
-const ReviewsCardList = ({loading, reviews, getReviewHeaderData}) => {
+const ReviewsCardList = ({
+  loading,
+  reviews,
+  getReviewHeaderData,
+  reviewsListTitle
+}) => {
   const [limit, setLimit] = useState(2);
 
   const showMoreDocuments = () => {
@@ -31,6 +38,9 @@ const ReviewsCardList = ({loading, reviews, getReviewHeaderData}) => {
     return (
         <div>
           <List sx={{width: '100%', bgcolor: 'background.paper'}}>
+            <ListSubheader>
+              <Typography variant="h6">{reviewsListTitle}</Typography>
+            </ListSubheader>
             {renderRowsWithItem(reviews)}
           </List>
 

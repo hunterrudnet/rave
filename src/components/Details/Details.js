@@ -7,6 +7,10 @@ import TrackList from './TrackList';
 import {useParams} from 'react-router';
 import {getAlbumBySpotifyId} from '../../services/album-service';
 import {getReviewsForAlbum} from '../../services/reviews-service';
+import {
+  getReviewHeaderDataShowUser,
+  reviewsForAlbumListTitle
+} from "../Reused/GetReviewsHeaderData";
 
 function Details() {
   const {albumID} = useParams();
@@ -14,14 +18,6 @@ function Details() {
   const [albumLoading, setAlbumLoading] = useState(true);
   const [reviewsData, setReviewsData] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
-
-  const getReviewHeaderData = (review) => ({
-    image: review.User.image,
-    alt: review.User.username,
-    link: `/profile/${review.User.username}`,
-    topText: review.User.username,
-    bottomText: review.User.name
-  });
 
   const fetchReviewsData = async () => {
     const reviews = await getReviewsForAlbum(album.id);
@@ -70,9 +66,9 @@ function Details() {
           <TrackList tracks={album.tracks} artistName={album.artist.name}/>
         </div>
         <div className="bottom-right">
-          <h3>{`Reviews for ${album.name} by ${album.artist.name}`}</h3>
           <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}
-                           getReviewHeaderData={getReviewHeaderData}/>
+                           getReviewHeaderData={getReviewHeaderDataShowUser}
+                           reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}/>
         </div>
       </div>
   );

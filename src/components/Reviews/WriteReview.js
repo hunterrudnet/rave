@@ -102,7 +102,7 @@ function WriteReview({albumName, albumIDFromDB}) {
     <Root>
       <Header>
         <Typography variant="h5">
-          {`Write a Review for ${albumName}`}
+          {`${userReview? "Edit your" : "Write a"} review for ${albumName}`}
         </Typography>
       </Header>
       <DividerStyled />

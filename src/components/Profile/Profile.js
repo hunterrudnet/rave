@@ -5,18 +5,11 @@ import LikedAlbums from "./UserInfo/LikedAlbums";
 import React, {useEffect, useState} from "react";
 import {getReviewsForUser} from "../../services/reviews-service";
 import ReviewsCardList from "../Reviews/ReviewsCardList";
+import {getReviewHeaderDataShowAlbum} from "../Reused/GetReviewsHeaderData";
 
 const Profile = ({loading, user}) => {
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [reviewsData, updateReviewsData] = useState([]);
-
-  const getReviewHeaderData = (review) => ({
-    image: review.Album.image,
-    alt: review.Album.name,
-    link: `/details/${review.Album.spotifyId}`,
-    topText: review.Album.name,
-    bottomText: review.Album.artist
-  });
 
   const fetchReviewsData = async () => {
     const reviews = await getReviewsForUser(user.id);
@@ -44,7 +37,8 @@ const Profile = ({loading, user}) => {
           <Grid item xs={7}>
             <UserInfo user={user}/>
             <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}
-                             getReviewHeaderData={getReviewHeaderData}/>
+                             getReviewHeaderData={getReviewHeaderDataShowAlbum}
+                             reviewsListTitle="Reviews"/>
           </Grid>
         </Grid>
     );
