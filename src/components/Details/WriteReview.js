@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { Rating } from '@mui/material';
+import Rating from '@mui/material/Rating';
 import { useSelector } from "react-redux";
 import { getReviewsForUser } from '../../services/reviews-service';
 import { createOrUpdateReview } from '../../services/reviews-service';

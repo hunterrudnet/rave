@@ -12,7 +12,6 @@ import Rating from "@mui/material/Rating";
 
 const Reviews = ({reviews, loading, headerText, getReviewHeader}) => {
   const getReviewRating = (review) => {
-    console.log(review);
     let reviewRating = null;
     if (review.score) {
       reviewRating =
@@ -31,26 +30,26 @@ const Reviews = ({reviews, loading, headerText, getReviewHeader}) => {
     {reviews.map(review => {
       return (<div key={review.id}>
         <ListItem>
-        <Link to={`/details/${review.Album.spotifyId}`} 
-        style={{
-            textDecoration: 'none',
-            color: 'black',
-            display: 'inline-block',
-            width: '100%',
-          }}>
-          <Grid container spacing={2} sx={{m: 0}}>
+          <Link to={`/details/${review.Album.spotifyId}`}
+                style={{
+                  textDecoration: 'none',
+                  color: 'black',
+                  display: 'inline-block',
+                  width: '100%'
+                }}>
             <Grid container spacing={2} sx={{m: 0}}>
-              <Grid item xs={9}>
-                <Box>
-                  {getReviewHeader(review)}
-                  <ReviewEntry review={review}/>
-                </Box>
-              </Grid>
-              <Grid item xs={3}>
-                {getReviewRating(review)}
+              <Grid container spacing={2} sx={{m: 0}}>
+                <Grid item xs={9}>
+                  <Box>
+                    {getReviewHeader(review)}
+                    <ReviewEntry review={review}/>
+                  </Box>
+                </Grid>
+                <Grid item xs={3}>
+                  {getReviewRating(review)}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
           </Link>
         </ListItem>
         <Divider/>

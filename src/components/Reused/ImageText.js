@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 
 const ImageText = ({bigText, smallText, image}) => {
-
   return (
       <Grid container spacing={2} sx={{m: 0}}>
         <Grid item xs={3}>

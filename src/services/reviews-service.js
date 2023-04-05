@@ -22,12 +22,10 @@ export const getReviewsForUserFollowings = async (userId) => {
   return response.data;
 };
 
-
 export const getReviewsForAlbum = async (albumId) => {
   const response = await axios.get(`${REVIEWS_API}/${albumId}`);
   return response.data;
 };
-
 
 export const getAllReviews = async () => {
   const response = await axios.get(`${REVIEWS_API}/`);

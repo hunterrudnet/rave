@@ -1,14 +1,13 @@
 import "../Reused/reused.css";
-import {Navigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Profile from "./Profile";
 import {useEffect, useState} from "react";
 import {getUser} from "../../services/user-service";
-import {useSelector} from "react-redux";
 
 const OtherUserProfile = () => {
   const {username} = useParams();
   const [userLoading, setUserLoading] = useState(false);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
 
   const fetchUserData = async () => {
     const user = await getUser(username);
@@ -27,7 +26,6 @@ const OtherUserProfile = () => {
   } else {
     return <Profile user={userData} loading={userLoading}/>;
   }
-
 };
 
 export default OtherUserProfile;
