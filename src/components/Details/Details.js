@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Details.css';
-import DetailsCardList from './DetailsCardList';
+import ReviewsCardList from './ReviewsCardList';
 import WriteReview from './WriteReview';
 import Album from './Album';
 import TrackList from './TrackList';
@@ -12,42 +12,40 @@ import {getReviewsForAlbum} from '../../services/reviews-service';
 function Details() {
   const {albumID} = useParams();
   const [album, setAlbum] = useState();
-  const [shouldFetch, setShouldFetch] = useState(true);
-  const [reviewsData, updateReviewsData] = useState([]);
+  const [albumLoading, setAlbumLoading] = useState(true);
+  const [reviewsData, setReviewsData] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
-  let {loading, loggedIn} = useSelector(
-      state => state.loggedInUserData);
 
   const fetchReviewsData = async () => {
-    console.log(album.id);
     const reviews = await getReviewsForAlbum(album.id);
-    console.log(reviews);
-    updateReviewsData(reviews);
-    //setReviewsLoading(false);
+    setReviewsData(reviews);
+    setReviewsLoading(false);
   };
 
-  async function fetchAlbumBySpotifyId() {
+  const fetchAlbumBySpotifyId = async () => {
     const foundAlbum = await getAlbumBySpotifyId(albumID);
     if (foundAlbum) {
       setAlbum(foundAlbum);
-      setShouldFetch(false);
+      setAlbumLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    if (!loading && album) {
+    if (!albumLoading && album) {
       setReviewsLoading(true);
       fetchReviewsData();
     }
-  }, [loading, loggedIn, album]);
+  }, [album]);
 
   useEffect(() => {
-    if (shouldFetch) {
-      fetchAlbumBySpotifyId();
-    }
+    fetchAlbumBySpotifyId();
   }, []);
 
-  if (!album) {
+  if (albumLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (!album && !albumLoading) {
     return <h2>Album not found</h2>;
   }
 
@@ -66,10 +64,10 @@ function Details() {
         </div>
         <div className="bottom-right">
           <h3>{`Reviews for ${album.name} by ${album.artist.name}`}</h3>
-          <DetailsCardList reviews={reviewsData}/>
+          <ReviewsCardList reviews={reviewsData} loading={reviewsLoading}/>
         </div>
       </div>
   );
-};
+}
 
 export default Details;
