@@ -19,9 +19,8 @@ const Root = styled('div')(() => ({
   alignItems: 'center'
 }));
 
-const AlbumName = styled(Typography)(({theme}) => ({
+const BigText = styled(Typography)(() => ({
   fontWeight: 'bold',
-  marginBottom: theme.spacing(1),
   textAlign: 'center'
 }));
 
@@ -36,8 +35,8 @@ const AlbumArtist = styled(Typography)(({theme}) => ({
   textAlign: 'center'
 }));
 
-const StyledRating = styled(Rating)(({}) => ({
-  position: "center"
+const StyledRating = styled(Rating)(({theme}) => ({
+  position: 'relative', top: 5, left: 4, marginBottom: theme.spacing(2)
 }));
 
 const Album = ({id, name, artist, imageSrc, loading, averageRating}) => {
@@ -73,21 +72,22 @@ const Album = ({id, name, artist, imageSrc, loading, averageRating}) => {
 
   return (
       <Root>
-        <AlbumName variant="h6">{name}
+        <BigText variant="h6">{name}
           {loggedIn && (
               <IconButton aria-label="like" onClick={handleClick}>
                 {liked ? <FavoriteIcon color="error"/> :
                     <FavoriteBorderIcon/>}
               </IconButton>
           )}
-        </AlbumName>
-        <h3>Average rating:
-          <StyledRating readOnly value={averageRating} precision={0.5}
+        </BigText>
+        <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
+        <BigText>Average rating:
+          <StyledRating size="small" readOnly value={averageRating}
+                        precision={0.5}
                         max={5}> </StyledRating>
-        </h3>
+        </BigText>
 
         <AlbumImage src={imageSrc} alt={name}/>
-        <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
       </Root>
   );
 };
