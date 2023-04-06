@@ -39,8 +39,7 @@ const Profile = ({loading, user}) => {
             <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
                              getReviewHeaderData={getReviewHeaderDataShowAlbum}
                              reviewsListTitle="Reviews"
-                             setReviewsData={setReviewsData}
-                             loggedInUserId={user.id}/>
+                             setReviewsData={setReviewsData}/>
           </Grid>
         </Grid>
     );

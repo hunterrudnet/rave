@@ -11,8 +11,7 @@ import {
   getReviewsForAlbum
 } from '../../services/reviews-service';
 import {
-  getReviewHeaderDataShowUser,
-  handleDeleteGeneral
+  getReviewHeaderDataShowUser
 } from "../Reused/ReusedFunctions";
 import {useSelector} from "react-redux";
 
@@ -28,7 +27,7 @@ const Details = () => {
     if (!albumLoading && album) {
       fetchReviewsData();
     }
-  }, [album]);
+  }, [album, loggedInUser]);
 
   useEffect(() => {
     fetchAlbumBySpotifyId();
@@ -101,8 +100,7 @@ const Details = () => {
           <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
                            getReviewHeaderData={getReviewHeaderDataShowUser}
                            reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
-                           setReviewsData={setReviewsData}
-                           loggedInUserId={loggedInUser.id}/>
+                           setReviewsData={setReviewsData}/>
         </div>
       </div>
   );

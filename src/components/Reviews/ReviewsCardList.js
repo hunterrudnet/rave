@@ -7,15 +7,16 @@ import ReviewCard from './ReviewCard';
 import Typography from "@mui/material/Typography";
 import ListSubheader from "@mui/material/ListSubheader";
 import {handleDeleteGeneral} from "../Reused/ReusedFunctions";
+import {useSelector} from "react-redux";
 
 const ReviewsCardList = ({
   loading,
   reviewsData,
   getReviewHeaderData,
   reviewsListTitle,
-  setReviewsData,
-  loggedInUserId
+  setReviewsData
 }) => {
+  let {loggedInUser} = useSelector(state => state.loggedInUserData);
   const [limit, setLimit] = useState(2);
 
   const showMoreDocuments = () => {
@@ -36,7 +37,7 @@ const ReviewsCardList = ({
                           score={review.score}
                           reviewText={review.reviewText}
                           reviewUserId={review.UserId}
-                          canDelete={review.UserId === loggedInUserId}
+                          canDelete={review.UserId === loggedInUser.id}
                           handleDelete={() => handleDelete(review.id)}
                           sx={{mb: "25"}}/>);
     });
