@@ -35,7 +35,7 @@ const LikedAlbums = ({userId}) => {
   }, []);
 
   const getLikes = () => {
-    return albumData.map(data => {
+    const likes = albumData.map(data => {
       return (<div key={data.spotifyId}>
         <Link to={`/details/${data.spotifyId}`}
               style={{textDecoration: 'none', color: "black"}}>
@@ -49,11 +49,20 @@ const LikedAlbums = ({userId}) => {
         <Divider/>
       </div>);
     });
+    if (likes.length === 0) {
+      return <ListItem>
+        <Typography variant="body1">No liked albums yet. Why not like
+          some albums?</Typography>
+      </ListItem>;
+
+    } else {
+      return likes;
+    }
   };
 
   return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
-      <Typography variant="h6">Liked Albums</Typography>
+      <Typography variant="h5" fontWeight='bold'>Liked Albums</Typography>
     </ListSubheader>
     {loading && "Loading..."}
     {!loading && getLikes()}

@@ -1,6 +1,6 @@
 import List from '@mui/material/List';
 import Button from "@mui/material/Button";
-import {useState} from "react";
+import React, {useState} from "react";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import ReviewCard from './ReviewCard';
@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import ListSubheader from "@mui/material/ListSubheader";
 import {handleDeleteGeneral} from "../Reused/ReusedFunctions";
 import {useSelector} from "react-redux";
+import ListItem from "@mui/material/ListItem";
 
 const ReviewsCardList = ({
   loading,
@@ -34,16 +35,22 @@ const ReviewsCardList = ({
     };
   }
 
-  const renderRowsWithItem = () => {
-    return reviewsData.slice(0, limit).map((review) => {
+  const renderReviewsList = () => {
+    const reviews = reviewsData.slice(0, limit).map((review) => {
       return (<ReviewCard {...getReviewHeaderData(review)}
-                          score={review.score}
-                          reviewText={review.reviewText}
-                          reviewUserId={review.UserId}
-                          canDelete={review.UserId === loggedInUser.id}
-                          handleDelete={() => handleDelete(review.id)}
-                          sx={{mb: "25"}}/>);
+                   score={review.score}
+                   reviewText={review.reviewText}
+                   reviewUserId={review.UserId}
+                   canDelete={review.UserId === loggedInUser.id}
+                   handleDelete={() => handleDelete(review.id)}
+                   sx={{mb: "25"}}/>);
     });
+    console.log(reviews);
+    if (reviews.length === 0) {
+      return <ListItem><Typography variant="body1">No reviews yet.</Typography></ListItem>;
+    } else {
+      return reviews;
+    }
   };
 
   const showMoreButton = () => {
@@ -73,13 +80,13 @@ const ReviewsCardList = ({
         <div>
           <List sx={{width: '100%', bgcolor: 'background.paper'}}>
             <ListSubheader>
-              <Typography variant="h6">{reviewsListTitle}</Typography>
+              <Typography variant="h5"
+                          fontWeight="bold">{reviewsListTitle}</Typography>
             </ListSubheader>
-            {renderRowsWithItem()}
+            {renderReviewsList()}
           </List>
           {reviewsData.length > 2 && showMoreButton()}
           {reviewsData.length > 2 && showLessButton()}
-
         </div>
     );
   }
