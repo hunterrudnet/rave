@@ -45,7 +45,6 @@ const ReviewsCardList = ({
                    handleDelete={() => handleDelete(review.id)}
                    sx={{mb: "25"}}/>);
     });
-    console.log(reviews);
     if (reviews.length === 0) {
       return <ListItem><Typography variant="body1">No reviews yet.</Typography></ListItem>;
     } else {

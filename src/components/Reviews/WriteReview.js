@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import {styled} from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import {getReviewsForUser} from '../../services/reviews-service';
-import {objectEmpty} from "../Reused/ReusedFunctions";
 
 const Root = styled(Box)(({theme}) => ({
   backgroundColor: '#ececec',
@@ -114,7 +113,7 @@ const WriteReview = ({
         />
         <DividerStyled/>
         <ButtonsContainer>
-          <Button variant="contained" color="primary"
+          <Button variant="contained" color="primary" disabled={!loggedInUserId}
                   onClick={() => handleSubmitReview()}>
             {userHasReview ? 'Update' : 'Submit'}
           </Button>
