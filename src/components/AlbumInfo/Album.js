@@ -85,7 +85,7 @@ const Album = ({id, name, artist, imageSrc}) => {
               </IconButton>
           )}
         </AlbumName>
-        <h3>Average score:
+        <h3>Average rating:
           <StyledRating readOnly value={averageRating} precision={0.5}
                         max={5}> </StyledRating>
         </h3>
