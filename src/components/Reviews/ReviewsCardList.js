@@ -14,7 +14,8 @@ const ReviewsCardList = ({
   reviewsData,
   getReviewHeaderData,
   reviewsListTitle,
-  setReviewsData
+  setReviewsData,
+  handleDelete
 }) => {
   let {loggedInUser} = useSelector(state => state.loggedInUserData);
   const [limit, setLimit] = useState(2);
@@ -27,9 +28,11 @@ const ReviewsCardList = ({
     setLimit(2);
   };
 
-  const handleDelete = (id) => {
-    handleDeleteGeneral(id, reviewsData, setReviewsData);
-  };
+  if (!handleDelete) {
+    handleDelete = async (id) => {
+      await handleDeleteGeneral(id, reviewsData, setReviewsData);
+    };
+  }
 
   const renderRowsWithItem = () => {
     return reviewsData.slice(0, limit).map((review) => {

@@ -11,7 +11,6 @@ import {
   unlikeAlbum,
   getLikedAlbums
 } from '../../services/likes-service';
-import {getAverageReviewScoreByAlbumId} from '../../services/album-service';
 
 const Root = styled('div')(() => ({
   display: 'flex',
@@ -41,10 +40,9 @@ const StyledRating = styled(Rating)(({}) => ({
   position: "center"
 }));
 
-const Album = ({id, name, artist, imageSrc}) => {
+const Album = ({id, name, artist, imageSrc, loading, averageRating}) => {
   const {loggedInUser, loggedIn} = useSelector(state => state.loggedInUserData);
   const [liked, setLiked] = useState(false);
-  const [averageRating, setAverageRating] = useState(null);
 
   useEffect(() => {
     const checkLiked = async () => {
@@ -56,12 +54,6 @@ const Album = ({id, name, artist, imageSrc}) => {
       }
     };
     checkLiked();
-
-    const getRating = async () => {
-      const rating = await getAverageReviewScoreByAlbumId(id);
-      setAverageRating(rating.averageScore);
-    };
-    getRating();
   }, [id, loggedIn, loggedInUser]);
 
   const handleClick = () => {
@@ -74,6 +66,10 @@ const Album = ({id, name, artist, imageSrc}) => {
       setLiked(true);
     }
   };
+
+  if (loading) {
+    return "Loading...";
+  }
 
   return (
       <Root>

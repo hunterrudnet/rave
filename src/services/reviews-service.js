@@ -4,7 +4,6 @@ const REVIEWS_API = process.env.REACT_APP_BASE_API + '/reviews';
 
 export const createOrUpdateReview = async (review) => {
   const response = await axios.post(`${REVIEWS_API}/`, review);
-  console.log(response);
   return response.data;
 };
 

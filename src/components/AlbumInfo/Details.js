@@ -11,16 +11,18 @@ import {
   getReviewsForAlbum
 } from '../../services/reviews-service';
 import {
-  getReviewHeaderDataShowUser
+  getReviewHeaderDataShowUser, handleDeleteGeneral
 } from "../Reused/ReusedFunctions";
 import {useSelector} from "react-redux";
+import {getAverageReviewScoreByAlbumId} from "../../services/album-service";
 
 const Details = () => {
   const {albumID} = useParams();
-  const [album, setAlbum] = useState();
+  const [album, setAlbum] = useState({artist: {}, images: [{}], tracks: [{}]});
   const [albumLoading, setAlbumLoading] = useState(true);
   const [reviewsData, setReviewsData] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [averageRating, setAverageRating] = useState(0);
   let {loggedInUser} = useSelector(state => state.loggedInUserData);
 
   useEffect(() => {
@@ -33,10 +35,18 @@ const Details = () => {
     fetchAlbumBySpotifyId();
   }, []);
 
+  useEffect(() => {
+    fetchAverageRating();
+  }, [reviewsData]);
+
+  const fetchAverageRating = async () => {
+    const rating = await getAverageReviewScoreByAlbumId(album.id);
+    setAverageRating(rating.averageScore);
+  };
+
   const fetchReviewsData = async () => {
     setReviewsLoading(true);
     const reviews = await getReviewsForAlbum(album.id);
-    console.log(reviews);
     setReviewsData(reviews);
     setReviewsLoading(false);
   };
@@ -48,10 +58,6 @@ const Details = () => {
       setAlbumLoading(false);
     }
   };
-
-  if (albumLoading) {
-    return <h2>Loading...</h2>;
-  }
 
   if (!album && !albumLoading) {
     return <h2>Album not found</h2>;
@@ -65,6 +71,7 @@ const Details = () => {
       reviewText: reviewData.reviewText
     };
     const updatedReview = await createOrUpdateReview(review);
+    await fetchAverageRating();
     let newReview = {};
     if (updatedReview) {
       let oldReview = reviewsData.find(
@@ -75,15 +82,20 @@ const Details = () => {
       newReviews.push(newReview);
       setReviewsData(newReviews);
     }
-
     return newReview;
+  };
+
+  const handleDelete = async (id) => {
+    await handleDeleteGeneral(id, reviewsData, setReviewsData);
+    await fetchAverageRating();
   };
 
   return (
       <div className="grid-container">
         <div className="top-left">
           <Album id={album.id} name={album.name} artist={album.artist.name}
-                 imageSrc={album.images[0].url}/>
+                 imageSrc={album.images[0].url} loading={albumLoading}
+                 averageRating={averageRating}/>
         </div>
         <div className="top-right">
           <WriteReview albumName={album.name} albumIDFromDB={album.id}
@@ -100,7 +112,8 @@ const Details = () => {
           <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
                            getReviewHeaderData={getReviewHeaderDataShowUser}
                            reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
-                           setReviewsData={setReviewsData}/>
+                           setReviewsData={setReviewsData}
+                           handleDelete={handleDelete}/>
         </div>
       </div>
   );
