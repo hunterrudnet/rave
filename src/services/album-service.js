@@ -12,17 +12,12 @@ export const getAverageReviewScoreByAlbumId = async (albumId) => {
   return response.data;
 };
 
-export const getAlbumByAlbumId = async (albumId) => {
-  const response = await axios.get(`${ALBUM_API}/lookup/${albumId}`);
-  return response.data;
-};
-
 export const getAlbumSearch = async (query) => {
   const response = await axios.get(`${ALBUM_API}/search/${query}`);
   return response.data;
 };
 
-export const getAllAlbums = async (query) => {
+export const getAllAlbums = async () => {
   const response = await axios.get(`${ALBUM_API}`);
   return response.data;
 };

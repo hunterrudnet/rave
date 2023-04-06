@@ -22,8 +22,8 @@ const LikedAlbums = ({userId}) => {
         name: likedAlbum.name,
         artist: likedAlbum.artist,
         image: likedAlbum.image
-      }
-    })
+      };
+    });
     updateAlbumData(likedAlbums);
     setLoading(false);
   };
@@ -34,28 +34,29 @@ const LikedAlbums = ({userId}) => {
     fetchLikedAlbumsData();
   }, []);
 
-  function getlikes() {
+  const getLikes = () => {
     return albumData.map(data => {
       return (<div key={data.spotifyId}>
-        <Link to={`/details/${data.spotifyId}`} style={{ textDecoration: 'none', color: "black"}}>
-        <ListItem>
-          <Grid container spacing={2} sx={{m: 0}}>
-            <ImageText bigText={data.name} smallText={data.artist}
-                       image={data.image}/>
-          </Grid>
-        </ListItem>
+        <Link to={`/details/${data.spotifyId}`}
+              style={{textDecoration: 'none', color: "black"}}>
+          <ListItem>
+            <Grid container spacing={2} sx={{m: 0}}>
+              <ImageText bigText={data.name} smallText={data.artist}
+                         image={data.image}/>
+            </Grid>
+          </ListItem>
         </Link>
         <Divider/>
       </div>);
     });
-  }
+  };
 
   return (<List className="scrollable-list" subheader={<li/>}>
     <ListSubheader>
       <Typography variant="h6">Liked Albums</Typography>
     </ListSubheader>
     {loading && "Loading..."}
-    {!loading && getlikes()}
+    {!loading && getLikes()}
   </List>);
 };
 

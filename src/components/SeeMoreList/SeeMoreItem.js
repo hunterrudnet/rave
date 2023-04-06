@@ -1,4 +1,3 @@
-import * as React from "react";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
@@ -21,21 +20,29 @@ import ListItemText from "@mui/material/ListItemText";
 //     imgUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Drake_-_Take_Care_cover.jpg/220px-Drake_-_Take_Care_cover.jpg",
 // }
 //
-export default function SeeMoreItem({stats, imgUrl, linkUrl, primaryText, secondaryText, visible}) {
+const SeeMoreItem = ({
+  stats,
+  imgUrl,
+  linkUrl,
+  primaryText,
+  secondaryText
+}) => {
+  return (
+      <ListItem button component="a" href={linkUrl} sx={{
+        backgroundColor: "#ececec",
+        borderRadius: "5px",
+        marginTop: "5px"
+      }} secondaryAction={stats}
+      >
+        <ListItemAvatar>
+          <Avatar src={imgUrl ? imgUrl : "/images/rave-logo.jpg"}/>
+        </ListItemAvatar>
+        <ListItemText
+            primary={primaryText}
+            secondary={secondaryText}
+        />
+      </ListItem>
+  );
+};
 
-    return (
-        <ListItem button component="a" href={linkUrl} sx={{ backgroundColor: "#ececec", borderRadius: "5px", marginTop: "5px" }}
-                  secondaryAction={
-                      stats
-                  }
-        >
-            <ListItemAvatar>
-                <Avatar src={imgUrl ? imgUrl : "/images/rave-logo.jpg"} />
-            </ListItemAvatar>
-            <ListItemText
-                primary={primaryText}
-                secondary={secondaryText}
-            />
-        </ListItem>
-    );
-}
+export default SeeMoreItem;

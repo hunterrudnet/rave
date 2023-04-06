@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -12,7 +13,6 @@ import {
   getWhoUserFollows, unfollowUser
 } from "../../../services/following-service";
 import {useSelector} from "react-redux";
-import {Button} from "@mui/material";
 
 const UserInfo = ({user}) => {
   let {loggedInUser, loggedInUserLoading, loggedIn} = useSelector(
