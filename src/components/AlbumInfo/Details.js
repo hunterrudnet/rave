@@ -97,7 +97,6 @@ const Details = () => {
 
   return (
     <div className="grid-container" sx={{ m: 100 }}>
-
       <div className="top-left">
         <Album id={album.id} name={album.name} artist={album.artist.name}
           imageSrc={album.images[0].url} loading={albumLoading}
