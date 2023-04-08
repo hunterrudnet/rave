@@ -15,7 +15,8 @@ import {
 } from "../Reused/ReusedFunctions";
 import { useSelector } from "react-redux";
 import { getAverageReviewScoreByAlbumId } from "../../services/album-service";
-import { spacing } from '@mui/system';
+import Grid from "@mui/material/Grid";
+
 
 const Details = () => {
   const { albumID } = useParams();
@@ -96,33 +97,93 @@ const Details = () => {
   }
 
   return (
-    <div className="grid-container" sx={{ m: 100 }}>
-      <div className="top-left">
-        <Album id={album.id} name={album.name} artist={album.artist.name}
-          imageSrc={album.images[0].url} loading={albumLoading}
-          averageRating={averageRating} />
-      </div>
-      <div className="bottom-left">
-        <h3>{"Songs"}</h3>
-        <TrackList tracks={album.tracks} artistName={album.artist.name} />
-      </div>
+    // <div className="grid-container" sx={{ m: 100 }}>
+    //   <div className="top-left">
+    //     <Album id={album.id} name={album.name} artist={album.artist.name}
+    //       imageSrc={album.images[0].url} loading={albumLoading}
+    //       averageRating={averageRating} />
+    //   </div>
+    //   <div className="bottom-left">
+    //     <h3>{"Songs"}</h3>
+    //     <TrackList tracks={album.tracks} artistName={album.artist.name} />
+    //   </div>
 
-      <div className="top-right">
-        <WriteReview albumName={album.name} albumIDFromDB={album.id}
-          loggedInUserId={loggedInUser.id}
-          reviewsLen={reviewsData.length}
-          submitReview={(reviewData) => handleSubmitReview(
-            reviewData)} />
-      </div>
+    //   <div className="top-right">
+    //     <WriteReview albumName={album.name} albumIDFromDB={album.id}
+    //       loggedInUserId={loggedInUser.id}
+    //       reviewsLen={reviewsData.length}
+    //       submitReview={(reviewData) => handleSubmitReview(
+    //         reviewData)} />
+    //   </div>
 
-      <div className="bottom-right">
-        <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
-          getReviewHeaderData={getReviewHeaderDataShowUser}
-          reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
-          setReviewsData={setReviewsData}
-          handleDelete={handleDelete} />
-      </div>
-    </div>
+    //   <div className="bottom-right">
+    //     <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
+    //       getReviewHeaderData={getReviewHeaderDataShowUser}
+    //       reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
+    //       setReviewsData={setReviewsData}
+    //       handleDelete={handleDelete} />
+    //   </div>
+    // </div>
+
+
+    // <Grid container spacing={2} sx={{ m: 0 }} style={{ width: "100% " }}>
+    //   <Grid item xs={12} md={7}>
+    //     <Album id={album.id} name={album.name} artist={album.artist.name}
+    //       imageSrc={album.images[0].url} loading={albumLoading}
+    //       averageRating={averageRating} />
+    //   </Grid>
+    //   <Grid item xs={0} md={5}>
+    //     <WriteReview albumName={album.name} albumIDFromDB={album.id}
+    //       loggedInUserId={loggedInUser.id}
+    //       reviewsLen={reviewsData.length}
+    //       submitReview={(reviewData) => handleSubmitReview(
+    //         reviewData)} />
+    //   </Grid>
+
+    //   <Grid item xs={0} md={7}>
+    //     <h3>{"Songs"}</h3>
+    //     <TrackList tracks={album.tracks} artistName={album.artist.name} />
+    //   </Grid>
+
+    //   <Grid item xs={0} md={5}>
+    //     <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
+    //       getReviewHeaderData={getReviewHeaderDataShowUser}
+    //       reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
+    //       setReviewsData={setReviewsData}
+    //       handleDelete={handleDelete} />
+    //   </Grid>
+    // </Grid>
+
+    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container rowSpacing={1} xs={12} md={7}>
+        <Grid item xs={12} md={12} className="top-left">
+          <Album id={album.id} name={album.name} artist={album.artist.name}
+            imageSrc={album.images[0].url} loading={albumLoading}
+            averageRating={averageRating} />
+        </Grid>
+        <Grid item xs={12} md={12} className="bottom-left">
+          <h3>{"Songs"}</h3>
+          <TrackList tracks={album.tracks} artistName={album.artist.name} />
+        </Grid>
+      </Grid>
+      <Grid container rowSpacing={1} xs={12} md={5}>
+        <Grid item xs={12} md={12} className="bottom-right">
+          <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
+            getReviewHeaderData={getReviewHeaderDataShowUser}
+            reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
+            setReviewsData={setReviewsData}
+            handleDelete={handleDelete} />
+        </Grid>
+        <Grid item xs={12} md={12} className="top-right">
+          <WriteReview albumName={album.name} albumIDFromDB={album.id}
+            loggedInUserId={loggedInUser.id}
+            reviewsLen={reviewsData.length}
+            submitReview={(reviewData) => handleSubmitReview(
+              reviewData)} />
+        </Grid>
+      </Grid>
+
+    </Grid>
   );
 };
 
