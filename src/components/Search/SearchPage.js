@@ -95,7 +95,7 @@ const SearchPage = () => {
               InputProps={{
                 endAdornment: (
                     <InputAdornment position="end">
-                      <IconButton onClick={handleSearch} disabled={loading}>
+                      <IconButton onClick={() => handleSearch(searchTerm)} disabled={loading}>
                         <Search/>
                       </IconButton>
                     </InputAdornment>
