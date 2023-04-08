@@ -25,8 +25,8 @@ const FollowModal = ({followers, data, loading}) => {
     return "Loading...";
   } else {
     return (
-        <>
-          <Button onClick={handleOpen}>{buttonLabel}</Button>
+        <span>
+          <Button sx={{pl: 0, pr: 2}} onClick={handleOpen}>{buttonLabel}</Button>
           <Modal
               open={open}
               onClose={handleClose}
@@ -56,7 +56,7 @@ const FollowModal = ({followers, data, loading}) => {
               })}
             </List>
           </Modal>
-        </>
+        </span>
     );
   }
 };
