@@ -78,7 +78,7 @@ const ReviewsCardList = ({
     return (
         <div>
           <List sx={{width: '100%', bgcolor: 'background.paper'}}>
-            <ListSubheader sx={{p: 0, my: 2}}>
+            <ListSubheader sx={{mb: '5px'}}>
               <Typography variant="h5"
                           fontWeight="bold">{reviewsListTitle}</Typography>
             </ListSubheader>

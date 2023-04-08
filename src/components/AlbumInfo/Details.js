@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Details.css';
 import ReviewsCardList from '../Reviews/ReviewsCardList';
 import WriteReview from '../Reviews/WriteReview';
 import Album from './Album';
 import TrackList from './TrackList';
-import {useParams} from 'react-router';
-import {getAlbumBySpotifyId} from '../../services/album-service';
+import { useParams } from 'react-router';
+import { getAlbumBySpotifyId } from '../../services/album-service';
 import {
   createOrUpdateReview,
   getReviewsForAlbum
@@ -13,17 +13,19 @@ import {
 import {
   getReviewHeaderDataShowUser, handleDeleteGeneral
 } from "../Reused/ReusedFunctions";
-import {useSelector} from "react-redux";
-import {getAverageReviewScoreByAlbumId} from "../../services/album-service";
+import { useSelector } from "react-redux";
+import { getAverageReviewScoreByAlbumId } from "../../services/album-service";
+import Grid from "@mui/material/Grid";
+
 
 const Details = () => {
-  const {albumID} = useParams();
-  const [album, setAlbum] = useState({artist: {}, images: [{}], tracks: [{}]});
+  const { albumID } = useParams();
+  const [album, setAlbum] = useState({ artist: {}, images: [{}], tracks: [{}] });
   const [albumLoading, setAlbumLoading] = useState(true);
   const [reviewsData, setReviewsData] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [averageRating, setAverageRating] = useState(0);
-  let {loggedInUser} = useSelector(state => state.loggedInUserData);
+  let { loggedInUser } = useSelector(state => state.loggedInUserData);
 
   useEffect(() => {
     if (!albumLoading && album) {
@@ -75,10 +77,10 @@ const Details = () => {
     let newReview = {};
     if (updatedReview) {
       let oldReview = reviewsData.find(
-          review => review.id === updatedReview.id);
-      newReview = {...oldReview, ...updatedReview};
+        review => review.id === updatedReview.id);
+      newReview = { ...oldReview, ...updatedReview };
       let newReviews = reviewsData.filter(
-          (review) => review.id !== updatedReview.id);
+        (review) => review.id !== updatedReview.id);
       newReviews.push(newReview);
       setReviewsData(newReviews);
     }
@@ -90,32 +92,40 @@ const Details = () => {
     await fetchAverageRating();
   };
 
+
   return (
-      <div className="grid-container">
-        <div className="top-left">
-          <Album id={album.id} name={album.name} artist={album.artist.name}
-                 imageSrc={album.images[0].url} loading={albumLoading}
-                 averageRating={averageRating}/>
-        </div>
-        <div className="top-right">
+    <Grid container sx={{mx: 'auto', width: {xs: '90%', md: '80%'}, mt: 5}}>
+      <Grid item xs={12} md={5} lg={4} sx={{pr: {md: 2, lg: 4}}}>
+        <Grid container >
+          <Grid item xs={12} md={12}>
+            <Album id={album.id} name={album.name} artist={album.artist.name}
+            imageSrc={album.images[0].url} loading={albumLoading}
+            averageRating={averageRating} />
+        </Grid>
+        <Grid item xs={12} md={12} sx={{mt: {xs:'10px'}, mx: 'auto'}}>
+          <TrackList tracks={album.tracks} artistName={album.artist.name} />
+        </Grid>
+      </Grid>
+      </Grid>
+      <Grid item  xs={12} md={7} lg={8}>
+      <Grid container>
+        <Grid item xs={12} md={12} sx={{mt: {xs:'10px'}}}>
           <WriteReview albumName={album.name} albumIDFromDB={album.id}
-                       loggedInUserId={loggedInUser.id}
-                       reviewsLen={reviewsData.length}
-                       submitReview={(reviewData) => handleSubmitReview(
-                           reviewData)}/>
-        </div>
-        <div className="bottom-left">
-          <h3>{"Songs"}</h3>
-          <TrackList tracks={album.tracks} artistName={album.artist.name}/>
-        </div>
-        <div className="bottom-right">
-          <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
-                           getReviewHeaderData={getReviewHeaderDataShowUser}
-                           reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
-                           setReviewsData={setReviewsData}
-                           handleDelete={handleDelete}/>
-        </div>
-      </div>
+            loggedInUserId={loggedInUser.id}
+            reviewsLen={reviewsData.length}
+            submitReview={(reviewData) => handleSubmitReview(
+              reviewData)} />
+          <Grid item xs={12} md={12} sx={{mt: {md: '115px', xs:'10px'}}}>
+            <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
+              getReviewHeaderData={getReviewHeaderDataShowUser}
+              reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
+              setReviewsData={setReviewsData}
+              handleDelete={handleDelete} />
+          </Grid>
+        </Grid>
+      </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

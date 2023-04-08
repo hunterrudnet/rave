@@ -4,6 +4,7 @@ import {useState} from "react";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Track from './Track';
+import { Box } from '@mui/material';
 
 const TrackList = ({tracks, artistName}) => {
   const [limit, setLimit] = useState(3);
@@ -23,8 +24,8 @@ const TrackList = ({tracks, artistName}) => {
   };
 
   return (
-      <div>
-        <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+      <Box sx={{mx: 'auto', textAlign: 'center'}}>
+        <List sx={{mx: 'auto', textAlign: 'center', width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
           {renderRowsWithItem(tracks)}
         </List>
 
@@ -42,7 +43,7 @@ const TrackList = ({tracks, artistName}) => {
         >
           see less
         </Button>
-      </div>
+      </Box>
   );
 };
 

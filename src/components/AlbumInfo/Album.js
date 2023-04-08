@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@mui/material/styles/styled';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -11,6 +11,8 @@ import {
   unlikeAlbum,
   getLikedAlbums
 } from '../../services/likes-service';
+
+import { Box, Container } from '@mui/material';
 
 const Root = styled('div')(() => ({
   display: 'flex',
@@ -24,23 +26,24 @@ const BigText = styled(Typography)(() => ({
   textAlign: 'center'
 }));
 
-const AlbumImage = styled('img')(({theme}) => ({
-  marginBottom: theme.spacing(1),
-  width: 450,
-  height: 'auto'
+const AlbumImage = styled('img')(({ theme }) => ({
+  maxWidth: 300,
+  textAlign: 'center',
+  width: '100%',
+  height: 'auto%'
 }));
 
-const AlbumArtist = styled(Typography)(({theme}) => ({
+const AlbumArtist = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
   textAlign: 'center'
 }));
 
-const StyledRating = styled(Rating)(({theme}) => ({
-  position: 'relative', top: 5, left: 4, marginBottom: theme.spacing(2)
+const StyledRating = styled(Rating)(({ theme }) => ({
+  position: 'relative', top: 5, left: 4
 }));
 
-const Album = ({id, name, artist, imageSrc, loading, averageRating}) => {
-  const {loggedInUser, loggedIn} = useSelector(state => state.loggedInUserData);
+const Album = ({ id, name, artist, imageSrc, loading, averageRating }) => {
+  const { loggedInUser, loggedIn } = useSelector(state => state.loggedInUserData);
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -57,10 +60,10 @@ const Album = ({id, name, artist, imageSrc, loading, averageRating}) => {
 
   const handleClick = () => {
     if (liked) {
-      unlikeAlbum({userId: loggedInUser.id, albumId: id});
+      unlikeAlbum({ userId: loggedInUser.id, albumId: id });
       setLiked(false);
     } else {
-      likeAlbum({userId: loggedInUser.id, albumId: id});
+      likeAlbum({ userId: loggedInUser.id, albumId: id });
       // Fire off a like request here
       setLiked(true);
     }
@@ -71,24 +74,26 @@ const Album = ({id, name, artist, imageSrc, loading, averageRating}) => {
   }
 
   return (
-      <Root>
-        <BigText variant="h6">{name}
-          {loggedIn && (
-              <IconButton aria-label="like" onClick={handleClick}>
-                {liked ? <FavoriteIcon color="error"/> :
-                    <FavoriteBorderIcon/>}
-              </IconButton>
-          )}
-        </BigText>
-        <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
-        <BigText>Average rating:
-          <StyledRating size="small" readOnly value={averageRating}
-                        precision={0.5}
-                        max={5}> </StyledRating>
-        </BigText>
-
-        <AlbumImage src={imageSrc} alt={name}/>
-      </Root>
+    <Container fixed>
+      <BigText variant="h6">{name}
+        {loggedIn && (
+          <IconButton aria-label="like" onClick={handleClick}>
+            {liked ? <FavoriteIcon color="error" /> :
+              <FavoriteBorderIcon />}
+          </IconButton>
+        )}
+      </BigText>
+      <AlbumArtist variant="subtitle1">{artist}</AlbumArtist>
+      <BigText>Average rating:
+        <StyledRating size="small" readOnly value={averageRating}
+          precision={0.5}
+          max={5}> </StyledRating>
+      </BigText>
+        
+      <Box sx={{mx: 'auto', maxWidth: '300px', width: '100%', height: 'auto%'}}>
+        <AlbumImage src={imageSrc} alt={name} />
+      </Box>
+    </Container>
   );
 };
 
