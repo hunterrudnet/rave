@@ -28,8 +28,9 @@ const BigText = styled(Typography)(() => ({
 
 const AlbumImage = styled('img')(({ theme }) => ({
   marginBottom: theme.spacing(1),
+  marginLeft: theme.spacing(7),
   width: 450,
-  height: 'auto'
+  textAlign: 'center'
 }));
 
 const AlbumArtist = styled(Typography)(({ theme }) => ({
