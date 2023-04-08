@@ -5,6 +5,7 @@ import SeeMoreItem from "./SeeMoreItem";
 import {useState} from "react";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
+import ListSubheader from "@mui/material/ListSubheader";
 
 // Displays a generic list of items, starting with a limit of 3.  If there are more than 3 items, an option
 // to see more will appear at the bottom of the list and allow the user to click it to expand the list with 3 further
@@ -51,7 +52,7 @@ const SeeMoreList = ({title, items, noContentMessage}) => {
   if (items.length === 0) {
     return (
         <div>
-          <Typography variant="h5" component="h5">{title}</Typography>
+          <Typography variant="h5" component="h5" fontWeight="bold">{title}</Typography>
           <Typography variant="h6" component="h6">
             {noContentMessage}
           </Typography>
@@ -61,7 +62,9 @@ const SeeMoreList = ({title, items, noContentMessage}) => {
         <div>
           <List
               sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-            <Typography variant="h5" component="h5">{title}</Typography>
+              <ListSubheader sx={{p: 0}}>
+                  <Typography variant="h5" fontWeight="bold">{title}</Typography>
+              </ListSubheader>
             {renderRowsWithItem(items)}
           </List>
 

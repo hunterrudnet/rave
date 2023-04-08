@@ -36,8 +36,8 @@ const ReviewsCardList = ({
   }
 
   const renderReviewsList = () => {
-    const reviews = reviewsData.slice(0, limit).map((review) => {
-      return (<ReviewCard {...getReviewHeaderData(review)}
+    const reviews = reviewsData.slice(0, limit).map((review, index) => {
+      return (<ReviewCard key={index} {...getReviewHeaderData(review)}
                    score={review.score}
                    reviewText={review.reviewText}
                    reviewUserId={review.UserId}
@@ -78,7 +78,7 @@ const ReviewsCardList = ({
     return (
         <div>
           <List sx={{width: '100%', bgcolor: 'background.paper'}}>
-            <ListSubheader sx={{mb: '5px'}}>
+            <ListSubheader sx={{p: 0, my: 2}}>
               <Typography variant="h5"
                           fontWeight="bold">{reviewsListTitle}</Typography>
             </ListSubheader>

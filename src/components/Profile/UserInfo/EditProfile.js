@@ -38,7 +38,7 @@ const EditProfile = ({user}) => {
 
   return (
       <>
-        <Button onClick={handleOpen}>Edit Profile</Button>
+        <Button sx={{pl: 0}} onClick={handleOpen}>Edit Profile</Button>
         <Modal
             open={open}
             onClose={handleClose}
