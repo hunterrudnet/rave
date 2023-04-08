@@ -12,7 +12,7 @@ import {
   getLikedAlbums
 } from '../../services/likes-service';
 
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 const Root = styled('div')(() => ({
   display: 'flex',
@@ -27,10 +27,10 @@ const BigText = styled(Typography)(() => ({
 }));
 
 const AlbumImage = styled('img')(({ theme }) => ({
-  marginBottom: theme.spacing(1),
-  marginLeft: theme.spacing(7),
-  width: 450,
-  textAlign: 'center'
+  maxWidth: 300,
+  textAlign: 'center',
+  width: '100%',
+  height: 'auto%'
 }));
 
 const AlbumArtist = styled(Typography)(({ theme }) => ({
@@ -39,7 +39,7 @@ const AlbumArtist = styled(Typography)(({ theme }) => ({
 }));
 
 const StyledRating = styled(Rating)(({ theme }) => ({
-  position: 'relative', top: 5, left: 4, marginBottom: theme.spacing(2)
+  position: 'relative', top: 5, left: 4
 }));
 
 const Album = ({ id, name, artist, imageSrc, loading, averageRating }) => {
@@ -89,8 +89,10 @@ const Album = ({ id, name, artist, imageSrc, loading, averageRating }) => {
           precision={0.5}
           max={5}> </StyledRating>
       </BigText>
-
-      <AlbumImage src={imageSrc} alt={name} />
+        
+      <Box sx={{mx: 'auto', maxWidth: '300px', width: '100%', height: 'auto%'}}>
+        <AlbumImage src={imageSrc} alt={name} />
+      </Box>
     </Container>
   );
 };

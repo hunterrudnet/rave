@@ -23,11 +23,13 @@ const Header = styled(Container)(({theme}) => ({
 }));
 
 const AvatarStyled = styled(Avatar)(({theme}) => ({
-  marginRight: theme.spacing(2)
+  marginRight: theme.spacing(2),
+  paddingLeft: 0,
+  paddingRight: 0
 }));
 
 const HeaderTextTop = styled(Typography)(({theme}) => ({
-  fontWeight: 'bold', marginRight: theme.spacing(2)
+  fontWeight: 'bold', marginRight: theme.spacing(1)
 }));
 
 const HeaderTextBottom = styled(Typography)(({theme}) => ({
@@ -43,7 +45,7 @@ const Text = styled(Typography)(({theme}) => ({
 }));
 
 const StyledRating = styled(Rating)(() => ({
-  position: 'absolute', right: "4%"
+  position: 'absolute', right: "15px"
 }));
 
 const DeleteReviewIcon = styled(IconButton)(() => ({
@@ -56,17 +58,15 @@ const ReviewCard = ({
   link,
   score,
   topText,
-  bottomText,
   reviewText,
   canDelete,
   handleDelete
 }) => {
-  return (<Root sx={{mb: 1, pb: 5, textDecoration: 'none'}}>
+  return (<Root sx={{mb: 1, pb: 5, textDecoration: 'none', ml: 0, mr: 0,}}>
     <Header component={Link} to={link} className="link-no-decoration">
       <AvatarStyled src={image} alt={alt}/>
       <div>
         <HeaderTextTop variant="body1">{topText}</HeaderTextTop>
-        <HeaderTextBottom variant="body2">{bottomText}</HeaderTextBottom>
       </div>
       <StyledRating name="rating" value={score} max={5} readOnly
                     precision={0.5}/>

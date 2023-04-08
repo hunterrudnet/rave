@@ -16,6 +16,7 @@ import {
 import { useSelector } from "react-redux";
 import { getAverageReviewScoreByAlbumId } from "../../services/album-service";
 import Grid from "@mui/material/Grid";
+import { Typography } from '@mui/material';
 
 
 const Details = () => {
@@ -94,36 +95,37 @@ const Details = () => {
 
 
   return (
-    <Grid container >
-      <Grid container xs={12} md={6} className="left">
-        <Grid item xs={12} md={12} className="top-left">
-          <Album id={album.id} name={album.name} artist={album.artist.name}
+    <Grid container sx={{mx: 'auto', width: {xs: '90%', md: '80%'}, mt: 5}}>
+      <Grid item xs={12} md={5} lg={4} sx={{pr: {md: 2, lg: 4}}}>
+        <Grid container >
+          <Grid item xs={12} md={12}>
+            <Album id={album.id} name={album.name} artist={album.artist.name}
             imageSrc={album.images[0].url} loading={albumLoading}
             averageRating={averageRating} />
         </Grid>
-        <Grid item xs={12} md={12} className="bottom-left">
-          <h3>{"Songs"}</h3>
+        <Grid item xs={12} md={12} sx={{mt: {xs:'10px'}, mx: 'auto'}}>
           <TrackList tracks={album.tracks} artistName={album.artist.name} />
         </Grid>
       </Grid>
-      <Grid container xs={12} md={6}>
-        <Grid item xs={12} md={12} className="right">
+      </Grid>
+      <Grid item  xs={12} md={7} lg={8}>
+      <Grid container>
+        <Grid item xs={12} md={12} sx={{mt: {xs:'10px'}}}>
           <WriteReview albumName={album.name} albumIDFromDB={album.id}
             loggedInUserId={loggedInUser.id}
             reviewsLen={reviewsData.length}
             submitReview={(reviewData) => handleSubmitReview(
               reviewData)} />
-          <div className="bottom-right">
+          <Grid item xs={12} md={12} sx={{mt: {md: '115px', xs:'10px'}}}>
             <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
               getReviewHeaderData={getReviewHeaderDataShowUser}
               reviewsListTitle={`Reviews for ${album.name} by ${album.artist.name}`}
               setReviewsData={setReviewsData}
               handleDelete={handleDelete} />
-          </div>
-
+          </Grid>
         </Grid>
       </Grid>
-
+      </Grid>
     </Grid>
   );
 };
