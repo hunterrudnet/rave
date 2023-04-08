@@ -29,18 +29,17 @@ const Profile = ({loading, user}) => {
     return <div>Loading...</div>;
   } else {
     return (
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <LikedAlbums userId={user.id}/>
-          </Grid>
-          <Grid item xs={0.5}/>
-          <Grid item xs={7}>
-            <UserInfo user={user}/>
-            <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
-                             getReviewHeaderData={getReviewHeaderDataShowAlbum}
-                             reviewsListTitle="Reviews"
-                             setReviewsData={setReviewsData}/>
-          </Grid>
+        <Grid container sx={{width: "80%", mx: 'auto', mt: 5}}>
+            <Grid item xs={12} md={7}>
+                <UserInfo user={user}/>
+                <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
+                                 getReviewHeaderData={getReviewHeaderDataShowAlbum}
+                                 reviewsListTitle="Reviews"
+                                 setReviewsData={setReviewsData}/>
+            </Grid>
+            <Grid item xs={12} md={3}>
+                <LikedAlbums userId={user.id}/>
+            </Grid>
         </Grid>
     );
   }

@@ -97,12 +97,12 @@ const UserInfo = ({user}) => {
 
   return (
       <Box>
-        <Grid container spacing={2} sx={{m: 0}}>
-          <Grid item xs={3}>
+        <Grid container sx={{m: 0, p: 0, textAlign: {xs: "center", md: "left"}}}>
+          <Grid item xs={12} md={3} sx={{p: 0}}>
             <Avatar alt={userData.name} src={userImage}
-                    sx={{width: 160, height: 160, mb: 1}}/>
+                    sx={{width: 160, height: 160, mb: 1, mx: 'auto'}}/>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={3} sx={{mx: {xs: 'auto', md: 2}, p: 0, minWidth: {md: 300}}}>
             <span>
               {isLoggedInUser && <EditProfile user={userData}/>}
               <Typography variant="h6"
