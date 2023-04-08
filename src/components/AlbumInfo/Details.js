@@ -16,7 +16,6 @@ import {
 import { useSelector } from "react-redux";
 import { getAverageReviewScoreByAlbumId } from "../../services/album-service";
 import Grid from "@mui/material/Grid";
-import { Typography } from '@mui/material';
 
 
 const Details = () => {
