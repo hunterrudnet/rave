@@ -71,7 +71,7 @@ const UserInfo = ({user}) => {
   const userImage = (userData.image) ? userData.image : "/images/rave-logo.jpg";
   let verified = null;
   if (userData.isMod) {
-    verified = <VerifiedIcon/>;
+    verified = <Box sx={{pl: 1, display: "flex"}}><VerifiedIcon /></Box>;
   }
 
   const handleFollow = async () => {
@@ -96,7 +96,7 @@ const UserInfo = ({user}) => {
   }
 
   return (
-      <Box>
+      <Box sx={{mb: 5}}>
         <Grid container sx={{m: 0, p: 0, textAlign: {xs: "center", md: "left"}}}>
           <Grid item xs={12} md={3} sx={{p: 0}}>
             <Avatar alt={userData.name} src={userImage}
@@ -106,7 +106,10 @@ const UserInfo = ({user}) => {
             <span>
               {isLoggedInUser && <EditProfile user={userData}/>}
               <Typography variant="h6"
-                          sx={{"pb": 1}}>{userData.name} {verified}</Typography>
+                          sx={{"pb": 1,
+                               display: "flex",
+                               alignItems: "center",
+                               justifyContent: {xs: "center", md: "flex-start"}}}>{userData.name} {verified}</Typography>
             </span>
             <Typography variant="body2"
                         sx={{"pb": 1}}>@{userData.username}</Typography>

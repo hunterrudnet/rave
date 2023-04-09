@@ -30,14 +30,14 @@ const Profile = ({loading, user}) => {
   } else {
     return (
         <Grid container sx={{width: "80%", mx: 'auto', mt: 5}}>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} lg={8} xl={9} sx={{p: 1}}>
                 <UserInfo user={user}/>
                 <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
                                  getReviewHeaderData={getReviewHeaderDataShowAlbum}
                                  reviewsListTitle="Reviews"
                                  setReviewsData={setReviewsData}/>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} lg={4} xl={3} sx={{p: 1}}>
                 <LikedAlbums userId={user.id}/>
             </Grid>
         </Grid>

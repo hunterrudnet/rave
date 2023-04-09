@@ -32,10 +32,6 @@ const HeaderTextTop = styled(Typography)(({theme}) => ({
   fontWeight: 'bold', marginRight: theme.spacing(1)
 }));
 
-const HeaderTextBottom = styled(Typography)(({theme}) => ({
-  fontWeight: 'normal', marginRight: theme.spacing(2)
-}));
-
 const DividerStyled = styled(Divider)(({theme}) => ({
   marginBottom: theme.spacing(2)
 }));
@@ -62,6 +58,7 @@ const ReviewCard = ({
   canDelete,
   handleDelete
 }) => {
+  const textSection = reviewText ? reviewText : parseInt(score) + "/5";
   return (<Root sx={{mb: 1, pb: 5, textDecoration: 'none', ml: 0, mr: 0,}}>
     <Header component={Link} to={link} className="link-no-decoration">
       <AvatarStyled src={image} alt={alt}/>
@@ -72,7 +69,7 @@ const ReviewCard = ({
                     precision={0.5}/>
     </Header>
     <DividerStyled/>
-    <Text variant="body1">{reviewText}</Text>
+    <Text variant="body1">{textSection}</Text>
     {canDelete && (<DeleteReviewIcon edge="end" aria-label="delete"
                                      onClick={() => handleDelete()}>
       <DeleteIcon/>
