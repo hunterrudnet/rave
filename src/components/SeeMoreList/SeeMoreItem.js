@@ -28,7 +28,7 @@ const SeeMoreItem = ({
   secondaryText
 }) => {
   return (
-      <ListItem button component="a" href={linkUrl} sx={{
+      <ListItem button component={linkUrl === "" ? "div" : "a"} href={linkUrl} sx={{
         backgroundColor: "#ececec",
         borderRadius: "5px",
         marginTop: "5px"

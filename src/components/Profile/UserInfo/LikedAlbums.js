@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
 import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListSubheader from "@mui/material/ListSubheader";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "../../Reused/reused.css";
 import {getLikedAlbums} from "../../../services/likes-service";
 import ImageText from "../../Reused/ImageText";
 import {Link} from "react-router-dom";
+import SeeMoreList from "../../SeeMoreList/SeeMoreList";
+import {LikeBadge} from "../../Reused/likeBadge";
+
 
 const LikedAlbums = ({userId}) => {
   const [loading, setLoading] = useState(true);
@@ -16,15 +17,16 @@ const LikedAlbums = ({userId}) => {
 
   const fetchLikedAlbumsData = async () => {
     const likedAlbums = await getLikedAlbums(userId);
-    likedAlbums.map(likedAlbum => {
+
+    updateAlbumData(likedAlbums.map(album => {
       return {
-        id: likedAlbum.id,
-        name: likedAlbum.name,
-        artist: likedAlbum.artist,
-        image: likedAlbum.image
+        imgUrl: album.image,
+        stats: LikeBadge(album.likesCount),
+        primaryText: album.name,
+        secondaryText: album.artist,
+        linkUrl: "/details/" + album.spotifyId
       };
-    });
-    updateAlbumData(likedAlbums);
+    }))
     setLoading(false);
   };
 
@@ -49,24 +51,28 @@ const LikedAlbums = ({userId}) => {
         <Divider/>
       </div>);
     });
-    if (likes.length === 0) {
+    if (albumData.length === 0) {
       return <ListItem>
         <Typography variant="body1">No liked albums yet. Why not like
           some albums?</Typography>
       </ListItem>;
 
     } else {
-      return likes;
+      return (
+          <SeeMoreList
+              title={"Liked Albums"}
+              items={albumData}
+              noContentMessage={"No Albums Yet..."}/>
+      );
     }
   };
 
-  return (<List className="scrollable-list" subheader={<li/>}>
-    <ListSubheader>
-      <Typography variant="h5" fontWeight='bold'>Liked Albums</Typography>
-    </ListSubheader>
-    {loading && "Loading..."}
-    {!loading && getLikes()}
-  </List>);
+  return (
+      <div>
+        {loading && "Loading..."}
+        {!loading && getLikes()}
+      </div>
+  );
 };
 
 export default LikedAlbums;

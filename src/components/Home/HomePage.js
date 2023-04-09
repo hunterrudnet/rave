@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import "../Reused/reused.css";
-import Badge from "@mui/material/Badge";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -12,24 +11,16 @@ import {
 } from "../../services/reviews-service";
 import {getAllAlbums} from "../../services/album-service";
 import {useSelector} from "react-redux";
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import {getAllUsers} from "../../services/user-service";
 import {getWhoFollowsUser} from "../../services/following-service";
 import {getLikedAlbums} from "../../services/likes-service";
 import ReviewsCardList from "../Reviews/ReviewsCardList";
 import {getReviewHeaderDataShowAlbum} from "../Reused/ReusedFunctions";
-import {red} from "@mui/material/colors";
+import {LikeBadge} from "../Reused/likeBadge";
 
-const LikeBadge = (count) => {
-  return (
-      <Badge badgeContent={count} color="primary">
-        <FavoriteIcon style={{color: red[500]}}/>
-      </Badge>
-  );
-};
+
 
 const HomePage = () => {
-  // const {isAuthenticated, isLoading} = useAuth0();
   let {loggedInUser, loading, loggedIn} = useSelector(
       state => state.loggedInUserData);
   const [reviewsData, updateReviewsData] = useState([]);

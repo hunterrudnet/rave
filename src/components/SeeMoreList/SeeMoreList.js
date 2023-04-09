@@ -61,7 +61,7 @@ const SeeMoreList = ({title, items, noContentMessage}) => {
     return (
         <div>
           <List
-              sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+              sx={{width: '100%', bgcolor: 'background.paper'}}>
               <ListSubheader sx={{p: 0}}>
                   <Typography variant="h5" fontWeight="bold">{title}</Typography>
               </ListSubheader>
