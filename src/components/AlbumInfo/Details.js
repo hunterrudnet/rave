@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Details.css';
 import ReviewsCardList from '../Reviews/ReviewsCardList';
 import WriteReview from '../Reviews/WriteReview';
 import Album from './Album';
