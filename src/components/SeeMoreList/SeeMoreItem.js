@@ -2,6 +2,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
+import {Link} from 'react-router-dom';
 
 // A SeeMoreItem represents a single list item in a see more list.
 //
@@ -28,7 +29,7 @@ const SeeMoreItem = ({
   secondaryText
 }) => {
   return (
-      <ListItem button component={linkUrl === "" ? "div" : "a"} href={linkUrl} sx={{
+      <ListItem button component={linkUrl === "" ? "div" : Link} to={linkUrl} sx={{
         backgroundColor: "#ececec",
         borderRadius: "5px",
         marginTop: "5px"
