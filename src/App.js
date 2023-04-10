@@ -18,7 +18,20 @@ const store = configureStore({ reducer: { loggedInUserData: userDataReducer } })
 const theme = createTheme({
   typography: {
     fontFamily:
-      ["Red Hat Display", " sans-serif"].join(",")
+      ["Red Hat Display", " sans-serif"].join(","),
+    body1: {
+      fontFamily:
+        ["PT Serif", " serif"].join(","),
+    },
+    body2: {
+      fontFamily:
+        ["PT Serif", " serif"].join(","),
+    },
+    'h4': {
+      fontFamily:
+        ["Red Hat Display", " sans-serif"].join(","),
+    }
+
   },
 });
 

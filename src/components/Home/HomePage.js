@@ -102,31 +102,14 @@ const HomePage = () => {
               mx: "auto",
               top: '81px',
               color: 'white',
-              backgroundColor: "rgba(52,52,52,0.55)",
+              backgroundColor: "rgba(39,40,92,0.55)",
             }
           }>
-            {/* <CardMedia
-              component="img"
-              sx={{
-                position: "relative",
-                top: 0,
-                p: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                width: "300px",
-                borderRadius: 1,
-                mx: "auto"
-              }}
-              // image="/images/rave-logo.jpg"
-              alt="logo"
-            /> */}
-            <Typography variant="h1" component="h5">
+            <Typography variant="h1" component="h5" sx={{ pt: 2, mx: 'auto' }}>
               Rave
             </Typography>
-            <Typography variant="h4" component="h5">
+            <Typography variant="h4" component="h5" sx={{ pb: 2, mx: 'auto' }}>
               Build connections through the music you enjoy
-
             </Typography>
           </CardContent>
         </Card>
