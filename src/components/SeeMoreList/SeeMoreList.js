@@ -2,7 +2,7 @@ import List from '@mui/material/List';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SeeMoreItem from "./SeeMoreItem";
-import {useState} from "react";
+import { useState } from "react";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import ListSubheader from "@mui/material/ListSubheader";
@@ -32,7 +32,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 //
 
 const INITIAL_LIMIT = 3;
-const SeeMoreList = ({title, items, noContentMessage}) => {
+const SeeMoreList = ({ title, items, noContentMessage }) => {
   const [limit, setLimit] = useState(INITIAL_LIMIT);
 
   const showMoreDocuments = () => {
@@ -45,47 +45,51 @@ const SeeMoreList = ({title, items, noContentMessage}) => {
 
   const renderRowsWithItem = (items) => {
     return items.slice(0, limit).map((item, i) => {
-      return (<SeeMoreItem key={i} {...item} sx={{marginTop: "5px"}}/>);
+      return (<SeeMoreItem key={i} {...item} sx={{ marginTop: "5px" }} />);
     });
   };
 
   if (items.length === 0) {
     return (
-        <div>
-          <Typography variant="h5" component="h5" fontWeight="bold">{title}</Typography>
-          <Typography variant="h6" component="h6">
-            {noContentMessage}
-          </Typography>
-        </div>);
+      <div>
+        <ListSubheader sx={{ p: 0 }}>
+          <Typography sx={{ pt: '8px', width: '100%', bgcolor: 'background.paper' }}
+            variant="h5" component="h5" fontWeight="bold" >{title}</Typography>
+        </ListSubheader>
+
+        <Typography variant="h6" component="h6">
+          {noContentMessage}
+        </Typography>
+      </div>);
   } else {
     return (
-        <div>
-          <List
-              sx={{width: '100%', bgcolor: 'background.paper'}}>
-              <ListSubheader sx={{p: 0}}>
-                  <Typography variant="h5" fontWeight="bold">{title}</Typography>
-              </ListSubheader>
-            {renderRowsWithItem(items)}
-          </List>
+      <div>
+        <List
+          sx={{ width: '100%', bgcolor: 'background.paper' }}>
+          <ListSubheader sx={{ p: 0 }}>
+            <Typography variant="h5" fontWeight="bold">{title}</Typography>
+          </ListSubheader>
+          {renderRowsWithItem(items)}
+        </List>
 
-          <Button
-              endIcon={<KeyboardArrowDown/>}
-              onClick={showMoreDocuments}
-              sx={{display: limit >= items.length ? "none" : ""}}
-          >
-            see more
-          </Button>
-          <Button
-              endIcon={<KeyboardArrowUp/>}
-              onClick={resetLimit}
-              sx={{
-                display: (limit > items.length && !(items.length
-                    < INITIAL_LIMIT)) ? "" : "none"
-              }}
-          >
-            see less
-          </Button>
-        </div>
+        <Button
+          endIcon={<KeyboardArrowDown />}
+          onClick={showMoreDocuments}
+          sx={{ display: limit >= items.length ? "none" : "" }}
+        >
+          see more
+        </Button>
+        <Button
+          endIcon={<KeyboardArrowUp />}
+          onClick={resetLimit}
+          sx={{
+            display: (limit > items.length && !(items.length
+              < INITIAL_LIMIT)) ? "" : "none"
+          }}
+        >
+          see less
+        </Button>
+      </div>
     );
   }
 };

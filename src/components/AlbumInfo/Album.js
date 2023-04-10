@@ -14,13 +14,6 @@ import {
 
 import { Box, Container } from '@mui/material';
 
-const Root = styled('div')(() => ({
-  display: 'flex',
-  position: 'absolute',
-  flexDirection: 'column',
-  alignItems: 'center'
-}));
-
 const BigText = styled(Typography)(() => ({
   fontWeight: 'bold',
   textAlign: 'center'
