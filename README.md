@@ -1,85 +1,43 @@
-The backend lives at the following URL: https://github.com/hunterrudnet/rave-backend/
+# Rave - Social Media for Albums App
 
-# Create env with necessary variables
-In order to run Auth0 correctly, you need to create a .env file in the root directory with the following variables:
+Welcome to Rave, the social media app for albums! Rave is an app where users can discover, share, and review albums with friends and other music enthusiasts. This README file provides all the necessary information to get started with the Rave app.
 
-REACT_APP_AUTH0_DOMAIN=""
-REACT_APP_AUTH0_CLIENT_ID=""
+## Backend
 
-# Backend env variable
-You also need an enviornment variable to connect to the backend. For development, we will have the following on our local machines:
+The backend for Rave can be found at https://github.com/hunterrudnet/rave-backend/. The backend is built with Node.js and uses Sequalize for data storage.
 
-REACT_APP_BASE_API="http://localhost:8080"
+## Environment Variables
 
-This assumes that the backend lives on port 8080.
+In order to run Rave correctly, you will need to create a .env file in the root directory with the following variables:
 
-# Getting Started with Create React App
+- `REACT_APP_AUTH0_DOMAIN`: The Auth0 domain for your app.
+- `REACT_APP_AUTH0_CLIENT_ID`: The client ID for your Auth0 app.
+- `REACT_APP_BASE_API`: The base URL for the Rave backend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For development, we assume that the backend is running on port 8080. Therefore, you will need to set `REACT_APP_BASE_API` to `http://localhost:8080`.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+To get started with Rave, follow these steps:
 
-### `npm start`
+1. Clone the Rave repository:
+`git clone https://github.com/hunterrudnet/rave.git`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Navigate to the `rave` directory and install the dependencies:
+```
+cd rave
+npm install
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Create a `.env` file in the root directory with the necessary environment variables.
 
-### `npm test`
+4. Start the app:
+`npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app should now be running at `http://localhost:3000`.
 
-### `npm run build`
+## Contributing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We welcome contributions to the Rave app! If you'd like to contribute, please fork the repository and submit a pull request. Please be sure to follow our code of conduct and our contributing guidelines.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
