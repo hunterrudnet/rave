@@ -28,11 +28,11 @@ const theme = createTheme({
       ["Red Hat Display", " sans-serif"].join(","),
     body1: {
       fontFamily:
-        ["PT Serif", " serif"].join(","),
+        ["Schibsted Grotesk", " sans-serif"].join(","),
     },
     body2: {
       fontFamily:
-        ["PT Serif", " serif"].join(","),
+        ["Schibsted Grotesk", " sans-serif"].join(","),
     },
     'h4': {
       fontFamily:
