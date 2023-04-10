@@ -12,7 +12,6 @@ import {
 import {getAllAlbums} from "../../services/album-service";
 import {useSelector} from "react-redux";
 import {getAllUsers} from "../../services/user-service";
-import {getWhoFollowsUser} from "../../services/following-service";
 import {getLikedAlbums} from "../../services/likes-service";
 import ReviewsCardList from "../Reviews/ReviewsCardList";
 import {getReviewHeaderDataShowAlbum} from "../Reused/ReusedFunctions";
@@ -35,7 +34,7 @@ const HomePage = () => {
     } else {
       reviews = await getAllReviews();
     }
-    updateReviewsData(reviews);
+    updateReviewsData(reviews.reverse());
     setReviewsLoading(false);
   };
 
@@ -59,13 +58,8 @@ const HomePage = () => {
   };
 
   const fetchUsersData = async () => {
-    let users;
-    if (loggedIn) {
-      users = await getWhoFollowsUser(loggedInUser.id);
-    } else {
-      users = await getAllUsers();
-    }
-    updateUsersData(users.map(user => {
+    const users = await getAllUsers();
+    updateUsersData(users.reverse().map(user => {
       return {
         imgUrl: user.image,
         primaryText: user.username,
@@ -134,7 +128,7 @@ const HomePage = () => {
                 items={albumsData}
                 noContentMessage={"No Albums Yet..."}/>
             <SeeMoreList
-                title={loggedIn ? "Newest Followers" : "Newest Members"}
+                title={"Newest Members"}
                 items={usersData}
                 noContentMessage={"No Followers Yet..."}/>
           </Grid>
