@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../Reused/reused.css";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
@@ -9,19 +9,20 @@ import {
   getAllReviews,
   getReviewsForUserFollowings
 } from "../../services/reviews-service";
-import {getAllAlbums} from "../../services/album-service";
-import {useSelector} from "react-redux";
-import {getAllUsers} from "../../services/user-service";
-import {getLikedAlbums} from "../../services/likes-service";
+import { getAllAlbums } from "../../services/album-service";
+import { useSelector } from "react-redux";
+import { getAllUsers } from "../../services/user-service";
+import { getLikedAlbums } from "../../services/likes-service";
 import ReviewsCardList from "../Reviews/ReviewsCardList";
-import {getReviewHeaderDataShowAlbum} from "../Reused/ReusedFunctions";
-import {LikeBadge} from "../Reused/likeBadge";
+import { getReviewHeaderDataShowAlbum } from "../Reused/ReusedFunctions";
+import { LikeBadge } from "../Reused/likeBadge";
+import Typography from "@mui/material/Typography";
 
 
 
 const HomePage = () => {
-  let {loggedInUser, loading, loggedIn} = useSelector(
-      state => state.loggedInUserData);
+  let { loggedInUser, loading, loggedIn } = useSelector(
+    state => state.loggedInUserData);
   const [reviewsData, updateReviewsData] = useState([]);
   const [albumsData, updateAlbumsData] = useState([]);
   const [usersData, updateUsersData] = useState([]);
@@ -84,64 +85,73 @@ const HomePage = () => {
     return <div>Loading ...</div>;
   }
   return (
+    <div>
       <div>
-        <div>
-          <Card>
-            <CardMedia
-                style={{height: 350, maxWidth: '100%'}}
-                image="/images/rave-banner.jpg"
-                title="Rave"
-            />
-            <CardContent style={
-              {
-                position: "absolute",
-                width: '100%',
-                top: '125px',
-                color: 'white',
-                textAlign: "center",
-                padding: 5
-              }
-            }>
-              <CardMedia
-                  component="img"
-                  sx={{
-                    position: "relative",
-                    top: 0,
-                    p: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                    width: "300px",
-                    borderRadius: 1,
-                    mx: "auto"
-                  }}
-                  image="/images/rave-logo.jpg"
-                  alt="logo"
-              />
-            </CardContent>
-          </Card>
-        </div>
-        <Grid container spacing={2} sx={{px: 0, pt: 2, mx: "auto"}} style={{width: "80% "}}>
-          <Grid item xs={12} md={3} sx={{p: 0, mx: 'auto'}}>
-            <SeeMoreList
-                title={loggedIn ? "Your Favorite Albums" : "Popular Albums"}
-                items={albumsData}
-                noContentMessage={"No Albums Yet..."}/>
-            <SeeMoreList
-                title={"Newest Members"}
-                items={usersData}
-                noContentMessage={"No Followers Yet..."}/>
-          </Grid>
-          <Grid item xs={12} md={7} sx={{p: 0, mx: 'auto'}}>
-            <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
-                             getReviewHeaderData={getReviewHeaderDataShowAlbum}
-                             reviewsListTitle={loggedIn
-                                 ? "Reviews From Users You Follow"
-                                 : "Recent Reviews"}/>
+        <Card sx={{ borderRadius: 0 }}>
+          <CardMedia
+            sx={{ height: 350, maxWidth: '100%', backgroundPosition: { lg: '0px -430px', xs: 'center' } }}
+            image="/images/rave-banner.jpg"
+            title="Rave"
+          />
+          <CardContent style={
+            {
+              position: "absolute",
+              width: '100%',
+              textAlign: "center",
+              padding: 5,
+              mx: "auto",
+              top: '81px',
+              color: 'white',
+              backgroundColor: "rgba(52,52,52,0.55)",
+            }
+          }>
+            {/* <CardMedia
+              component="img"
+              sx={{
+                position: "relative",
+                top: 0,
+                p: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                width: "300px",
+                borderRadius: 1,
+                mx: "auto"
+              }}
+              // image="/images/rave-logo.jpg"
+              alt="logo"
+            /> */}
+            <Typography variant="h1" component="h5">
+              Rave
+            </Typography>
+            <Typography variant="h4" component="h5">
+              Build connections through the music you enjoy
 
-          </Grid>
-        </Grid>
+            </Typography>
+          </CardContent>
+        </Card>
       </div>
+      <Grid container spacing={2} sx={{ px: 0, pt: 2, mx: "auto" }} style={{ width: "80% " }}>
+        <Grid item xs={12} md={3} sx={{ p: 0, mx: 'auto' }}>
+          <SeeMoreList
+            title={loggedIn ? "Your Favorite Albums" : "Popular Albums"}
+            items={albumsData}
+            noContentMessage={"No Albums Yet..."} />
+          <SeeMoreList
+            title={"Newest Members"}
+            items={usersData}
+            noContentMessage={"No Followers Yet..."} />
+        </Grid>
+        <Grid item xs={12} md={7} sx={{ p: 0, mx: 'auto' }}>
+          <ReviewsCardList reviewsData={reviewsData} loading={reviewsLoading}
+            getReviewHeaderData={getReviewHeaderDataShowAlbum}
+            reviewsListTitle={loggedIn
+              ? "Reviews From Users You Follow"
+              : "Recent Reviews"} />
+
+        </Grid>
+      </Grid>
+    </div >
   );
 };
 
