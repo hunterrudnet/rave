@@ -59,12 +59,7 @@ const HomePage = () => {
   };
 
   const fetchUsersData = async () => {
-    let users;
-    if (loggedIn) {
-      users = await getWhoFollowsUser(loggedInUser.id);
-    } else {
-      users = await getAllUsers();
-    }
+    const users = await getAllUsers();
     updateUsersData(users.map(user => {
       return {
         imgUrl: user.image,
